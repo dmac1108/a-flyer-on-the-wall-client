@@ -1,0 +1,6 @@
+.list-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;
+}

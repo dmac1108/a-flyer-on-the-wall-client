@@ -1,0 +1,13 @@
+.flyer-list {
+    position: relative;
+    top: 200px;
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+  }
+
+  ul{
+      list-style: none;
+  }

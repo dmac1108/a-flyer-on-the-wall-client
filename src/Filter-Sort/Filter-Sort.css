@@ -1,0 +1,26 @@
+.filter {
+   font-size: 12px;
+   position: fixed;
+   top: 100px;
+   left: 0px;
+   right: 0px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   height: 100px;
+   text-align: top;
+   background-color: papayawhip;
+   
+ 
+}
+
+.form-group {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-content: flex-start;
+}
+
+/*p {
+   display: inline-block;
+}*/

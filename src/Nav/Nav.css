@@ -1,7 +1,23 @@
 nav {
+    padding-top: 10px;
+    padding-right: 10px;
+    border: 1px solid black;
     position: fixed;
-    top: 0px;
+    text-align: right;
+    z-index: 1;
     left: 0px;
     right: 0px;
-    z-index: 1
-  }
+    /*background-color: white;*/
+}
+
+h1 {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+nav ul {
+  display: block;
+  list-style: none;
+}
+
