@@ -43,6 +43,13 @@ class App extends Component {
     })
   }
 
+  onSortChange = (sortValue) =>{
+    console.log(sortValue)
+    this.setState({
+     sortValue: sortValue
+    })
+  }
+
   componentDidMount(){
     this.setState({
       flyers: STORE.flyers, 
@@ -51,20 +58,25 @@ class App extends Component {
   }
 
   render(){
-    
+    const contextValue = {
+      flyers: this.state.flyers,
+      children: this.state.children,
+    }
 
   return(
     <div>
+      <FlyersContext.Provider value={this.contextValue}>
       <Nav />
       
       <Switch>
         <Route exact path='/' component={LandingPage}/>
         <Route path='/sign-up' component={SignUp}/>
         <Route path='/sign-in' component={SignIn}/>
-        <Route path='/flyers' render={() =>  <FlyerList flyersList={this.state.flyers} childList={this.state.children} filterType={this.state.filterType} filter={this.state.filterValue} sort={this.state.sortValue} filterChange={this.onFilterChange}/>} />
+        <Route path='/flyers' component={FlyerList} />
         <Route path='/add-flyer' component={AddFlyer}/>
         <Route path='/edit-flyer' component={EditFlyer}/>
       </Switch>
+      </FlyersContext.Provider>
 
     </div>
   )

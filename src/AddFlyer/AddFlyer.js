@@ -2,6 +2,9 @@ import React from 'react'
 import './AddFlyer.css'
 
 export default function () {
+    /*const childOptions = props.childList.map((child) => 
+        <option value={child.id}>{child.name}</option>
+    )*/
     return(
 <form className="addflyer" id="newflyer">
        <label for="title">Title</label> 

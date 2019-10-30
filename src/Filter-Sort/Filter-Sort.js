@@ -2,22 +2,22 @@ import React from 'react';
 import './Filter-Sort.css';
 
 function FilterSort(props){
-
+    const childOptions = props.childList.map((child) => 
+        <option value={child.id}>{child.name}</option>
+    )
     return(
         <section className="filter">
             <fieldset className="filter-group">
             <legend>Filter List by</legend>
             <div className="form-group">
-                <label htmlFor="child-select">Select One or More Children</label>
-                <select id="child-select" multiple size="4">
-                    <option value="all">All</option>
-                    <option value="child1">Child 1</option>
-                    <option value="child2">Child 2</option>
+                <label htmlFor="child-select">Select a Child</label>
+                <select id="child-select" size="4" onChange={(e)=>props.filterChange('child',e.target.value)}>
+                    {childOptions}
                 </select>
             </div>
             <div className="form-group">
                 <label htmlFor="category-select">Select Catgory</label>
-                <select id="category-select" onChange={props.filterChange('category',this.value)}>
+                <select id="category-select" onChange={(e)=>props.filterChange('category',e.target.value)}>
                 <option value="school">School</option>
                 <option value="scouts">Scouts</option>
         </select>
@@ -27,11 +27,11 @@ function FilterSort(props){
             <fieldset className="filter-group">
             <legend>Sort by</legend>
             <div className="form-group">
-                <input id="eventdatesort" type="radio" name="sort" value="eventdate"/>
+                <input id="eventdatesort" type="radio" name="sort" value="eventdate" onChange={(e)=>props.sortChange(e.target.value)}/>
                 <label htmlFor="eventdatesort">Event Date</label>
             </div>
             <div className="form-group">
-                <input id="actiondatesort" type="radio" name="sort" value="actiondate"/>
+                <input id="actiondatesort" type="radio" name="sort" value="actiondate" onChange={(e)=>props.sortChange(e.target.value)}/>
                 <label htmlFor="actiondatesort">Action Date</label>
             </div>
             </fieldset>
