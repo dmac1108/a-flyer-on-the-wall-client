@@ -43,7 +43,7 @@ class AddFlyer extends Component {
         })
     }
     onCategoryChange = (category) =>{
-        console.log(category)
+        
         this.setState({
             category: category
         })
@@ -58,7 +58,7 @@ class AddFlyer extends Component {
                     }
                   }
             this.setState({child: value});
-            console.log('add flyer child state', this.state.child)
+           
             
     }
 
@@ -75,7 +75,7 @@ class AddFlyer extends Component {
                 category: this.state.category,
                 childid: this.state.child,
             }
-        console.log(flyer)
+        
         this.context.onAddFlyer(flyer);
         this.props.history.push('/flyers')
     }
@@ -87,15 +87,15 @@ class AddFlyer extends Component {
     )
 
     return(
-    <form className="addflyer" id="newflyer">
+    <form className="addflyer" id="newflyer" onSubmit={(e) => this.handleSubmit(e)}>
        <label htmlFor="title">Title</label> 
        <input id="title" type="text" required onChange={(e)=>this.onTitleChange(e.target.value)}/>
        <label htmlFor="imgfile">Flyer Image</label>
        <input id="last" type="file" accept="image/*,.pdf" required onChange={(e) =>this.onImageChange(e.target.files)}/>
        <label htmlFor="eventdate">Event Date</label>
-       <input id="eventdate" type="datetime" required onChange={(e)=>this.onEventDateChange(e.target.value)}/>
+       <input id="eventdate" type="date" required onChange={(e)=>this.onEventDateChange(e.target.value)}/>
        <label htmlFor="actiondate">Action Date</label>
-       <input id="actiondate" type="datetime" onChange={(e)=>this.onActionDateChange(e.target.value)}/>
+       <input id="actiondate" type="date" onChange={(e)=>this.onActionDateChange(e.target.value)}/>
        <label htmlFor="actiontype">Action</label>
        <input id="actiontype" type="text" onChange={(e)=>this.onActionChange(e.target.value)}/>
        <label htmlFor="category-select">Select Catgory</label>
@@ -107,8 +107,8 @@ class AddFlyer extends Component {
         <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)}>
             {childOptions}
         </select>
-       <button type="submit" onClick={(e) => this.handleSubmit(e)}>Submit</button>
-       <button type="reset">Cancel</button>
+       <button type="submit" >Submit</button>
+       <button type="reset" onClick={() => this.props.history.push('/flyers')}>Cancel</button>
     </form>
 
     )

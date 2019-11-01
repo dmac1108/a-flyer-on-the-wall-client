@@ -15,14 +15,14 @@ class FilterSort extends Component{
             <legend>Filter List by</legend>
             <div className="form-group">
                 <label htmlFor="child-select">Select a Child</label>
-                <select id="child-select" size="2" defaultValue="all" onChange={(e)=>this.context.onChildFilterChange(e.target.value)} value={this.context.childFilterValue}>
+                <select id="child-select" size="2" onChange={(e)=>this.context.onChildFilterChange(e.target.value)} value={this.context.childFilterValue}>
                 <option key="all" value="all">All</option>
                     {childOptions}
                 </select>
             </div>
             <div className="form-group">
                 <label htmlFor="category-select">Select Catgory</label>
-                <select defaultValue="all" id="category-select" onChange={(e)=>this.context.onFilterChange('category',e.target.value)} value={this.context.filterValue}>
+                <select id="category-select" onChange={(e)=>this.context.onFilterChange(e.target.value)} value={this.context.filterValue}>
                 <option value="all">All</option>
                 <option value="school">School</option>
                 <option value="scouts">Scouts</option>
@@ -33,11 +33,11 @@ class FilterSort extends Component{
             <fieldset className="filter-group">
             <legend>Sort by</legend>
             <div className="form-group">
-                <input id="eventdatesort" type="radio" name="sort" value="eventdate" onChange={(e)=>this.context.onSortChange(e.target.value)}/>
+                <input id="eventdatesort" type="radio" name="sort" value="eventdate" onChange={(e)=>this.context.onSortChange(e.target.value)} checked={this.context.sortValue === 'eventdate'}/>
                 <label htmlFor="eventdatesort">Event Date</label>
             </div>
             <div className="form-group">
-                <input id="actiondatesort" type="radio" name="sort" value="actiondate" onChange={(e)=>this.context.onSortChange(e.target.value)}/>
+                <input id="actiondatesort" type="radio" name="sort" value="actiondate" onChange={(e)=>this.context.onSortChange(e.target.value)} checked={this.context.sortValue === 'actiondate'}/>
                 <label htmlFor="actiondatesort">Action Date</label>
             </div>
             </fieldset>

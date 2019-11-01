@@ -14,7 +14,7 @@ class FlyerList extends Component{
     
 
     render(){
-    const {flyers, children, filterType, filterValue, childFilterValue, sortValue} = this.context;
+    const {flyers, children, filterValue, childFilterValue, sortValue} = this.context;
 
     let sortedList = flyers;
     
@@ -28,23 +28,17 @@ class FlyerList extends Component{
     }
     
     let filteredList = sortedList;
-    
-
-    /*if(filterValue !== 'all'){
-        
-        filteredList = filterType === 'category' ? sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase()) : sortedList.filter((flyer) => flyer.childid.find((childid) => childid==filterValue) == filterValue)
-    }*/
 
     if(filterValue === 'all' && childFilterValue !== 'all')
     {
-        filteredList = sortedList.filter((flyer) => flyer.childid.find((childid) => childid == filterValue) == filterValue)
+        filteredList = sortedList.filter((flyer) => flyer.childid.find((childid) => childid == childFilterValue) == childFilterValue)
     }
     else if(filterValue !== 'all' && childFilterValue === 'all'){
-        filteredList = filterType === sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase()) 
+        filteredList = sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase()) 
     }
     else if(filterValue !== 'all' && childFilterValue !== 'all'){
 
-     filteredList = filterType === sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase() && flyer.childid.find((childid) => childid == filterValue) == filterValue) 
+     filteredList = sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase() && flyer.childid.find((childid) => childid == childFilterValue) == childFilterValue) 
     }
     
    

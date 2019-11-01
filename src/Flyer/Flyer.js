@@ -9,7 +9,7 @@ import './Flyer.css';
 
     render(){
     const {title, image, eventdate, actiondate, action, category, childid} = this.props
-    console.log('child in flyer', childid)    
+      
     const {children} = this.context    
     const childListItems = !childid ? '' : childid.map((childid) =>{
         const child = children.filter(child => child.id == childid)

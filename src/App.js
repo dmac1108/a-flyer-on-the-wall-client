@@ -18,7 +18,6 @@ class App extends Component {
   state = {
       flyers: [],
       children: [],
-      filterType: 'category',
       filterValue: 'all',
       childFilterValue: 'all',
       sortValue: 'actiondate',
@@ -26,11 +25,11 @@ class App extends Component {
   
    
   onAddFlyer = (flyer) => {
-    console.log("Add flyer called", flyer)
+    
     this.setState({
       flyers: [...this.state.flyers,flyer]
     })
-    console.log(this.state.flyers)
+    
   }
 
   onDeleteFlyer = (flyerid) =>{
@@ -39,9 +38,8 @@ class App extends Component {
     })
   }
 
-  onFilterChange = (filterType, selectedValue) =>{
+  onFilterChange = (selectedValue) =>{
     this.setState({
-      filterType: filterType,
       filterValue: selectedValue,
     })
   }
@@ -63,7 +61,6 @@ class App extends Component {
     this.setState({
       flyers: STORE.flyers, 
       children: STORE.children,
-      filterType: 'category',
       filterValue: 'all',
       childFilterValue: 'all',
       sortValue: 'eventdate',
@@ -74,7 +71,6 @@ class App extends Component {
     const contextValue = {
       flyers: this.state.flyers,
       children: this.state.children,
-      filterType: this.state.filterType,
       filterValue: this.state.filterValue,
       childFilterValue: this.state.childFilterValue,
       sortValue: this.state.sortValue,
