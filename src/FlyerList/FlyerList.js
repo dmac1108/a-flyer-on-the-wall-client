@@ -5,40 +5,61 @@ import FlyersContext from '../FlyersContext';
 import Flyer from '../Flyer/Flyer';
 import FilterSort from '../Filter-Sort/Filter-Sort';
 
-class FlyerList extends Component (){
+class FlyerList extends Component{
+    static defaultProps = {
+        flyers: []
+    }
+
     static contextType = FlyersContext;
+    
 
     render(){
-    const sortValue = this.context.sortValue;
-    let sortedList = this.context.flyers;
+    const {flyers, children, filterType, filterValue, childFilterValue, sortValue} = this.context;
+
+    let sortedList = flyers;
     
     if(sortValue !== null){
         if(sortValue === 'eventdate'){
-            sortedList = this.context.flyers.sort((a,b) => new Date(a.eventdate) - new Date(b.eventdate))
+            sortedList = flyers.sort((a,b) => new Date(a.eventdate) - new Date(b.eventdate))
             }
         else {
-            sortedList = this.context.flyers.sort((a,b) => new Date(a.actiondate) - new Date(b.actiondate))
+            sortedList = flyers.sort((a,b) => new Date(a.actiondate) - new Date(b.actiondate))
         }
     }
     
     let filteredList = sortedList;
-    if(this.context.filterValue !== null){
+    
+
+    /*if(filterValue !== 'all'){
         
-        filteredList = this.context.filterType === 'category' ? sortedList.filter((flyer) => flyer.category.toLowerCase() === this.context.filterValue.toLowerCase()) : sortedList.filter((flyer) => flyer.childid.find((childid) => childid==this.context.filterValue) == this.context.filterValue)
+        filteredList = filterType === 'category' ? sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase()) : sortedList.filter((flyer) => flyer.childid.find((childid) => childid==filterValue) == filterValue)
+    }*/
+
+    if(filterValue === 'all' && childFilterValue !== 'all')
+    {
+        filteredList = sortedList.filter((flyer) => flyer.childid.find((childid) => childid == filterValue) == filterValue)
+    }
+    else if(filterValue !== 'all' && childFilterValue === 'all'){
+        filteredList = filterType === sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase()) 
+    }
+    else if(filterValue !== 'all' && childFilterValue !== 'all'){
+
+     filteredList = filterType === sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase() && flyer.childid.find((childid) => childid == filterValue) == filterValue) 
     }
     
-    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer title={flyer.title} image={flyer.image} eventdate={flyer.eventdate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category} childid={flyer.childid} childList={this.context.children}/></li>);
+   
+    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer title={flyer.title} image={flyer.image} eventdate={flyer.eventdate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category} childid={flyer.childid} childList={children}/></li>);
 
     
     return(
         <div> 
-        <FilterSort childList={this.context.children} filterChange={this.context.onFilterChange} sortChange={this.context.onSortChange}/>
+        <FilterSort/>
         <section className="flyer-list">
             <Link to='/add-flyer' ><button>+ New Flyer</button></Link>
             <ul>
                 {list}
             </ul>
-        </section>
+    </section>
         </div>
     )
     }

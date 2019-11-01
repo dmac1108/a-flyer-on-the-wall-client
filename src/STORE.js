@@ -17,7 +17,7 @@ export default {
     {
         id: 1,
         title: "Corn Maze",
-        image: "",
+        image: {},
         eventdate: "10/15/19",
         actiondate: "10/10/19",
         action: "RSVP",
@@ -27,7 +27,7 @@ export default {
     {
         id: 2,
         title: "Field Trip",
-        image: "",
+        image: {},
         eventdate: "11/13/19",
         actiondate: "9/5/19",
         action: "Send Permission Slip",
@@ -37,7 +37,7 @@ export default {
     {
         id: 3,
         title: "Camping",
-        image: "",
+        image: {},
         eventdate: "9/3/19",
         actiondate: "8/20/19",
         action: "Pay",

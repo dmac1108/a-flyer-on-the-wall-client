@@ -1,7 +1,7 @@
 nav {
-    padding-top: 10px;
+    padding-top: 5px;
     padding-right: 10px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     position: fixed;
     text-align: right;
     z-index: 1;
@@ -12,12 +12,17 @@ nav {
 
 h1 {
   position: absolute;
-  top: 10px;
+  top: 0px;
   left: 20px;
 }
 
 nav ul {
-  display: block;
+  position: relative;
+  top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   list-style: none;
 }
 

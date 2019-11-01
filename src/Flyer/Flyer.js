@@ -1,33 +1,43 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import FlyersContext from '../FlyersContext'
 import './Flyer.css';
 
-export default function Flyer (props){
-    const childListItems = !props.childid ? '' : props.childid.map((childid) =>{
-        const child = props.childList.filter(child => child.id === childid)
+ class Flyer extends Component{
+     
+    static contextType = FlyersContext
+
+    render(){
+    const {title, image, eventdate, actiondate, action, category, childid} = this.props
+    console.log('child in flyer', childid)    
+    const {children} = this.context    
+    const childListItems = !childid ? '' : childid.map((childid) =>{
+        const child = children.filter(child => child.id == childid)
         return <dd key={childid}>{child[0].name}</dd>
     }) 
     
+   
+    
     return(
         <section className="flyer">
-        <h2>{props.title}</h2>
-        <img alt="Flyer Thumbnail" a-href={props.image}/>
+        <h2>{title}</h2>
+        <img alt="Flyer Thumbnail" src={image}/>
         <dl>
             <div className="list-group">
                 <dt>Event Date:</dt>
-                <dd>{props.eventdate}</dd>
+                <dd>{eventdate}</dd>
             </div>
             <div className="list-group">
                 <dt>Action Date:</dt>
-                <dd>{props.actiondate}</dd>
+                <dd>{actiondate}</dd>
             </div>
             <div className="list-group">
                 <dt>Action</dt>
-                <dd>{props.action}</dd>
+                <dd>{action}</dd>
             </div>
             <div className="list-group">
                 <dt>Category</dt>
-                <dd>{props.category}</dd>
+                <dd>{category}</dd>
             </div>
             
                 <dt>Children</dt>
@@ -38,4 +48,7 @@ export default function Flyer (props){
         <button>Delete</button>
      </section>
     )
+    }
 }
+
+export default Flyer
