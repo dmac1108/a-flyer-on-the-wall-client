@@ -8,7 +8,7 @@ import './Flyer.css';
     static contextType = FlyersContext
 
     render(){
-    const {title, image, eventdate, actiondate, action, category, childid} = this.props
+    const {id, title, image, eventdate, actiondate, action, category, childid} = this.props
       
     const {children} = this.context    
     const childListItems = !childid ? '' : childid.map((childid) =>{
@@ -44,8 +44,8 @@ import './Flyer.css';
                 {childListItems}
            
         </dl>
-        <Link to='/edit-flyer'><button>Edit</button></Link>
-        <button>Delete</button>
+        <Link to={`/edit-flyer/${id}`}><button>Edit</button></Link>
+        <button onClick={()=>this.context.onDeleteFlyer(id)}>Delete</button>
      </section>
     )
     }

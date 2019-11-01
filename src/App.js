@@ -25,11 +25,15 @@ class App extends Component {
   
    
   onAddFlyer = (flyer) => {
-    
+    flyer.id = Math.floor(Math.random() * Math.floor(10000))
     this.setState({
       flyers: [...this.state.flyers,flyer]
     })
     
+  }
+
+  onEditFlyer = (flyer) =>{
+    console.log('edit flyer',flyer)
   }
 
   onDeleteFlyer = (flyerid) =>{
@@ -79,6 +83,7 @@ class App extends Component {
       onFilterChange: this.onFilterChange,
       onSortChange: this.onSortChange,
       onChildFilterChange: this.onChildFilterChange,
+      onEditFlyer: this.onEditFlyer,
     }
     
     return(

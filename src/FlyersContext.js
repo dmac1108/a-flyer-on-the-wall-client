@@ -12,6 +12,7 @@ const FlyersContext = React.createContext({
     onSortChange: () => {},
     onAddFlyer: () => {},
     onDeleteFlyer: () => {},
+    onEditFlyer: () => {},
 })
 
 export default FlyersContext;
