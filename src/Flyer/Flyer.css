@@ -17,3 +17,8 @@ img {
 dt{
     font-weight: bold;
 }
+
+img:hover {
+    width: 50%;
+    height: 50%;
+  }
