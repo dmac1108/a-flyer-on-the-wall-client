@@ -12,6 +12,7 @@ import SignUp from './SignUp/SignUp';
 import SignIn from './SignIn/SignIn';
 import AddFlyer from './AddFlyer/AddFlyer';
 import EditFlyer from './EditFlyer/EditFlyer';
+import FlyerExpandedView from './FlyerExpandedView/FlyerExpandedView';
 
 class App extends Component {
  
@@ -115,6 +116,7 @@ class App extends Component {
         <Route path='/flyers/:flyerid' component={Flyer}/>
         <Route path='/add-flyer' component={AddFlyer}/>
         <Route path='/edit-flyer/:flyerid' component={EditFlyer}/>
+        <Route path='/flyer-image/:image' component={FlyerExpandedView}/>
       </Switch>
       </FlyersContext.Provider>
 

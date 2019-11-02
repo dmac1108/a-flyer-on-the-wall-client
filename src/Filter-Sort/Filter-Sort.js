@@ -9,6 +9,7 @@ class FilterSort extends Component{
     const childOptions = this.context.children.map((child) => 
         <option key={child.id} value={child.id}>{child.name}</option>
     )
+    const categoryOptions = this.context.categories.map((category) => <option key={category} value={category}>{category}</option>)
     return(
         <section className="filter">
             <fieldset className="filter-group">
@@ -24,8 +25,7 @@ class FilterSort extends Component{
                 <label htmlFor="category-select">Select Catgory</label>
                 <select id="category-select" onChange={(e)=>this.context.onFilterChange(e.target.value)} value={this.context.filterValue}>
                 <option value="all">All</option>
-                <option value="school">School</option>
-                <option value="scouts">Scouts</option>
+                {categoryOptions}
         </select>
             </div>
     

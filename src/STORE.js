@@ -1,3 +1,5 @@
+
+
 export default {
 "children" : [
     {
@@ -17,7 +19,7 @@ export default {
     {
         id: 1,
         title: "Corn Maze",
-        image: {},
+        image: require('../src/Corn-Maze-Flyer.jpg'),
         eventdate: "10/15/19",
         actiondate: "10/10/19",
         action: "RSVP",
@@ -27,7 +29,7 @@ export default {
     {
         id: 2,
         title: "Field Trip",
-        image: {},
+        image: require('../src/after-school-flyer.jpg'),
         eventdate: "11/13/19",
         actiondate: "9/5/19",
         action: "Send Permission Slip",
@@ -37,7 +39,7 @@ export default {
     {
         id: 3,
         title: "Camping",
-        image: {},
+        image: require('../src/scoutcamping.jpg'),
         eventdate: "9/3/19",
         actiondate: "8/20/19",
         action: "Pay",

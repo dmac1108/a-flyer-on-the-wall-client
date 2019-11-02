@@ -16,7 +16,7 @@ import './Flyer.css';
         return <dd key={childid}>{child[0].name}</dd>
     }) 
     
-   
+    
     
     return(
         <div className="flyer">
@@ -32,15 +32,15 @@ import './Flyer.css';
                 <dd>{new Date(actiondate).toString().substring(0,10)}</dd>
             </div>
             <div className="list-group">
-                <dt>Action</dt>
+                <dt>Action:</dt>
                 <dd>{action}</dd>
             </div>
             <div className="list-group">
-                <dt>Category</dt>
+                <dt>Category:</dt>
                 <dd>{category}</dd>
             </div>
             
-                <dt>Children</dt>
+                <dt>Children:</dt>
                 {childListItems}
            
         </dl>
