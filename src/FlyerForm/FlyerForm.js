@@ -1,14 +1,18 @@
 import React, {Component} from 'react'
 import FlyersContext from '../FlyersContext'
 import {withRouter} from 'react-router-dom'
+import DatePicker  from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
 
 class FlyerForm extends Component {
     state={
+        id: '',
         title: '',
         image: '',
-        eventdate: '',
+        eventdate: new Date(),
         action: '',
-        actiondate: '',
+        actiondate: new Date(),
         category: '',
         child: [],
     }
@@ -19,6 +23,7 @@ class FlyerForm extends Component {
             title: title
         })
     }
+
     onImageChange = (files) =>{
         
         this.setState({
@@ -28,8 +33,10 @@ class FlyerForm extends Component {
     }
 
     onEventDateChange = (eventDate) =>{
+        const formattedDate = eventDate.getMonth() + 1 + '/' + eventDate.getDay() + '/' + eventDate.getFullYear()
+
         this.setState({
-            eventdate: eventDate
+            eventdate: formattedDate
         })
     }
     onActionChange = (action) =>{
@@ -38,8 +45,9 @@ class FlyerForm extends Component {
         })
     }
     onActionDateChange = (actionDate) =>{
+        const formattedDate = actionDate.getMonth() + 1 + '/' + actionDate.getDay() + '/' + actionDate.getFullYear()
         this.setState({
-            actiondate: actionDate
+            actiondate: formattedDate
         })
     }
     onCategoryChange = (category) =>{
@@ -57,9 +65,7 @@ class FlyerForm extends Component {
                       value.push(Number(options[i].value));
                     }
                   }
-            this.setState({child: value});
-           
-            
+            this.setState({child: value});     
     }
 
     handleSubmit = (e) =>{
@@ -76,7 +82,7 @@ class FlyerForm extends Component {
                 childid: this.state.child,
             }
         
-        this.props.submissionType === 'add' ? this.context.onAddFlyer(flyer) : this.context.onEditFlyer(flyer)
+        this.props.submissionType === 'add' ? this.context.onAddFlyer(flyer) : this.context.onEditFlyer(this.props.flyerid, flyer)
         this.props.history.push('/flyers')
     }
 
@@ -87,6 +93,7 @@ class FlyerForm extends Component {
                 title: selectedFlyer.title,
                 image: selectedFlyer.image,
                 eventdate: selectedFlyer.eventdate,
+                action: selectedFlyer.action,
                 actiondate: selectedFlyer.actiondate,
                 category: selectedFlyer.category,
                 child: selectedFlyer.childid
@@ -103,22 +110,25 @@ class FlyerForm extends Component {
     return(
     <form className="addflyer" id="newflyer" onSubmit={(e) => this.handleSubmit(e)}>
        <label htmlFor="title">Title</label> 
-       <input id="title" type="text" required onChange={(e)=>this.onTitleChange(e.target.value)}/>
+       <input id="title" type="text" required onChange={(e)=>this.onTitleChange(e.target.value)} value={this.state.title}/>
        <label htmlFor="imgfile">Flyer Image</label>
-       <input id="last" type="file" accept="image/*,.pdf" required onChange={(e) =>this.onImageChange(e.target.files)}/>
+       <input id="last" type="file" accept="image/*,.pdf" required onChange={(e) =>this.onImageChange(e.target.files)} files={this.state.image}/>
+       
        <label htmlFor="eventdate">Event Date</label>
-       <input id="eventdate" type="date" required onChange={(e)=>this.onEventDateChange(e.target.value)}/>
+       <DatePicker id="eventdate" selected={new Date(this.state.eventdate)} onChange={date =>{this.onEventDateChange(date)}}/>
+       
        <label htmlFor="actiondate">Action Date</label>
-       <input id="actiondate" type="date" onChange={(e)=>this.onActionDateChange(e.target.value)}/>
+       <DatePicker id="actiondate" selected={new Date(this.state.actiondate)} onChange={date =>{this.onActionDateChange(date)}}/>
+
        <label htmlFor="actiontype">Action</label>
-       <input id="actiontype" type="text" onChange={(e)=>this.onActionChange(e.target.value)}/>
+       <input id="actiontype" type="text" onChange={(e)=>this.onActionChange(e.target.value)} value={this.state.action}/>
        <label htmlFor="category-select">Select Catgory</label>
-       <select id="category-select" onChange={(e)=>this.onCategoryChange(e.target.value)}>
+       <select id="category-select" onChange={(e)=>this.onCategoryChange(e.target.value)} value={this.state.category.toLowerCase()}>
          <option value="school">School</option>
          <option value="scouts">Scouts</option>
         </select>
         <label htmlFor="student-select">Select One or More Students</label>
-        <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)}>
+        <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)} >
             {childOptions}
         </select>
        <button type="submit" >Submit</button>

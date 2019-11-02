@@ -29,11 +29,16 @@ class App extends Component {
     this.setState({
       flyers: [...this.state.flyers,flyer]
     })
-    
   }
 
-  onEditFlyer = (flyer) =>{
-    console.log('edit flyer',flyer)
+  onEditFlyer = (id,flyer) =>{
+    console.log('edit flyer',id)
+    const index = this.state.flyers.find((flyerIndex) => flyerIndex.id == id).id
+    console.log(index)
+    this.setState({
+      flyers: [...this.state.flyers.filter((flyer)=>flyer.id !== index),flyer]
+    })
+
   }
 
   onDeleteFlyer = (flyerid) =>{

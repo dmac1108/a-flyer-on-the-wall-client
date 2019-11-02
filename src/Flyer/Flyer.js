@@ -25,11 +25,11 @@ import './Flyer.css';
         <dl>
             <div className="list-group">
                 <dt>Event Date:</dt>
-                <dd>{eventdate}</dd>
+                <dd>{new Date(eventdate).toString().substring(0,10)}</dd>
             </div>
             <div className="list-group">
                 <dt>Action Date:</dt>
-                <dd>{actiondate}</dd>
+                <dd>{new Date(actiondate).toString().substring(0,10)}</dd>
             </div>
             <div className="list-group">
                 <dt>Action</dt>
