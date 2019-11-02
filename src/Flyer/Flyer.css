@@ -9,3 +9,7 @@ img {
     width: 25%;
     height: 25%;
 }
+
+.flyer {
+    border: solid #46535E 2px;
+}

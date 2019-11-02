@@ -19,7 +19,7 @@ import './Flyer.css';
    
     
     return(
-        <section className="flyer">
+        <div className="flyer">
         <h2>{title}</h2>
         <img alt="Flyer Thumbnail" src={image}/>
         <dl>
@@ -46,7 +46,7 @@ import './Flyer.css';
         </dl>
         <Link to={`/edit-flyer/${id}`}><button>Edit</button></Link>
         <button onClick={()=>this.context.onDeleteFlyer(id)}>Delete</button>
-     </section>
+     </div>
     )
     }
 }

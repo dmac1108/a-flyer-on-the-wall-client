@@ -9,5 +9,9 @@
   }
 
   ul{
-      list-style: none;
+      list-style: none;   
+  }
+  
+  li {
+    margin-top: 10px;
   }

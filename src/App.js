@@ -18,6 +18,7 @@ class App extends Component {
   state = {
       flyers: [],
       children: [],
+      categories: [],
       filterValue: 'all',
       childFilterValue: 'all',
       sortValue: 'actiondate',
@@ -31,10 +32,17 @@ class App extends Component {
     })
   }
 
+  onAddCategory = (newCategory) => {
+    console.log(newCategory)
+    this.setState({
+      categories: [...this.state.categories,newCategory]
+    })
+  }
+
   onEditFlyer = (id,flyer) =>{
-    console.log('edit flyer',id)
+    
     const index = this.state.flyers.find((flyerIndex) => flyerIndex.id == id).id
-    console.log(index)
+   
     this.setState({
       flyers: [...this.state.flyers.filter((flyer)=>flyer.id !== index),flyer]
     })
@@ -70,6 +78,7 @@ class App extends Component {
     this.setState({
       flyers: STORE.flyers, 
       children: STORE.children,
+      categories: STORE.categories,
       filterValue: 'all',
       childFilterValue: 'all',
       sortValue: 'eventdate',
@@ -80,6 +89,7 @@ class App extends Component {
     const contextValue = {
       flyers: this.state.flyers,
       children: this.state.children,
+      categories: this.state.categories,
       filterValue: this.state.filterValue,
       childFilterValue: this.state.childFilterValue,
       sortValue: this.state.sortValue,
@@ -89,6 +99,7 @@ class App extends Component {
       onSortChange: this.onSortChange,
       onChildFilterChange: this.onChildFilterChange,
       onEditFlyer: this.onEditFlyer,
+      onAddCategory: this.onAddCategory,
     }
     
     return(

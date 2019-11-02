@@ -3,22 +3,26 @@
   }
 
   body {
-    /*font-family: Arial, Helvetica, sans-serif;
-    font-family: 'Rock Salt', cursive;*/
     font-family: 'Permanent Marker', cursive;
     font-size: 20px;
-    color: black;
+    color: #5D7991;
     text-align: center;
   }
-
-
   
-  
-  /*section:nth-child(odd) {
-    background-color: white;
-  }*/
+  a:hover {
+    color: #E2A66F;
+  }  
+  a:link {
+    color: #2A465E;
+  }
+  a:visited {
+    color: #2A465E;
+  }
 
   button {
-      height: 20px;
-      margin: 5 px;
+      border-radius: 5px;
+      margin-right: 10 px;
+      font-size: 20px;
+      color: #2A465E;
+      background-color: #E2A66F ;
   }

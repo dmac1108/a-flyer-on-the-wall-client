@@ -3,6 +3,7 @@ import React from 'react';
 const FlyersContext = React.createContext({
     flyers: [],
     childrend: [],
+    categories: [],
     filterType: null,
     filterValue: 'all',
     childFilterValue: 'all',
@@ -13,6 +14,7 @@ const FlyersContext = React.createContext({
     onAddFlyer: () => {},
     onDeleteFlyer: () => {},
     onEditFlyer: () => {},
+    onAddCategory: () => {},
 })
 
 export default FlyersContext;

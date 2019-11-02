@@ -45,4 +45,5 @@ export default {
         childid: [3]
     },
 ],
+categories: ['scouts', 'school', 'gymnastics']
 }

@@ -5,9 +5,11 @@ nav {
     position: fixed;
     text-align: right;
     z-index: 1;
+    top: 0px;
     left: 0px;
     right: 0px;
-    /*background-color: white;*/
+    background-color: #A3C2DD;
+    height: 100px;
 }
 
 h1 {
@@ -16,7 +18,7 @@ h1 {
   left: 20px;
 }
 
-nav ul {
+nav> ul {
   position: relative;
   top: 40px;
   display: flex;
