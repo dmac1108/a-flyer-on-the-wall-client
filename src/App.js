@@ -12,6 +12,7 @@ import SignUp from './SignUp/SignUp';
 import SignIn from './SignIn/SignIn';
 import AddFlyer from './AddFlyer/AddFlyer';
 import EditFlyer from './EditFlyer/EditFlyer';
+import AddChild from './AddChild/AddChild';
 
 
 class App extends Component {
@@ -53,7 +54,6 @@ class App extends Component {
       id: Math.floor(Math.random() * Math.floor(10000)),
       name: newChild,
     }
-    
     this.setState({
       children: [...this.state.children,child]
     })
@@ -137,7 +137,7 @@ class App extends Component {
         <Route path='/flyers/:flyerid' component={Flyer}/>
         <Route path='/add-flyer' component={AddFlyer}/>
         <Route path='/edit-flyer/:flyerid' component={EditFlyer}/>
-        
+        <Route path='/add-child' component={AddChild}/>
       </Switch>
       </FlyersContext.Provider>
 

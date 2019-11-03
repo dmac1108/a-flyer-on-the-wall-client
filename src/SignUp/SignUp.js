@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import FlyersContext from '../FlyersContext'
+import {Link} from 'react-router-dom'
 import './SignUp.css';
+
 
 class SignUp extends Component {
 
@@ -10,15 +12,11 @@ class SignUp extends Component {
         email: '',
         username: '',
         password: '',
-        hideChildForm: true,
-        childName: '',
 
     }
     static contextType  = FlyersContext
 
     onInputChange = (event) =>{
-        console.log(event.target.value)
-        console.log(event.target.name)
         const value = event.target.value;
         this.setState({
             ...this.state,
@@ -27,18 +25,7 @@ class SignUp extends Component {
         })
     }
 
-    handleAddChildForm = (e) =>{
-        e.preventDefault()
-        
-        
-    }
-    handleAddChild = (e) =>{
-        e.preventDefault()
-        this.context.onAddChild(e.target.value)
-        this.setState({
-            childName: '',
-        })
-    }
+    
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -66,10 +53,10 @@ class SignUp extends Component {
     render(){
     
     return(
-        <section>
-            <div hidden={!this.state.hideChildForm}>
+        <section className="signup">
+        <div >
         <form id="signup" onSubmit={(e) => this.handleSubmit(e)}>
-            <fieldset className="signup">
+            <fieldset className="signupform">
             <legend>Sign-Up</legend>
                 <label htmlFor="first">First Name</label> 
                 <input name="first" id="first" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.first}/>
@@ -85,16 +72,10 @@ class SignUp extends Component {
             </fieldset>
         </form>
      </div>
-     <div  hidden={this.state.hideChildForm}>
-        <button type="button" onClick={()=>{this.handleAddChildForm()}}>Add Child</button>
-        <form  className="addChild" onSubmit={(e)=>this.handleAddChild(e)}>
-            <legend>Add Child</legend>
-            <label htmlFor="add-child">Name</label>
-            <input type="text" id="add-child"  value={this.state.childName}/>
-            <button type="submit">Add</button>
-        </form>
-            <button className="done" type="submit" onChange={()=>this.props.history.push('/flyers')}>Done</button>
-     </div>
+     <div className="signup">
+        <Link to='/add-child'><button type="button">Add Child</button></Link>
+        
+        </div>
      </section>
     );
     }

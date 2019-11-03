@@ -1,13 +1,14 @@
-.signup {
+.signup, .signupform {
     position: relative;
-    top: 120px;
+    top: 75px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
 }
 
-.signup > input {
+
+.signupform > input {
     width: 100%;
     text-align: center;
     margin-left: 20px;
@@ -21,9 +22,4 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-}
-
-.done {
-    position: relative;
-    top: 20px;
 }

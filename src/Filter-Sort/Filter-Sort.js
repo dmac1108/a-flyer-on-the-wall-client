@@ -30,7 +30,7 @@ class FilterSort extends Component{
             </div>
     
             </fieldset> 
-            <fieldset className="filter-group">
+            <fieldset className="form-group">
             <legend>Sort by</legend>
             <div className="form-group">
                 <input id="eventdatesort" type="radio" name="sort" value="eventdate" onChange={(e)=>this.context.onSortChange(e.target.value)} checked={this.context.sortValue === 'eventdate'}/>
