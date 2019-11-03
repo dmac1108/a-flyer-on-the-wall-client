@@ -35,8 +35,8 @@ class FlyerForm extends Component {
     }
 
     onEventDateChange = (eventDate) =>{
-        const formattedDate = eventDate.getMonth() + 1 + '/' + eventDate.getDay() + '/' + eventDate.getFullYear()
-
+        const formattedDate = eventDate.getMonth() + 1 + '/' + eventDate.getDate() + '/' + eventDate.getFullYear()
+        
         this.setState({
             eventdate: formattedDate
         })
@@ -47,7 +47,7 @@ class FlyerForm extends Component {
         })
     }
     onActionDateChange = (actionDate) =>{
-        const formattedDate = actionDate.getMonth() + 1 + '/' + actionDate.getDay() + '/' + actionDate.getFullYear()
+        const formattedDate = actionDate.getMonth() + 1 + '/' + actionDate.getDate() + '/' + actionDate.getFullYear()
         this.setState({
             actiondate: formattedDate
         })

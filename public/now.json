@@ -1,0 +1,15 @@
+{ 
+    "version": 2,
+    "alias": "dmac1108-a-flyer-on-the-wall",
+    "name": "a-flyer-on-the-wall",
+    "routes" :[
+        {
+            "src": "^/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": ".*",
+            "dest": "/index.html"
+        }
+    ]
+}
