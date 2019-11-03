@@ -77,11 +77,12 @@ class FlyerForm extends Component {
     }
 
     handleNewCategory = (newCategory) =>{
-        console.log('handlenewcategory', newCategory)
         this.setState({
             category: newCategory
+            
         })
         this.context.onAddCategory(newCategory)
+        
     }
 
     handleSubmit = (e) =>{
@@ -154,6 +155,7 @@ class FlyerForm extends Component {
         <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)} >
             {childOptions}
         </select>
+       
        <button type="submit" >Submit</button>
        <button type="reset" onClick={() => this.props.history.push('/flyers')}>Cancel</button>
     </form>

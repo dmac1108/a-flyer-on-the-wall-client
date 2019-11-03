@@ -12,7 +12,7 @@ import SignUp from './SignUp/SignUp';
 import SignIn from './SignIn/SignIn';
 import AddFlyer from './AddFlyer/AddFlyer';
 import EditFlyer from './EditFlyer/EditFlyer';
-import FlyerExpandedView from './FlyerExpandedView/FlyerExpandedView';
+
 
 class App extends Component {
  
@@ -20,6 +20,7 @@ class App extends Component {
       flyers: [],
       children: [],
       categories: [],
+      users: [],
       filterValue: 'all',
       childFilterValue: 'all',
       sortValue: 'actiondate',
@@ -34,9 +35,27 @@ class App extends Component {
   }
 
   onAddCategory = (newCategory) => {
-    console.log(newCategory)
+    
     this.setState({
       categories: [...this.state.categories,newCategory]
+    })
+  }
+
+  onAddUser = (newUser) =>{
+    newUser.id = Math.floor(Math.random() * Math.floor(10000))
+    this.setState({
+      users: [...this.state.users,newUser]
+    })
+  }
+
+  onAddChild = (newChild) =>{
+    const child = {
+      id: Math.floor(Math.random() * Math.floor(10000)),
+      name: newChild,
+    }
+    
+    this.setState({
+      children: [...this.state.children,child]
     })
   }
 
@@ -101,6 +120,8 @@ class App extends Component {
       onChildFilterChange: this.onChildFilterChange,
       onEditFlyer: this.onEditFlyer,
       onAddCategory: this.onAddCategory,
+      onAddUser: this.onAddUser,
+      onAddChild: this.onAddChild,
     }
     
     return(
@@ -116,7 +137,7 @@ class App extends Component {
         <Route path='/flyers/:flyerid' component={Flyer}/>
         <Route path='/add-flyer' component={AddFlyer}/>
         <Route path='/edit-flyer/:flyerid' component={EditFlyer}/>
-        <Route path='/flyer-image/:image' component={FlyerExpandedView}/>
+        
       </Switch>
       </FlyersContext.Provider>
 

@@ -15,6 +15,8 @@ const FlyersContext = React.createContext({
     onDeleteFlyer: () => {},
     onEditFlyer: () => {},
     onAddCategory: () => {},
+    onAddChild: () => {},
+    onAddUser: () => {},
 })
 
 export default FlyersContext;

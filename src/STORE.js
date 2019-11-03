@@ -4,15 +4,15 @@ export default {
 "children" : [
     {
         id: 1,
-        name: "Child 1",
+        name: "Dick",
     },
     {
         id: 2,
-        name: "Child 2",
+        name: "Sally",
     },
     {
         id: 3,
-        name: "Child 3",
+        name: "Jane",
     },
 ],
 "flyers": [
@@ -47,5 +47,10 @@ export default {
         childid: [3]
     },
 ],
-categories: ['scouts', 'school', 'gymnastics']
+categories: ['scouts', 'school', 'gymnastics'],
+users: [
+
+],
+
+
 }
