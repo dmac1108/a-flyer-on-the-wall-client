@@ -143,16 +143,14 @@ class FlyerForm extends Component {
        <input id="actiontype" type="text" onChange={(e)=>this.onActionChange(e.target.value)} value={this.state.action}/>
        <label htmlFor="category-select" hidden={!this.state.hideAddCategory}>Select Catgory</label>
        <select id="category-select" onChange={(e)=>this.onCategoryChange(e.target.value)} hidden={!this.state.hideAddCategory} value={this.state.category.toLowerCase()}>
-         {/*<option value="school">School</option>
-         <option value="scouts">Scouts</option>*/}
-    {categoryOptions}
-         
-         <option value="add-category">Add category</option>
+       <option value="select">Choose an option</option>
+        {categoryOptions}
         </select>
         <label htmlFor="add-category" hidden={this.state.hideAddCategory}>Add Category</label>
         <input type="text" id="add-category" hidden={this.state.hideAddCategory} onChange={(e)=>this.handleNewCategory(e.target.value)}/>
         <label htmlFor="student-select">Select One or More Students</label>
         <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)} >
+            <option value="select">Choose an option</option>
             {childOptions}
         </select>
        
