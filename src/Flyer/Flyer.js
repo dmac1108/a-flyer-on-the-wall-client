@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import FlyersContext from '../FlyersContext'
 import './Flyer.css';
+import AddToCalendar from 'react-add-to-calendar';
+import moment from 'moment';
+
 
  class Flyer extends Component{
      
@@ -16,7 +19,21 @@ import './Flyer.css';
         return <dd key={childid}>{child[0].name}</dd>
     }) 
     
-    
+    const startTime = moment(eventdate).format();
+    const timeNow = moment().format();
+    const startHours = new Date(startTime).getHours()
+    console.log(startHours)
+    const endTime = new Date(startTime).setHours(startHours +2)
+
+    console.log(startTime)
+    console.log(timeNow)
+    const event = {
+            title: title,
+            description: title,
+            startTime: new Date(startTime),
+            endTime: moment(endTime).format(),
+        }
+        console.log(event);
     
     return(
         <div className="flyer">
@@ -25,7 +42,8 @@ import './Flyer.css';
         <dl>
             <div className="list-group">
                 <dt>Event Date:</dt>
-                <dd>{new Date(eventdate).toString().substring(0,10)}</dd>
+                <dd>{moment(eventdate).format('MMMM Do YYYY, h:mm:ss a')}</dd>
+                {/*<dd>{new Date(eventdate).toString().substring(0,10)}</dd>*/}
             </div>
             <div className="list-group">
                 <dt>Action Date:</dt>
@@ -44,6 +62,9 @@ import './Flyer.css';
                 {childListItems}
            
         </dl>
+        
+        <AddToCalendar event={event} buttonWrapperClass="add-to-calendar"/>
+    
         <Link to={`/edit-flyer/${id}`}><button>Edit</button></Link>
         <button onClick={()=>this.context.onDeleteFlyer(id)}>Delete</button>
      </div>

@@ -13,6 +13,7 @@ import SignIn from './SignIn/SignIn';
 import AddFlyer from './AddFlyer/AddFlyer';
 import EditFlyer from './EditFlyer/EditFlyer';
 import AddChild from './AddChild/AddChild';
+import UploadToCalendar from './UploadToCalendar/UploadToCalendar'
 
 
 class App extends Component {
@@ -138,6 +139,7 @@ class App extends Component {
         <Route path='/add-flyer' component={AddFlyer}/>
         <Route path='/edit-flyer/:flyerid' component={EditFlyer}/>
         <Route path='/add-child' component={AddChild}/>
+        <Route path='/add-to-calendar/:id' component={UploadToCalendar}/>
       </Switch>
       </FlyersContext.Provider>
 

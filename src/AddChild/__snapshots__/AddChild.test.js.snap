@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddChild Component renders the AddChild component 1`] = `
+<section
+  className="addchildsection"
+>
+  <div>
+    <form
+      className="addChild"
+      onSubmit={[Function]}
+    >
+      <legend>
+        Add Child
+      </legend>
+      <label
+        htmlFor="add-child"
+      >
+        Name
+      </label>
+      <input
+        id="add-child"
+        name="name"
+        onChange={[Function]}
+        type="text"
+      />
+      <button
+        type="submit"
+      >
+        Add Child
+      </button>
+      <button
+        onClick={[Function]}
+        type="reset"
+      >
+        Done
+      </button>
+    </form>
+  </div>
+  <div
+    className="addchildlist"
+  >
+    <h2>
+      Children Added
+    </h2>
+    <ul />
+  </div>
+</section>
+`;

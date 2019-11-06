@@ -7,14 +7,17 @@ import FilterSort from '../Filter-Sort/Filter-Sort';
 
 class FlyerList extends Component{
     static defaultProps = {
-        flyers: []
+        flyers: [],
+        filterValue: '',
+        childFilterValue: '',
+        sortValue: ''
     }
 
     static contextType = FlyersContext;
     
 
     render(){
-    const {flyers, children, filterValue, childFilterValue, sortValue} = this.context;
+    const {flyers, filterValue, childFilterValue, sortValue} = this.context;
 
     let sortedList = flyers;
     
@@ -42,7 +45,7 @@ class FlyerList extends Component{
     }
     
    
-    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} image={flyer.image} eventdate={flyer.eventdate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category} childid={flyer.childid} childList={children}/></li>);
+    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} image={flyer.image} eventdate={flyer.eventdate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category} childid={flyer.childid}/></li>);
 
     
     return(

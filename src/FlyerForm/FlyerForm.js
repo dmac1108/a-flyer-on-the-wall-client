@@ -17,6 +17,7 @@ class FlyerForm extends Component {
         category: '',
         child: [],
         hideAddCategory: true,
+        
     }
     static contextType = FlyersContext
 
@@ -103,6 +104,8 @@ class FlyerForm extends Component {
         this.props.history.push('/flyers')
     }
 
+
+
     componentDidMount(){
         if(this.props.submissionType === 'edit'){
             const selectedFlyer = this.context.flyers.find((flyer) => flyer.id == this.props.flyerid)
@@ -120,9 +123,11 @@ class FlyerForm extends Component {
 
 
     render(){
+
     const childOptions = this.context.children.map((child) => 
         <option key={child.id} value={child.id}>{child.name}</option>
     )
+    
     const categoryOptions = this.context.categories.map((category) => <option key={category} value={category}>{category}</option>)
     
 
