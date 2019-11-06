@@ -11,7 +11,7 @@ import moment from 'moment';
     static contextType = FlyersContext
 
     render(){
-    const {id, title, image, eventdate, actiondate, action, category, childid} = this.props
+    const {id, title, image, eventstartdate, eventenddate, actiondate, action, category, childid} = this.props
       
     const {children} = this.context    
     const childListItems = !childid ? '' : childid.map((childid) =>{
@@ -19,21 +19,15 @@ import moment from 'moment';
         return <dd key={childid}>{child[0].name}</dd>
     }) 
     
-    const startTime = moment(eventdate).format();
-    const timeNow = moment().format();
-    const startHours = new Date(startTime).getHours()
-    console.log(startHours)
-    const endTime = new Date(startTime).setHours(startHours +2)
-
-    console.log(startTime)
-    console.log(timeNow)
+    const startTime = moment(eventstartdate).format();
+    const endTime= moment(eventenddate).format()
+    const description = `http://localhost:3000/flyers/${id}`
     const event = {
             title: title,
-            description: title,
-            startTime: new Date(startTime),
-            endTime: moment(endTime).format(),
+            description: description,
+            startTime: startTime,
+            endTime: endTime,
         }
-        console.log(event);
     
     return(
         <div className="flyer">
@@ -41,8 +35,13 @@ import moment from 'moment';
         <img alt="Flyer Thumbnail" src={image}/>
         <dl>
             <div className="list-group">
-                <dt>Event Date:</dt>
-                <dd>{moment(eventdate).format('MMMM Do YYYY, h:mm:ss a')}</dd>
+                <dt>Event Start Date/Time:</dt>
+                <dd>{moment(eventstartdate).format('MMMM Do YYYY, h:mm:ss a')}</dd>
+                {/*<dd>{new Date(eventdate).toString().substring(0,10)}</dd>*/}
+            </div>
+            <div className="list-group">
+                <dt>Event End Date/Time:</dt>
+                <dd>{moment(eventenddate).format('MMMM Do YYYY, h:mm:ss a')}</dd>
                 {/*<dd>{new Date(eventdate).toString().substring(0,10)}</dd>*/}
             </div>
             <div className="list-group">

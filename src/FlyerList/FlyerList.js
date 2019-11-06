@@ -23,7 +23,7 @@ class FlyerList extends Component{
     
     if(sortValue !== null){
         if(sortValue === 'eventdate'){
-            sortedList = flyers.sort((a,b) => new Date(a.eventdate) - new Date(b.eventdate))
+            sortedList = flyers.sort((a,b) => new Date(a.eventstartdate) - new Date(b.eventstartdate))
             }
         else {
             sortedList = flyers.sort((a,b) => new Date(a.actiondate) - new Date(b.actiondate))
@@ -45,7 +45,7 @@ class FlyerList extends Component{
     }
     
    
-    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} image={flyer.image} eventdate={flyer.eventdate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category} childid={flyer.childid}/></li>);
+    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} image={flyer.image} eventstartdate={flyer.eventstartdate} eventenddate={flyer.eventenddate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category} childid={flyer.childid}/></li>);
 
     
     return(

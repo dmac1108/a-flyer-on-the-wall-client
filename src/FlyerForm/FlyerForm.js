@@ -11,7 +11,8 @@ class FlyerForm extends Component {
         id: '',
         title: '',
         image: '',
-        eventdate: new Date(),
+        eventstartdatetime: new Date(),
+        eventenddatetime: new Date(),
         action: '',
         actiondate: new Date(),
         category: '',
@@ -35,13 +36,20 @@ class FlyerForm extends Component {
         })
     }
 
-    onEventDateChange = (eventDate) =>{
-        const formattedDate = eventDate.getMonth() + 1 + '/' + eventDate.getDate() + '/' + eventDate.getFullYear()
+    onEventStartDateChange = (eventDate) =>{
         
         this.setState({
-            eventdate: formattedDate
+            eventstartdatetime: eventDate
         })
     }
+
+    onEventEndDateChange = (eventDate) =>{
+        
+        this.setState({
+            eventenddatetime: eventDate
+        })
+    }
+
     onActionChange = (action) =>{
         this.setState({
             action: action
@@ -93,7 +101,8 @@ class FlyerForm extends Component {
             {
                 title: this.state.title,
                 image: this.state.image,
-                eventdate: this.state.eventdate,
+                eventstartdate: this.state.eventstartdate,
+                eventenddate: this.state.eventenddate,
                 action: this.state.action,
                 actiondate: this.state.actiondate,
                 category: this.state.category,
@@ -138,8 +147,17 @@ class FlyerForm extends Component {
        <label htmlFor="imgfile">Flyer Image</label>
        <input id="last" type="file" accept="image/*,.pdf" required onChange={(e) =>this.onImageChange(e.target.files)} files={this.state.image}/>
        
-       <label htmlFor="eventdate">Event Date</label>
-       <DatePicker id="eventdate" selected={new Date(this.state.eventdate)} onChange={date =>{this.onEventDateChange(date)}}/>
+       <label htmlFor="eventstartdatetime">Event Start Date/Time</label>
+       <DatePicker id="eventstartdatedate" timeFormat="HH:mm"
+      timeIntervals={15}
+      timeCaption="time"
+      dateFormat="MMMM d, yyyy h:mm aa" selected={new Date(this.state.eventstartdatetime)} onChange={date =>{this.onEventStartDateChange(date)}}/>
+
+        <label htmlFor="eventenddatetime">Event End Date/Time</label>
+       <DatePicker id="eventenddatetime" timeFormat="HH:mm"
+      timeIntervals={15}
+      timeCaption="time"
+      dateFormat="MMMM d, yyyy h:mm aa" selected={new Date(this.state.eventenddatetime)} onChange={date =>{this.onEventEndDateChange(date)}}/>
        
        <label htmlFor="actiondate">Action Date</label>
        <DatePicker id="actiondate" selected={new Date(this.state.actiondate)} onChange={date =>{this.onActionDateChange(date)}}/>
@@ -150,9 +168,12 @@ class FlyerForm extends Component {
        <select id="category-select" onChange={(e)=>this.onCategoryChange(e.target.value)} hidden={!this.state.hideAddCategory} value={this.state.category.toLowerCase()}>
        <option value="select">Choose an option</option>
         {categoryOptions}
+        <option value="add-category">Add Category</option>
         </select>
-        <label htmlFor="add-category" hidden={this.state.hideAddCategory}>Add Category</label>
-        <input type="text" id="add-category" hidden={this.state.hideAddCategory} onChange={(e)=>this.handleNewCategory(e.target.value)}/>
+        <div hidden={this.state.hideAddCategory}>
+        <label htmlFor="add-category" >Add Category</label>
+        <input type="text" id="add-category"/>
+        </div>
         <label htmlFor="student-select">Select One or More Students</label>
         <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)} >
             <option value="select">Choose an option</option>
