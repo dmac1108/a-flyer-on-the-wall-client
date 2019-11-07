@@ -47,7 +47,8 @@ class FlyerForm extends Component {
     onEventStartDateChange = (eventDate) =>{
         
         this.setState({
-            eventstartdatetime: eventDate
+            eventstartdatetime: eventDate,
+            eventenddatetime: eventDate
         })
     }
 
