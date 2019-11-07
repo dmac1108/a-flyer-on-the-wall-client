@@ -118,14 +118,14 @@ class FlyerForm extends Component {
             {
                 title: this.state.title.value,
                 image: this.state.image,
-                eventstartdate: this.state.eventstartdate,
-                eventenddate: this.state.eventenddate,
+                eventstartdate: this.state.eventstartdatetime,
+                eventenddate: this.state.eventenddatetime,
                 action: this.state.action,
                 actiondate: this.state.actiondate,
                 category: this.state.category.value,
                 childid: this.state.child,
             }
-        
+        console.log(flyer)
         this.props.submissionType === 'add' ? this.context.onAddFlyer(flyer) : this.context.onEditFlyer(this.props.flyerid, flyer)
         this.props.history.push('/flyers')
     }
