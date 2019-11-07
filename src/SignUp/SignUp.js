@@ -58,9 +58,9 @@ class SignUp extends Component {
         <form id="signup" onSubmit={(e) => this.handleSubmit(e)}>
             <fieldset className="signupform">
             <legend>Sign-Up</legend>
-                <label htmlFor="first">First Name</label> 
+                <label htmlFor="first">Parent First Name</label> 
                 <input name="first" id="first" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.first}/>
-                <label htmlFor="last">Last Name</label>
+                <label htmlFor="last">Parent Last Name</label>
                 <input name="last" id="last" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.last}/>
                 <label htmlFor="email">Email Address</label>
                  <input name="email" id="email" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.email}/>
