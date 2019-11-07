@@ -139,7 +139,7 @@ class App extends Component {
         <Route path='/add-flyer' component={AddFlyer}/>
         <Route path='/edit-flyer/:flyerid' component={EditFlyer}/>
         <Route path='/add-child' component={AddChild}/>
-        <Route path='/add-to-calendar/:id' component={UploadToCalendar}/>
+       
       </Switch>
       </FlyersContext.Provider>
 
