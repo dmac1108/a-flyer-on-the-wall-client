@@ -15,6 +15,7 @@ class FlyerForm extends Component {
         title:  
         { value: '',
           touched: true  },
+        location: '',
         image: '',
         eventstartdatetime: new Date(),
         eventenddatetime: new Date(),
@@ -36,6 +37,13 @@ class FlyerForm extends Component {
         })
     }
 
+    onLocationChange = (location) =>{
+
+        this.setState({
+            location: location
+            
+        })
+    }
     onImageChange = (files) =>{
 
         this.setState({
@@ -119,6 +127,7 @@ class FlyerForm extends Component {
             {
                 title: this.state.title.value,
                 image: this.state.image,
+                location: this.state.location,
                 eventstartdate: this.state.eventstartdatetime,
                 eventenddate: this.state.eventenddatetime,
                 action: this.state.action,
@@ -190,7 +199,9 @@ class FlyerForm extends Component {
       
        <input id="title" type="text" required onChange={(e)=>this.onTitleChange(e.target.value)} value={this.state.title.value}/>
        
-
+       <label htmlFor="location">Location</label> 
+      
+      <input id="location" type="text" required onChange={(e)=>this.onLocationChange(e.target.value)} value={this.state.location.value}/>
 
        <label htmlFor="imgfile">Flyer Image</label>
        <input id="last" type="file" accept="image/*,.pdf" required onChange={(e) =>this.onImageChange(e.target.files)} files={this.state.image}/>

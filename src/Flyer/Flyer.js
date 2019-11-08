@@ -11,7 +11,7 @@ import moment from 'moment';
     static contextType = FlyersContext
 
     render(){
-    const {id, title, image, eventstartdate, eventenddate, actiondate, action, category, childid} = this.props
+    const {id, title, location, image, eventstartdate, eventenddate, actiondate, action, category, childid} = this.props
       
     const {children} = this.context    
     const childListItems = !childid ? '' : childid.map((childid) =>{
@@ -24,6 +24,7 @@ import moment from 'moment';
     const description = `http://localhost:3000/flyers/${id}`
     const event = {
             title: title,
+            location: location,
             description: description,
             startTime: startTime,
             endTime: endTime,
@@ -32,16 +33,21 @@ import moment from 'moment';
     return(
         <div className="flyer">
         <h2>{title}</h2>
+        
         <img alt="Flyer Thumbnail" src={image}/>
         <dl>
             <div className="list-group">
+                <dt>Location:</dt>
+                <dd>{location}</dd>
+            </div>
+            <div className="list-group">
                 <dt>Event Start Date/Time:</dt>
-                <dd>{moment(eventstartdate).format('MMMM Do YYYY, h:mm:ss a')}</dd>
+                <dd>{moment(eventstartdate).format('MMMM Do, h:mm a')}</dd>
                 {/*<dd>{new Date(eventdate).toString().substring(0,10)}</dd>*/}
             </div>
             <div className="list-group">
                 <dt>Event End Date/Time:</dt>
-                <dd>{moment(eventenddate).format('MMMM Do YYYY, h:mm:ss a')}</dd>
+                <dd>{moment(eventenddate).format('MMMM Do, h:mm a')}</dd>
                 {/*<dd>{new Date(eventdate).toString().substring(0,10)}</dd>*/}
             </div>
             <div className="list-group">

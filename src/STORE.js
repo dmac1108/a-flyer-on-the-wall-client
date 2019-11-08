@@ -19,9 +19,11 @@ export default {
     {
         id: 1,
         title: "Corn Maze",
+        location: "Best Corn Maze",
         image: require('../src/Corn-Maze-Flyer.jpg'),
         eventdate: "10/15/19 15:30",
         eventenddate: "10/15/19 17:00",
+        
         actiondate: "10/10/19",
         action: "RSVP",
         category: "School",
@@ -30,6 +32,7 @@ export default {
     {
         id: 2,
         title: "Field Trip",
+        location: "Washington D.C.",
         image: require('../src/after-school-flyer.jpg'),
         eventstartdate: "11/13/19 13:00",
         eventenddate: "11/13/19 15:00",
@@ -41,6 +44,7 @@ export default {
     {
         id: 3,
         title: "Camping",
+        location: "Camp Lost In the Woods",
         image: require('../src/scoutcamping.jpg'),
         eventstartdate: "9/3/19 9:30",
         eventenddate: "9/4/19 10:30",
