@@ -3,6 +3,7 @@ import React from 'react';
 const FlyersContext = React.createContext({
     flyers: [],
     children: [],
+    flyers_children: [],
     categories: [],
     filterType: null,
     filterValue: 'all',

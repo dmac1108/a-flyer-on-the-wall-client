@@ -1,3 +1,4 @@
+import config from './config';
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Nav from './Nav/Nav';
@@ -13,7 +14,7 @@ import SignIn from './SignIn/SignIn';
 import AddFlyer from './AddFlyer/AddFlyer';
 import EditFlyer from './EditFlyer/EditFlyer';
 import AddChild from './AddChild/AddChild';
-import UploadToCalendar from './UploadToCalendar/UploadToCalendar'
+
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
   state = {
       flyers: [],
       children: [],
+      flyers_children: [],
       categories: [],
       users: [],
       filterValue: 'all',
@@ -96,20 +98,41 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.setState({
-      flyers: STORE.flyers, 
-      children: STORE.children,
-      categories: STORE.categories,
-      filterValue: 'all',
-      childFilterValue: 'all',
-      sortValue: 'eventdate',
+    Promise.all(
+      [
+        fetch(`${config.API_ENDPOINT}/children`),
+        fetch(`${config.API_ENDPOINT}/flyers`),
+        fetch(`${config.API_ENDPOINT}/flyers_children`),
+        fetch(`${config.API_ENDPOINT}/categories`)
+      ]
+    ).then(([childreRes, flyersRes, flyers_childrenRes, categoriesRes]) => {
+      if(!childreRes.ok) {
+        return childreRes.json().then(e => Promise.reject(e));
+      }
+      if(!flyersRes.ok) {
+        return flyersRes.json().then(e => Promise.reject(e));
+      }
+      if(!flyers_childrenRes.ok) {
+        return flyers_childrenRes.json().then(e => Promise.reject(e));
+      }
+      if(!categoriesRes.ok) {
+        return categoriesRes.json().then(e => Promise.reject(e));
+      }
+      return Promise.all([childreRes.json(), flyersRes.json(), flyers_childrenRes.json(), categoriesRes.json()]);
     })
+    .then(([children, flyers, flyers_children, categories]) =>{
+      this.setState({children,flyers, flyers_children, categories,filterValue: 'all',
+      childFilterValue: 'all',
+      sortValue: 'eventdate',});
+    })
+    .catch(error => console.error(error));
   }
 
   render(){
     const contextValue = {
       flyers: this.state.flyers,
       children: this.state.children,
+      flyers_children: this.state.flyers_children,
       categories: this.state.categories,
       filterValue: this.state.filterValue,
       childFilterValue: this.state.childFilterValue,
@@ -124,7 +147,7 @@ class App extends Component {
       onAddUser: this.onAddUser,
       onAddChild: this.onAddChild,
     }
-    
+    console.log(this.state.categories)
     return(
     <div>
       <FlyersContext.Provider value={contextValue}>

@@ -43,9 +43,10 @@ class FlyerList extends Component{
 
      filteredList = sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase() && flyer.childid.find((childid) => childid == childFilterValue) == childFilterValue) 
     }
+
     
    
-    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} location={flyer.location} image={flyer.image} eventstartdate={flyer.eventstartdate} eventenddate={flyer.eventenddate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category} childid={flyer.childid}/></li>);
+    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} location={flyer.eventlocation} image={flyer.flyerimage} eventstartdate={flyer.eventstartdate} eventenddate={flyer.eventenddate} actiondate={flyer.actiondate} action={flyer.flyeraction} category={flyer.flyercategory} childid={flyer.childid}/></li>);
 
     
     return(

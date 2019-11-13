@@ -1,3 +1,4 @@
+import config from '../config'
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import FlyersContext from '../FlyersContext'
@@ -13,15 +14,15 @@ import moment from 'moment';
     render(){
     const {id, title, location, image, eventstartdate, eventenddate, actiondate, action, category, childid} = this.props
       
-    const {children} = this.context    
+    const {flyers_children} = this.context    
     const childListItems = !childid ? '' : childid.map((childid) =>{
-        const child = children.filter(child => child.id == childid)
+        const child = flyers_children.filter(child => child.id == childid)
         return <dd key={childid}>{child[0].name}</dd>
     }) 
     
     const startTime = moment(eventstartdate).format();
     const endTime= moment(eventenddate).format()
-    const description = `http://localhost:3000/flyers/${id}`
+    const description = `${config.API_ENDPOINT}/${id}`
     const event = {
             title: title,
             location: location,
