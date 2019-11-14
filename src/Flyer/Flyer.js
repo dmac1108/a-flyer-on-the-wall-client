@@ -9,16 +9,25 @@ import moment from 'moment';
 
  class Flyer extends Component{
      
-    static contextType = FlyersContext
+    //Need to determine how to update the url based on different image types
 
+    static contextType = FlyersContext
+    
     render(){
-    const {id, title, location, image, eventstartdate, eventenddate, actiondate, action, category, childid} = this.props
-      
-    const {flyers_children} = this.context    
-    const childListItems = !childid ? '' : childid.map((childid) =>{
-        const child = flyers_children.filter(child => child.id == childid)
-        return <dd key={childid}>{child[0].name}</dd>
-    }) 
+    const {id, title, location, image, eventstartdate, eventenddate, actiondate, action, category} = this.props
+    const {flyers_children, children} = this.context  
+    
+    const flyer_children = flyers_children.filter((flyer_child)=>
+        flyer_child.flyerid === id
+    )
+    let childrenList;
+
+    if(flyers_children){
+        const childrenToList = flyer_children.map((flyer_child) => children.find(child => child.id === flyer_child.childid))
+
+        childrenList = childrenToList.map((flyerchild)=> <dd key={flyerchild.id}>{flyerchild.childname}</dd>)
+        
+    }
     
     const startTime = moment(eventstartdate).format();
     const endTime= moment(eventenddate).format()
@@ -31,11 +40,13 @@ import moment from 'moment';
             endTime: endTime,
         }
     
+    const imageBase64String = atob(image)
+    
     return(
         <div className="flyer">
         <h2>{title}</h2>
         
-        <img alt="Flyer Thumbnail" src={image}/>
+        <img alt="Flyer Thumbnail" src={`data:image/jpeg;base64,${imageBase64String}`}/>
         <dl>
             <div className="list-group">
                 <dt>Location:</dt>
@@ -65,7 +76,7 @@ import moment from 'moment';
             </div>
             
                 <dt>Children:</dt>
-                {childListItems}
+                {childrenList}
            
         </dl>
         

@@ -17,7 +17,7 @@ class FlyerList extends Component{
     
 
     render(){
-    const {flyers, filterValue, childFilterValue, sortValue} = this.context;
+    const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;
 
     let sortedList = flyers;
     
@@ -31,22 +31,23 @@ class FlyerList extends Component{
     }
     
     let filteredList = sortedList;
-
+    
     if(filterValue === 'all' && childFilterValue !== 'all')
     {
-        filteredList = sortedList.filter((flyer) => flyer.childid.find((childid) => childid == childFilterValue) == childFilterValue)
+        filteredList = sortedList.filter((flyer) => flyers_children.find((childid) => childid == childFilterValue) == flyer.id)
     }
     else if(filterValue !== 'all' && childFilterValue === 'all'){
+        
         filteredList = sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase()) 
     }
     else if(filterValue !== 'all' && childFilterValue !== 'all'){
-
+        
      filteredList = sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase() && flyer.childid.find((childid) => childid == childFilterValue) == childFilterValue) 
     }
 
-    
+
    
-    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} location={flyer.eventlocation} image={flyer.flyerimage} eventstartdate={flyer.eventstartdate} eventenddate={flyer.eventenddate} actiondate={flyer.actiondate} action={flyer.flyeraction} category={flyer.flyercategory} childid={flyer.childid}/></li>);
+    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} location={flyer.location} image={flyer.image} eventstartdate={flyer.eventstartdate} eventenddate={flyer.eventenddate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category}/></li>);
 
     
     return(

@@ -7,9 +7,9 @@ class FilterSort extends Component{
 
     render(){
     const childOptions = this.context.children.map((child) => 
-        <option key={child.id} value={child.id}>{child.name}</option>
+        <option key={child.id} value={child.id}>{child.childname}</option>
     )
-    const categoryOptions = this.context.categories.map((category) => <option key={category} value={category}>{category}</option>)
+    const categoryOptions = this.context.categories.map((category) => <option key={category.category} value={category.category}>{category.category}</option>)
     return(
         <section className="filter">
             <fieldset className="filter-group">

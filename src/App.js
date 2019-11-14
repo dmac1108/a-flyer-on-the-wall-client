@@ -127,7 +127,7 @@ class App extends Component {
     })
     .catch(error => console.error(error));
   }
-
+  
   render(){
     const contextValue = {
       flyers: this.state.flyers,
@@ -147,7 +147,7 @@ class App extends Component {
       onAddUser: this.onAddUser,
       onAddChild: this.onAddChild,
     }
-    console.log(this.state.categories)
+    
     return(
     <div>
       <FlyersContext.Provider value={contextValue}>
