@@ -6,6 +6,8 @@ import DatePicker  from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import ValidationError from '../ValidationError/ValidationError'
 import { addYears } from 'date-fns'
+import config from '../config'
+import { read } from 'fs'
 
 
 
@@ -16,7 +18,7 @@ class FlyerForm extends Component {
         { value: '',
           touched: true  },
         location: '',
-        image: '',
+        image: {},
         eventstartdatetime: new Date(),
         eventenddatetime: new Date(),
         action: '',
@@ -24,6 +26,7 @@ class FlyerForm extends Component {
         category: {value: '', touched: true},
         child: [],
         hideAddCategory: true,
+        file: {},
         
     }
     static contextType = FlyersContext
@@ -44,13 +47,30 @@ class FlyerForm extends Component {
             
         })
     }
-    onImageChange = (files) =>{
 
-        this.setState({
-            image:  URL.createObjectURL(files[0])
-            
+    
+
+    onImageChange = (event) =>{
+        event.stopPropagation();
+        event.preventDefault();
+        const file = event.target.files[0]
+            this.setState({
+            file: file
         })
+        
+  }
+    
+    getFileData= (resolve)=>{
+        console.log('get file data', this.state.file)
+        const reader  = new FileReader();
+        reader.readAsDataURL(this.state.file)
+        reader.onload = function(progressEvent){
+            var url = reader.result
+            resolve(url)
+        }
+        
     }
+      
 
     onEventStartDateChange = (eventDate) =>{
         
@@ -126,18 +146,49 @@ class FlyerForm extends Component {
         const flyer = 
             {
                 title: this.state.title.value,
-                image: this.state.image,
-                location: this.state.location,
+                flyerimage: this.state.image,
+                eventlocation: this.state.location,
                 eventstartdate: this.state.eventstartdatetime,
                 eventenddate: this.state.eventenddatetime,
-                action: this.state.action,
+                flyeraction: this.state.action,
                 actiondate: this.state.actiondate,
-                category: this.state.category.value,
-                childid: this.state.child,
+                flyercategory: this.state.category.value,
+                
             }
         console.log(flyer)
-        this.props.submissionType === 'add' ? this.context.onAddFlyer(flyer) : this.context.onEditFlyer(this.props.flyerid, flyer)
-        this.props.history.push('/flyers')
+        let url;
+        let fetchMethod;
+        if(this.props.submissionType === 'add'){
+            url = `${config.API_ENDPOINT}/flyers`
+            fetchMethod = 'POST'
+        }else {
+            url = `${config.API_ENDPOINT}/flyers/${this.props.flyerid}}`;
+            fetchMethod = 'PATCH'
+        }    
+
+        fetch(url,{
+            method: fetchMethod,
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(flyer),
+        })
+        .then(res => {
+          if(!res.ok) {
+            throw new Error(res.status)
+          }
+          return res.json()
+        })
+        .then(flyer =>{
+            
+            this.props.submissionType === 'add' ? this.context.onAddFlyer(flyer) : this.context.onEditFlyer(this.props.flyerid, flyer)
+            this.props.history.push('/flyers')
+        })
+        .catch(error => this.setState({error}))
+    
+
+
+
     }
 
     validateTitle(){
@@ -152,7 +203,7 @@ class FlyerForm extends Component {
     validateCategory(){
     
         const category = this.state.category.value;
-        console.log(category)
+        
         if(category === '' || category === 'select'){
             return 'A valid category is required.'
         }
@@ -182,16 +233,31 @@ class FlyerForm extends Component {
             })
         }
     }
-
+    componentDidUpdate(prevProps, prevState){
+        let currentComponent = this;
+        
+        if(this.state.file !== prevState.file){
+            
+            var promise = new Promise(this.getFileData);
+            promise.then(function(data){
+                const dataToPass = data.substring(data.indexOf(',')+1)
+                currentComponent.setState({
+                    image: dataToPass
+                })
+            }).catch(function(err){
+                console.log('Error', err);
+            });
+         
+        }
+    }
 
     render(){
-
+    
     const childOptions = this.context.children.map((child) => 
-        <option key={child.id} value={child.id}>{child.name}</option>
-    )
-    
-    const categoryOptions = this.context.categories.map((category) => <option key={category} value={category}>{category}</option>)
-    
+    <option key={child.id} value={child.id}>{child.childname}</option>
+)
+    const categoryOptions = this.context.categories.map((category) => <option key={category.category} value={category.category}>{category.category}</option>)    
+
 
     return(
     <form className="addflyer" id="newflyer" onSubmit={(e) => this.handleSubmit(e)}>
@@ -204,7 +270,7 @@ class FlyerForm extends Component {
       <input id="location" type="text" required onChange={(e)=>this.onLocationChange(e.target.value)} value={this.state.location.value}/>
 
        <label htmlFor="imgfile">Flyer Image</label>
-       <input id="last" type="file" accept="image/*,.pdf" required onChange={(e) =>this.onImageChange(e.target.files)} files={this.state.image}/>
+       <input id="last" type="file" accept="image/*,.pdf" required onChange={(e) =>this.onImageChange(e)} files={this.state.image}/>
        
        <label htmlFor="eventstartdatetime">Event Start Date/Time</label>
        <DatePicker id="eventstartdatedate" 

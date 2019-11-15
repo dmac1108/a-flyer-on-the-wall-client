@@ -34,15 +34,22 @@ class FlyerList extends Component{
     
     if(filterValue === 'all' && childFilterValue !== 'all')
     {
-        filteredList = sortedList.filter((flyer) => flyers_children.find((childid) => childid == childFilterValue) == flyer.id)
+        
+        const filteredFlyers_Children = flyers_children.filter((flyer_child)=>flyer_child.childid == childFilterValue)
+        
+
+        filteredList = sortedList.filter((flyer) => filteredFlyers_Children.find((flyer_child)=> flyer_child.flyerid === flyer.id))
+        
     }
     else if(filterValue !== 'all' && childFilterValue === 'all'){
         
         filteredList = sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase()) 
     }
     else if(filterValue !== 'all' && childFilterValue !== 'all'){
+      
+        const filteredFlyers_Children = flyers_children.filter((flyer_child)=>flyer_child.childid == childFilterValue) 
         
-     filteredList = sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase() && flyer.childid.find((childid) => childid == childFilterValue) == childFilterValue) 
+        filteredList = sortedList.filter((flyer) => filteredFlyers_Children.find((flyer_child)=> flyer_child.flyerid === flyer.id) && flyer.category.toLowerCase() === filterValue.toLowerCase())
     }
 
 
