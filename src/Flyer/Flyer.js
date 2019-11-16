@@ -8,8 +8,6 @@ import moment from 'moment';
 
 
  class Flyer extends Component{
-     
-    //Need to determine how to update the url based on different image types
 
     static contextType = FlyersContext
     
@@ -45,8 +43,8 @@ import moment from 'moment';
     return(
         <div className="flyer">
         <h2>{title}</h2>
-        
-        <img alt="Flyer Thumbnail" src={`data:image/jpeg;base64,${imageBase64String}`}/>
+   
+        <img alt="Flyer Thumbnail" src={imageBase64String}/>
         <dl>
             <div className="list-group">
                 <dt>Location:</dt>

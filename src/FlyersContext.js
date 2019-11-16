@@ -13,6 +13,7 @@ const FlyersContext = React.createContext({
     onChildFilterChange: () => {},
     onSortChange: () => {},
     onAddFlyer: () => {},
+    onAddFlyers_Children: () => {},
     onDeleteFlyer: () => {},
     onEditFlyer: () => {},
     onAddCategory: () => {},

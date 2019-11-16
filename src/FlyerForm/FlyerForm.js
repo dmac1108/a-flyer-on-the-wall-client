@@ -23,12 +23,13 @@ class FlyerForm extends Component {
         eventenddatetime: new Date(),
         action: '',
         actiondate: new Date(),
-        category: {value: '', touched: true},
+        category: {value: ''},
         child: [],
         hideAddCategory: true,
         file: {},
         
     }
+
     static contextType = FlyersContext
 
     onTitleChange = (title) =>{
@@ -61,14 +62,12 @@ class FlyerForm extends Component {
   }
     
     getFileData= (resolve)=>{
-        console.log('get file data', this.state.file)
         const reader  = new FileReader();
         reader.readAsDataURL(this.state.file)
         reader.onload = function(progressEvent){
             var url = reader.result
             resolve(url)
-        }
-        
+        }  
     }
       
 
@@ -124,25 +123,35 @@ class FlyerForm extends Component {
                       value.push(Number(options[i].value));
                     }
                   }
-            this.setState({child: value});     
+            this.setState({child: value}); 
+                
     }
 
     handleNewCategory = (newCategory) =>{
-        console.log('new category', newCategory)
         this.setState({
-            category: {
-                value: newCategory,
-                touched: true,
-            }
-            
+            category:{ value: newCategory}
         })
         this.context.onAddCategory(newCategory)
-        
+        const category = {value: newCategory}
+        fetch(`${config.API_ENDPOINT}/categories`,{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(category),
+        })
+        .then(res => {
+          if(!res.ok) {
+            throw new Error(res.status)
+          }
+          return res.json()
+        })
+        .catch((err) => console.log(err))
     }
 
     handleSubmit = (e) =>{
         e.preventDefault();
-        
+
         const flyer = 
             {
                 title: this.state.title.value,
@@ -155,7 +164,7 @@ class FlyerForm extends Component {
                 flyercategory: this.state.category.value,
                 
             }
-        console.log(flyer)
+        
         let url;
         let fetchMethod;
         if(this.props.submissionType === 'add'){
@@ -181,14 +190,37 @@ class FlyerForm extends Component {
         })
         .then(flyer =>{
             
+            const childrenToAdd = this.state.child
+            for (let i=0; i<childrenToAdd.length; i++){
+                let flyerChild = {
+                    childid: childrenToAdd[i],
+                    flyerid: flyer.id
+                }
+                
+                this.context.onAddFlyers_Children(flyerChild)
+
+                fetch(`${config.API_ENDPOINT}/flyers_children`,{
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(flyerChild),
+                })
+                .then(res => {
+                  if(!res.ok) {
+                    throw new Error(res.status)
+                  }
+
+                  return res.json()
+                })
+                .catch((err)=>console.error(err))
+            }
+
             this.props.submissionType === 'add' ? this.context.onAddFlyer(flyer) : this.context.onEditFlyer(this.props.flyerid, flyer)
             this.props.history.push('/flyers')
         })
         .catch(error => this.setState({error}))
-    
-
-
-
+        
     }
 
     validateTitle(){
@@ -221,18 +253,34 @@ class FlyerForm extends Component {
 
     componentDidMount(){
         if(this.props.submissionType === 'edit'){
+            
+            fetch(`${config.API_ENDPOINT}/flyers_children/flyer/${this.props.flyerid}`,{
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                }})
+                .then((res) =>{
+                    console.log(res)
+                })
+            }
+
             const selectedFlyer = this.context.flyers.find((flyer) => flyer.id == this.props.flyerid)
             this.setState({
-                title: selectedFlyer.title,
-                image: selectedFlyer.image,
-                eventdate: selectedFlyer.eventdate,
+                title: {value: selectedFlyer.title, touched: true},
+                location: selectedFlyer.location,
+                //image: selectedFlyer.image,
+                eventstartdatetime: selectedFlyer.eventstartdate,
+                eventenddatetime: selectedFlyer.eventenddate,
                 action: selectedFlyer.action,
                 actiondate: selectedFlyer.actiondate,
-                category: selectedFlyer.category,
-                child: selectedFlyer.childid
+                category: {value: selectedFlyer.category},
+                //child: selectedFlyer.childid
+                hideAddCategory: true,
+                file: {},
+
             })
         }
-    }
+    
     componentDidUpdate(prevProps, prevState){
         let currentComponent = this;
         
@@ -240,7 +288,7 @@ class FlyerForm extends Component {
             
             var promise = new Promise(this.getFileData);
             promise.then(function(data){
-                const dataToPass = data.substring(data.indexOf(',')+1)
+                const dataToPass = data
                 currentComponent.setState({
                     image: dataToPass
                 })
@@ -249,6 +297,7 @@ class FlyerForm extends Component {
             });
          
         }
+
     }
 
     render(){
@@ -308,7 +357,7 @@ class FlyerForm extends Component {
         </select>
         <div hidden={this.state.hideAddCategory}>
         <label htmlFor="add-category" >Add Category</label>
-        <input type="text" id="add-category" onChange={(e)=>this.handleNewCategory(e.target.value)}/>
+        <input type="text" id="add-category" onBlur={(e)=>this.handleNewCategory(e.target.value)}/>
         </div>
         <label htmlFor="student-select">Select One or More Students</label>
         <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)} >
@@ -317,7 +366,7 @@ class FlyerForm extends Component {
         </select>
 
         {this.state.title.touched && (<ValidationError message={this.validateTitle()}/>)}
-        {this.state.category.touched && (<ValidationError message={this.validateCategory()}/>)}
+        <ValidationError message={this.validateCategory()}/>
         <ValidationError message={this.validateEventEndDate()}/>
        <button type="submit" disabled={this.validateTitle() || this.validateCategory() || this.validateEventEndDate()}>Submit</button>
        <button type="reset" onClick={() => this.props.history.push('/flyers')}>Cancel</button>

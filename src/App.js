@@ -5,7 +5,6 @@ import Nav from './Nav/Nav';
 import './App.css';
 import STORE from './STORE';
 import FlyersContext from './FlyersContext';
-
 import FlyerList from './FlyerList/FlyerList';
 import Flyer from './Flyer/Flyer'
 import LandingPage from './LandingPage/LandingPage';
@@ -32,17 +31,24 @@ class App extends Component {
   
    
   onAddFlyer = (flyer) => {
-    flyer.id = Math.floor(Math.random() * Math.floor(10000))
     this.setState({
       flyers: [...this.state.flyers,flyer]
+    })
+  }
+
+  onAddFlyers_Children = (flyer_child) => {
+    console.log('add flyers children', flyer_child)
+    this.setState({
+      flyers_children: [...this.state.flyers_children,flyer_child]
     })
   }
 
   onAddCategory = (newCategory) => {
     
     this.setState({
-      categories: [...this.state.categories,newCategory]
+      categories: [...this.state.categories,{category: newCategory}]
     })
+
   }
 
   onAddUser = (newUser) =>{
@@ -138,6 +144,7 @@ class App extends Component {
       childFilterValue: this.state.childFilterValue,
       sortValue: this.state.sortValue,
       onAddFlyer: this.onAddFlyer,
+      onAddFlyers_Children: this.onAddFlyers_Children,
       onDeleteFlyer: this.onDeleteFlyer,
       onFilterChange: this.onFilterChange,
       onSortChange: this.onSortChange,
