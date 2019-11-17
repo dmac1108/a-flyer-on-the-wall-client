@@ -154,7 +154,7 @@ class App extends Component {
       onAddUser: this.onAddUser,
       onAddChild: this.onAddChild,
     }
-    
+    console.log(this.state.flyers)
     return(
     <div>
       <FlyersContext.Provider value={contextValue}>

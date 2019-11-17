@@ -7,8 +7,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 import ValidationError from '../ValidationError/ValidationError'
 import { addYears } from 'date-fns'
 import config from '../config'
-import { read } from 'fs'
-
 
 
 class FlyerForm extends Component {
@@ -27,7 +25,7 @@ class FlyerForm extends Component {
         child: [],
         hideAddCategory: true,
         file: {},
-        
+        imageRequired: true,
     }
 
     static contextType = FlyersContext
@@ -48,8 +46,6 @@ class FlyerForm extends Component {
             
         })
     }
-
-    
 
     onImageChange = (event) =>{
         event.stopPropagation();
@@ -260,15 +256,22 @@ class FlyerForm extends Component {
                     'content-type': 'application/json',
                 }})
                 .then((res) =>{
-                    console.log(res)
+                    
+                    if(!res.ok){
+                        throw new Error(res.status)
+                     }
+                     return res.json
+                }).then((data)=>{
+                    console.log(data)
                 })
-            }
+            
 
             const selectedFlyer = this.context.flyers.find((flyer) => flyer.id == this.props.flyerid)
+            console.log(selectedFlyer)
             this.setState({
                 title: {value: selectedFlyer.title, touched: true},
                 location: selectedFlyer.location,
-                //image: selectedFlyer.image,
+                image: selectedFlyer.image,
                 eventstartdatetime: selectedFlyer.eventstartdate,
                 eventenddatetime: selectedFlyer.eventenddate,
                 action: selectedFlyer.action,
@@ -276,10 +279,12 @@ class FlyerForm extends Component {
                 category: {value: selectedFlyer.category},
                 //child: selectedFlyer.childid
                 hideAddCategory: true,
-                file: {},
+                //file: {},
+                imageRequired: false
 
             })
         }
+    }
     
     componentDidUpdate(prevProps, prevState){
         let currentComponent = this;
@@ -316,15 +321,15 @@ class FlyerForm extends Component {
        
        <label htmlFor="location">Location</label> 
       
-      <input id="location" type="text" required onChange={(e)=>this.onLocationChange(e.target.value)} value={this.state.location.value}/>
+      <input id="location" type="text" required onChange={(e)=>this.onLocationChange(e.target.value)} value={this.state.location}/>
 
        <label htmlFor="imgfile">Flyer Image</label>
-       <input id="last" type="file" accept="image/*,.pdf" required onChange={(e) =>this.onImageChange(e)} files={this.state.image}/>
+       <input id="last" type="file" accept="image/*,.pdf" required={this.state.imageRequired} onChange={(e) =>this.onImageChange(e)} files={this.state.image}/>
        
        <label htmlFor="eventstartdatetime">Event Start Date/Time</label>
        <DatePicker id="eventstartdatedate" 
         inline
-        minDate={new Date()}
+        minDate={!this.state.eventstartdatetime? new Date() : this.state.eventstartdatetime}
         maxDate={addYears(new Date(),1)}
         showTimeSelect
         timeFormat="HH:mm"
