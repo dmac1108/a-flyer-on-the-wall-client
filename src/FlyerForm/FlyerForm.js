@@ -167,7 +167,7 @@ class FlyerForm extends Component {
             url = `${config.API_ENDPOINT}/flyers`
             fetchMethod = 'POST'
         }else {
-            url = `${config.API_ENDPOINT}/flyers/${this.props.flyerid}}`;
+            url = `${config.API_ENDPOINT}/flyers/${this.props.flyerid}`;
             fetchMethod = 'PATCH'
         }    
 
@@ -179,12 +179,20 @@ class FlyerForm extends Component {
             body: JSON.stringify(flyer),
         })
         .then(res => {
+            
           if(!res.ok) {
             throw new Error(res.status)
+          }
+
+          if(this.props.submissionType === 'edit'){
+            this.context.onEditFlyer(this.props.flyerid, flyer)
           }
           return res.json()
         })
         .then(flyer =>{
+            
+            this.context.onAddFlyer(flyer) 
+                
             
             const childrenToAdd = this.state.child
             for (let i=0; i<childrenToAdd.length; i++){
@@ -210,13 +218,16 @@ class FlyerForm extends Component {
                   return res.json()
                 })
                 .catch((err)=>console.error(err))
-            }
 
-            this.props.submissionType === 'add' ? this.context.onAddFlyer(flyer) : this.context.onEditFlyer(this.props.flyerid, flyer)
-            this.props.history.push('/flyers')
+                
+            }
+            
         })
         .catch(error => this.setState({error}))
         
+        this.props.history.push('/flyers')
+            
+            
     }
 
     validateTitle(){
@@ -267,15 +278,14 @@ class FlyerForm extends Component {
             
 
             const selectedFlyer = this.context.flyers.find((flyer) => flyer.id == this.props.flyerid)
-            console.log(selectedFlyer)
             this.setState({
                 title: {value: selectedFlyer.title, touched: true},
                 location: selectedFlyer.location,
                 image: selectedFlyer.image,
-                eventstartdatetime: selectedFlyer.eventstartdate,
-                eventenddatetime: selectedFlyer.eventenddate,
+                eventstartdatetime: new Date(selectedFlyer.eventstartdate),
+                eventenddatetime: new Date(selectedFlyer.eventenddate),
                 action: selectedFlyer.action,
-                actiondate: selectedFlyer.actiondate,
+                actiondate: new Date(selectedFlyer.actiondate),
                 category: {value: selectedFlyer.category},
                 //child: selectedFlyer.childid
                 hideAddCategory: true,

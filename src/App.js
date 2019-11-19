@@ -31,13 +31,14 @@ class App extends Component {
   
    
   onAddFlyer = (flyer) => {
+    
     this.setState({
       flyers: [...this.state.flyers,flyer]
     })
   }
 
   onAddFlyers_Children = (flyer_child) => {
-    console.log('add flyers children', flyer_child)
+    
     this.setState({
       flyers_children: [...this.state.flyers_children,flyer_child]
     })
@@ -69,11 +70,9 @@ class App extends Component {
   }
 
   onEditFlyer = (id,flyer) =>{
-    
-    const index = this.state.flyers.find((flyerIndex) => flyerIndex.id == id).id
-   
+    console.log('edit', this.state.flyers.filter((flyer)=>flyer.id != id))
     this.setState({
-      flyers: [...this.state.flyers.filter((flyer)=>flyer.id !== index),flyer]
+      flyers: [...this.state.flyers.filter((flyer)=>flyer.id !== id),flyer]
     })
 
   }
@@ -133,6 +132,12 @@ class App extends Component {
     })
     .catch(error => console.error(error));
   }
+
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.flyers !== prevState.flyers){
+      console.log('flyers updated', this.state.flyers)
+    }
+  }
   
   render(){
     const contextValue = {
@@ -154,7 +159,7 @@ class App extends Component {
       onAddUser: this.onAddUser,
       onAddChild: this.onAddChild,
     }
-    console.log(this.state.flyers)
+    
     return(
     <div>
       <FlyersContext.Provider value={contextValue}>

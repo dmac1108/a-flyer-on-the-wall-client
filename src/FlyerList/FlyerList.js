@@ -18,7 +18,7 @@ class FlyerList extends Component{
 
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;
-
+    
     let sortedList = flyers;
     
     if(sortValue !== null){

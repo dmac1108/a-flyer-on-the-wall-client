@@ -37,14 +37,17 @@ import moment from 'moment';
             startTime: startTime,
             endTime: endTime,
         }
-    
-    const imageBase64String = atob(image)
+    // console.log('id', id)
+    //     console.log(image)
+      
+   
+    //const imageBase64String = atob(image)
     
     return(
         <div className="flyer">
         <h2>{title}</h2>
    
-        <img alt="Flyer Thumbnail" src={imageBase64String}/>
+        <img alt="Flyer Thumbnail" src={image}/>
         <dl>
             <div className="list-group">
                 <dt>Location:</dt>
