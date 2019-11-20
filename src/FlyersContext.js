@@ -1,6 +1,7 @@
 import React from 'react';
 
 const FlyersContext = React.createContext({
+    users: [],
     flyers: [],
     children: [],
     flyers_children: [],

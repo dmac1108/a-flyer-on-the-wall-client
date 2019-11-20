@@ -53,7 +53,6 @@ class App extends Component {
   }
 
   onAddUser = (newUser) =>{
-    newUser.id = Math.floor(Math.random() * Math.floor(10000))
     this.setState({
       users: [...this.state.users,newUser]
     })
@@ -70,6 +69,7 @@ class App extends Component {
   }
 
   onEditFlyer = (id,flyer) =>{
+    flyer.id = id
     console.log('edit', this.state.flyers.filter((flyer)=>flyer.id != id))
     this.setState({
       flyers: [...this.state.flyers.filter((flyer)=>flyer.id !== id),flyer]
@@ -105,12 +105,16 @@ class App extends Component {
   componentDidMount(){
     Promise.all(
       [
+        fetch(`${config.API_ENDPOINT}/users`),
         fetch(`${config.API_ENDPOINT}/children`),
         fetch(`${config.API_ENDPOINT}/flyers`),
         fetch(`${config.API_ENDPOINT}/flyers_children`),
         fetch(`${config.API_ENDPOINT}/categories`)
       ]
-    ).then(([childreRes, flyersRes, flyers_childrenRes, categoriesRes]) => {
+    ).then(([userRes],[childreRes, flyersRes, flyers_childrenRes, categoriesRes]) => {
+      if(!userRes.ok) {
+        return userRes.json().then(e => Promise.reject(e));
+      }
       if(!childreRes.ok) {
         return childreRes.json().then(e => Promise.reject(e));
       }
@@ -123,10 +127,10 @@ class App extends Component {
       if(!categoriesRes.ok) {
         return categoriesRes.json().then(e => Promise.reject(e));
       }
-      return Promise.all([childreRes.json(), flyersRes.json(), flyers_childrenRes.json(), categoriesRes.json()]);
+      return Promise.all([userRes.json(), childreRes.json(), flyersRes.json(), flyers_childrenRes.json(), categoriesRes.json()]);
     })
-    .then(([children, flyers, flyers_children, categories]) =>{
-      this.setState({children,flyers, flyers_children, categories,filterValue: 'all',
+    .then(([users, children, flyers, flyers_children, categories]) =>{
+      this.setState({users, children,flyers, flyers_children, categories,filterValue: 'all',
       childFilterValue: 'all',
       sortValue: 'eventdate',});
     })
@@ -141,6 +145,7 @@ class App extends Component {
   
   render(){
     const contextValue = {
+      users: this.state.users,
       flyers: this.state.flyers,
       children: this.state.children,
       flyers_children: this.state.flyers_children,

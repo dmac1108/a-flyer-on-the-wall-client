@@ -1,3 +1,4 @@
+import config from '../config'
 import React, {Component} from 'react';
 import FlyersContext from '../FlyersContext'
 import {Link} from 'react-router-dom'
@@ -31,14 +32,31 @@ class SignUp extends Component {
         e.preventDefault();
 
         const user = {
-            first: this.state.first,
-            last: this.state.last,
+            firstname: this.state.first,
+            lastname: this.state.last,
             email: this.state.email,
             username: this.state.username,
-            password: this.state.password
+            user_password: this.state.password
         }
+        const url = `${config.API_ENDPOINT}/users`
+        fetch(url,{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        })
+        .then((res)=>{
+            if(!res.ok){
+                throw new Error(res.status)
+            }
+            res.json()
 
-        this.context.onAddUser(user)
+        })
+        .then((user)=>{
+            console.log(user)
+            this.context.onAddUser(user)
+        })
 
         this.setState({
             first: '',
