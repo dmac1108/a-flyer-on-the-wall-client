@@ -111,7 +111,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/flyers_children`),
         fetch(`${config.API_ENDPOINT}/categories`)
       ]
-    ).then(([userRes],[childreRes, flyersRes, flyers_childrenRes, categoriesRes]) => {
+    ).then(([userRes, childreRes, flyersRes, flyers_childrenRes, categoriesRes]) => {
       if(!userRes.ok) {
         return userRes.json().then(e => Promise.reject(e));
       }
