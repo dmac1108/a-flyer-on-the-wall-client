@@ -13,7 +13,7 @@ import SignIn from './SignIn/SignIn';
 import AddFlyer from './AddFlyer/AddFlyer';
 import EditFlyer from './EditFlyer/EditFlyer';
 import AddChild from './AddChild/AddChild';
-
+import FlyerApiService from './services/flyer-api-service'
 
 
 class App extends Component {
@@ -103,32 +103,8 @@ class App extends Component {
   }
 
   componentDidMount(){
-    Promise.all(
-      [
-        fetch(`${config.API_ENDPOINT}/users`),
-        fetch(`${config.API_ENDPOINT}/children`),
-        fetch(`${config.API_ENDPOINT}/flyers`),
-        fetch(`${config.API_ENDPOINT}/flyers_children`),
-        fetch(`${config.API_ENDPOINT}/categories`)
-      ]
-    ).then(([userRes, childreRes, flyersRes, flyers_childrenRes, categoriesRes]) => {
-      if(!userRes.ok) {
-        return userRes.json().then(e => Promise.reject(e));
-      }
-      if(!childreRes.ok) {
-        return childreRes.json().then(e => Promise.reject(e));
-      }
-      if(!flyersRes.ok) {
-        return flyersRes.json().then(e => Promise.reject(e));
-      }
-      if(!flyers_childrenRes.ok) {
-        return flyers_childrenRes.json().then(e => Promise.reject(e));
-      }
-      if(!categoriesRes.ok) {
-        return categoriesRes.json().then(e => Promise.reject(e));
-      }
-      return Promise.all([userRes.json(), childreRes.json(), flyersRes.json(), flyers_childrenRes.json(), categoriesRes.json()]);
-    })
+    
+    FlyerApiService.getAllData()
     .then(([users, children, flyers, flyers_children, categories]) =>{
       this.setState({users, children,flyers, flyers_children, categories,filterValue: 'all',
       childFilterValue: 'all',

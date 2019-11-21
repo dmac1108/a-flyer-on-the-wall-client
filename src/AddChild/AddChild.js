@@ -1,6 +1,8 @@
+import config from '../config'
 import React, {Component} from 'react'
 import FlyersContext from '../FlyersContext'
 import './AddChild.css'
+import FlyerApiService from '../services/flyer-api-service'
 
 class AddChild extends Component {
     state = {
@@ -21,14 +23,19 @@ class AddChild extends Component {
     handleAddChild = (e) =>{
         e.preventDefault()
         this.context.onAddChild(this.state.name)
+        const newChild = {childname: this.state.name}
+        FlyerApiService.postChild(newChild)
+        .then(()=>{
         this.setState({
             childrenAdded: [...this.state.childrenAdded, this.state.name]
         })
-        console.log(this.state.childrenAdded)
         this.setState({
             name: '',
            
         })
+    })
+        
+        
     }
     
     render(){

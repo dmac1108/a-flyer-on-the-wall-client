@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import FlyersContext from '../FlyersContext'
 import {Link} from 'react-router-dom'
 import './SignUp.css';
+import FlyerApiService from '../services/flyer-api-service'
 
 
 class SignUp extends Component {
@@ -38,21 +39,8 @@ class SignUp extends Component {
             username: this.state.username,
             user_password: this.state.password
         }
-        const url = `${config.API_ENDPOINT}/users`
-        fetch(url,{
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(user),
-        })
-        .then((res)=>{
-            if(!res.ok){
-                throw new Error(res.status)
-            }
-            res.json()
-
-        })
+        
+        FlyerApiService.postUser(user)
         .then((user)=>{
             console.log(user)
             this.context.onAddUser(user)

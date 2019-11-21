@@ -19,7 +19,8 @@ class SignIn extends Component {
 
     handleSubmitBasicAuth = ev =>{
         ev.preventDefault()
-        const {username, password} = ev.target
+        const username = this.state.username
+        const password = this.state.password
         TokenService.saveAuthToken(
             TokenService.makeBasicAuthToken(username, password)
         )

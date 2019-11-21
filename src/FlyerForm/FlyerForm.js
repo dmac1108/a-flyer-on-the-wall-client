@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import ValidationError from '../ValidationError/ValidationError'
 import { addYears } from 'date-fns'
 import config from '../config'
+import FlyerApiService from '../services/flyer-api-service'
 
 
 class FlyerForm extends Component {
@@ -129,20 +130,7 @@ class FlyerForm extends Component {
         })
         this.context.onAddCategory(newCategory)
         const category = {value: newCategory}
-        fetch(`${config.API_ENDPOINT}/categories`,{
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(category),
-        })
-        .then(res => {
-          if(!res.ok) {
-            throw new Error(res.status)
-          }
-          return res.json()
-        })
-        .catch((err) => console.log(err))
+        FlyerApiService.postCategory(category)
     }
 
     handleSubmit = (e) =>{
@@ -171,13 +159,7 @@ class FlyerForm extends Component {
             fetchMethod = 'PATCH'
         }    
 
-        fetch(url,{
-            method: fetchMethod,
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(flyer),
-        })
+        FlyerApiService.postOrPatchFlyer(url, fetchMethod, flyer)
         .then(res => {
             
           if(!res.ok) {
@@ -193,33 +175,14 @@ class FlyerForm extends Component {
             
             this.context.onAddFlyer(flyer) 
                 
-            
             const childrenToAdd = this.state.child
             for (let i=0; i<childrenToAdd.length; i++){
                 let flyerChild = {
                     childid: childrenToAdd[i],
                     flyerid: flyer.id
                 }
-                
                 this.context.onAddFlyers_Children(flyerChild)
-
-                fetch(`${config.API_ENDPOINT}/flyers_children`,{
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(flyerChild),
-                })
-                .then(res => {
-                  if(!res.ok) {
-                    throw new Error(res.status)
-                  }
-
-                  return res.json()
-                })
-                .catch((err)=>console.error(err))
-
-                
+                FlyerApiService.postFlyersChildren(flyerChild)    
             }
             
         })
@@ -261,22 +224,11 @@ class FlyerForm extends Component {
     componentDidMount(){
         if(this.props.submissionType === 'edit'){
             
-            fetch(`${config.API_ENDPOINT}/flyers_children/flyer/${this.props.flyerid}`,{
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                }})
-                .then((res) =>{
-                    
-                    if(!res.ok){
-                        throw new Error(res.status)
-                     }
-                     return res.json
-                }).then((data)=>{
+            FlyerApiService.getFlyersChildrenByFlyerId(this.props.flyerid)
+            .then((data)=>{
                     console.log(data)
                 })
             
-
             const selectedFlyer = this.context.flyers.find((flyer) => flyer.id == this.props.flyerid)
             this.setState({
                 title: {value: selectedFlyer.title, touched: true},
