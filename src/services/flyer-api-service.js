@@ -7,27 +7,27 @@ const FlyerApiService = {
         [
           fetch(`${config.API_ENDPOINT}/users`, {
               headers: {
-                  'authorization': `basic ${TokenService.getAuthToken()}`,
+                  'authorization': `bearer ${TokenService.getAuthToken()}`,
               }
           }),
           fetch(`${config.API_ENDPOINT}/children`, {
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         }),
           fetch(`${config.API_ENDPOINT}/flyers`, {
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         }),
           fetch(`${config.API_ENDPOINT}/flyers_children`, {
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         }),
           fetch(`${config.API_ENDPOINT}/categories`, {
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         })
         ]
@@ -54,7 +54,7 @@ const FlyerApiService = {
         return fetch(`${config.API_ENDPOINT}/flyers_children/flyer/${flyerId}`,{
             method: 'GET',
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
             }})
             .then((res) =>{
@@ -69,7 +69,7 @@ const FlyerApiService = {
         return fetch(`${config.API_ENDPOINT}/categories`,{
             method: 'POST',
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
             },
             body: JSON.stringify(category),
@@ -86,7 +86,7 @@ const FlyerApiService = {
         return fetch(url,{
             method: fetchMethod,
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
             },
             body: JSON.stringify(flyer),
@@ -96,7 +96,7 @@ const FlyerApiService = {
         return fetch(`${config.API_ENDPOINT}/flyers_children`,{
             method: 'POST',
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
             },
             body: JSON.stringify(flyerChild),
@@ -114,7 +114,7 @@ const FlyerApiService = {
         return fetch(`${config.API_ENDPOINT}/users`,{
             method: 'POST',
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
             },
             body: JSON.stringify(user),
@@ -131,7 +131,7 @@ const FlyerApiService = {
         return fetch(`${config.API_ENDPOINT}/children`,{
             method: 'POST',
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
             },
             body: JSON.stringify(child),

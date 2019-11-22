@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './SignIn.css';
 import TokenService from '../services/token-service';
+import AuthApiService from '../services/auth-api-service';
 
 class SignIn extends Component {
     state={
@@ -16,24 +17,29 @@ class SignIn extends Component {
             
         })
     }
+   
 
-    handleSubmitBasicAuth = ev =>{
+    handleSubmitJwtAuth = ev =>{
         ev.preventDefault()
-        const username = this.state.username
-        const password = this.state.password
-        TokenService.saveAuthToken(
-            TokenService.makeBasicAuthToken(username, password)
-        )
-        this.setState = ({
-            username: '',
-            password: '',
+        this.setState({error: null})
+
+        AuthApiService.postLogin({
+            username: this.state.username,
+            user_password: this.state.password,
         })
-        this.props.history.push('/flyers')
+        .then(res => {
+            this.setState({
+                username: '',
+                password: '',
+            })
+            TokenService.saveAuthToken(res.authToken)
+
+        })
     }
     
     render(){
     return(
-        <form  className="signin" id="signin" onSubmit={this.handleSubmitBasicAuth}>
+        <form  className="signin" id="signin" onSubmit={this.handleSubmitJwtAuth}>
         <label htmlFor="username">Username</label>
         <input name="username" id="usernmae" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username}/>
         <label htmlFor="password">Password</label>
