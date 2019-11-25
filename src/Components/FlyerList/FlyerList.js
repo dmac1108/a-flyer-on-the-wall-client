@@ -40,6 +40,10 @@ class FlyerList extends Component{
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;
     
+    // if(this.context.children.length  === 0){
+    //     this.props.history.push('/add-child')
+    // }
+
     let sortedList = flyers;
     
     if(sortValue !== null){
@@ -83,6 +87,7 @@ class FlyerList extends Component{
         <FilterSort/>
         <section className="flyer-list">
             <Link to='/add-flyer' ><button>+ New Flyer</button></Link>
+            <Link to='/add-child'><button>+ New Child</button></Link>
             <ul>
                 {list}
             </ul>

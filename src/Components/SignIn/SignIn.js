@@ -23,6 +23,7 @@ class SignIn extends Component {
 
     onLoginSuccess = ()=>{
         this.props.history.push('/flyers')
+        
     } 
 
     handleSubmitJwtAuth = ev =>{
@@ -38,8 +39,13 @@ class SignIn extends Component {
                 username: '',
                 password: '',
             })
-            TokenService.saveAuthToken(res.authToken)
-            this.onLoginSuccess()
+            const tokenPromise = new Promise((resolve, reject)=>{
+                resolve(TokenService.saveAuthToken(res.authToken))
+            })
+            tokenPromise.then(this.onLoginSuccess())
+            .catch(error => console.error(error))
+            
+            
         })
         .catch(err => console.error(err))
     }

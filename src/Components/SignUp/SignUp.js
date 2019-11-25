@@ -46,7 +46,6 @@ class SignUp extends Component {
         
         FlyerApiService.postUser(user)
         .then((user)=>{
-            console.log(user)
             this.context.onAddUser(user)
         })
 
@@ -84,10 +83,10 @@ class SignUp extends Component {
             </fieldset>
         </form>
      </div>
-     <div className="signup">
+     {/* <div className="signup">
         <Link to='/add-child'><button type="button">Add Child</button></Link>
         
-        </div>
+        </div> */}
      </section>
     );
     }
