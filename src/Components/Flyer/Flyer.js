@@ -1,7 +1,7 @@
-import config from '../config'
+import config from '../../config'
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import FlyersContext from '../FlyersContext'
+import FlyersContext from '../../FlyersContext'
 import './Flyer.css';
 import AddToCalendar from 'react-add-to-calendar';
 import moment from 'moment';
@@ -15,14 +15,16 @@ import moment from 'moment';
     const {id, title, location, image, eventstartdate, eventenddate, actiondate, action, category} = this.props
     const {flyers_children, children} = this.context  
     
+    
     const flyer_children = flyers_children.filter((flyer_child)=>
         flyer_child.flyerid === id
     )
+    
     let childrenList;
 
-    if(flyers_children){
+    if(flyer_children){
         const childrenToList = flyer_children.map((flyer_child) => children.find(child => child.id === flyer_child.childid))
-
+        
         childrenList = childrenToList.map((flyerchild)=> <dd key={flyerchild.id}>{flyerchild.childname}</dd>)
         
     }

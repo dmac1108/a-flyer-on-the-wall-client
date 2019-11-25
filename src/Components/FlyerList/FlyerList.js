@@ -1,20 +1,41 @@
 import React, {Component} from 'react';
 import {Link }  from 'react-router-dom'
 import './FlyerList.css';
-import FlyersContext from '../FlyersContext';
+import FlyersContext from '../../FlyersContext';
+import FlyerApiService from '../../services/flyer-api-service'
 import Flyer from '../Flyer/Flyer';
 import FilterSort from '../Filter-Sort/Filter-Sort';
 
 class FlyerList extends Component{
-    static defaultProps = {
-        flyers: [],
-        filterValue: '',
-        childFilterValue: '',
-        sortValue: ''
-    }
+    // static defaultProps = {
+    //     flyers: [],
+    //     filterValue: '',
+    //     childFilterValue: '',
+    //     sortValue: ''
+    // }
 
-    static contextType = FlyersContext;
+    static contextType = FlyersContext
     
+
+    componentDidMount(){
+
+        FlyerApiService.getFlyers()
+        .then(this.context.setFlyers)
+        .catch(error => console.error(error))
+        FlyerApiService.getChildren()
+        .then(this.context.setChildren)
+        .catch(error => console.error(error))
+        FlyerApiService.getFlyersChildren()
+        .then(this.context.setFlyersChildren)
+        .catch(error => console.error(error))
+        FlyerApiService.getCategories()
+        .then(this.context.setCategories)
+        .catch(error => console.error(error))
+        
+      }
+
+
+
 
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Filter-Sort.css';
-import FlyersContext from '../FlyersContext'
+import FlyersContext from '../../FlyersContext'
 
 class FilterSort extends Component{
     static contextType = FlyersContext;

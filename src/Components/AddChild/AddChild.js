@@ -1,8 +1,8 @@
-import config from '../config'
+import config from '../../config'
 import React, {Component} from 'react'
-import FlyersContext from '../FlyersContext'
+import FlyersContext from '../../FlyersContext'
 import './AddChild.css'
-import FlyerApiService from '../services/flyer-api-service'
+import FlyerApiService from '../../services/flyer-api-service'
 
 class AddChild extends Component {
     state = {

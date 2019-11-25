@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import './FlyerForm.css'
-import FlyersContext from '../FlyersContext'
+import FlyersContext from '../../FlyersContext'
 import {withRouter} from 'react-router-dom'
 import DatePicker  from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import ValidationError from '../ValidationError/ValidationError'
 import { addYears } from 'date-fns'
-import config from '../config'
-import FlyerApiService from '../services/flyer-api-service'
+import config from '../../config'
+import FlyerApiService from '../../services/flyer-api-service'
 
 
 class FlyerForm extends Component {
@@ -133,6 +133,8 @@ class FlyerForm extends Component {
         FlyerApiService.postCategory(category)
     }
 
+    
+
     handleSubmit = (e) =>{
         e.preventDefault();
 
@@ -167,28 +169,40 @@ class FlyerForm extends Component {
           }
 
           if(this.props.submissionType === 'edit'){
-            this.context.onEditFlyer(this.props.flyerid, flyer)
+            this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history)
+            
           }
           return res.json()
         })
         .then(flyer =>{
+            console.log(flyer)
             
-            this.context.onAddFlyer(flyer) 
-                
+            let newFlyerChildren = []    
             const childrenToAdd = this.state.child
+            if(childrenToAdd.length>0){
             for (let i=0; i<childrenToAdd.length; i++){
                 let flyerChild = {
                     childid: childrenToAdd[i],
                     flyerid: flyer.id
                 }
-                this.context.onAddFlyers_Children(flyerChild)
-                FlyerApiService.postFlyersChildren(flyerChild)    
+                newFlyerChildren.push(flyerChild)
+            }
+
+            FlyerApiService.postFlyersChildren(newFlyerChildren)
+                .then(() =>{
+                    this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
+                    
+                })    
+            
+            }
+            else{
+                this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
             }
             
         })
         .catch(error => this.setState({error}))
         
-        this.props.history.push('/flyers')
+       
             
             
     }

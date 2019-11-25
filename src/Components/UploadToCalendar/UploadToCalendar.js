@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AddToCalendar from 'react-add-to-calendar';
-import FlyersContext from '../FlyersContext'
+import FlyersContext from '../../FlyersContext'
 import moment from 'moment'
 
 class UploadToCalendar extends Component {

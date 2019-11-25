@@ -5,11 +5,6 @@ const FlyerApiService = {
     getAllData(){
     return Promise.all(
         [
-          fetch(`${config.API_ENDPOINT}/users`, {
-              headers: {
-                  'authorization': `bearer ${TokenService.getAuthToken()}`,
-              }
-          }),
           fetch(`${config.API_ENDPOINT}/children`, {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -31,10 +26,8 @@ const FlyerApiService = {
             }
         })
         ]
-      ).then(([userRes, childreRes, flyersRes, flyers_childrenRes, categoriesRes]) => {
-        if(!userRes.ok) {
-          return userRes.json().then(e => Promise.reject(e));
-        }
+      ).then(([childreRes, flyersRes, flyers_childrenRes, categoriesRes]) => {
+        
         if(!childreRes.ok) {
           return childreRes.json().then(e => Promise.reject(e));
         }
@@ -47,8 +40,56 @@ const FlyerApiService = {
         if(!categoriesRes.ok) {
           return categoriesRes.json().then(e => Promise.reject(e));
         }
-        return Promise.all([userRes.json(), childreRes.json(), flyersRes.json(), flyers_childrenRes.json(), categoriesRes.json()]);
+        return Promise.all([childreRes.json(), flyersRes.json(), flyers_childrenRes.json(), categoriesRes.json()]);
       })
+    },
+    getFlyers(){
+        return fetch(`${config.API_ENDPOINT}/flyers`, {
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            }
+        }).then(flyersRes=>{
+            if(!flyersRes.ok) {
+                return flyersRes.json().then(e => Promise.reject(e));
+              }
+            return flyersRes.json()
+        })
+    },
+    getChildren(){
+        return fetch(`${config.API_ENDPOINT}/children`, {
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            }
+        }).then(childrenRes=>{
+            if(!childrenRes.ok) {
+                return childrenRes.json().then(e => Promise.reject(e));
+              }
+            return childrenRes.json()
+        })
+    },
+    getFlyersChildren(){
+        return fetch(`${config.API_ENDPOINT}/flyers_children`, {
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            }
+        }).then(flyers_childrenRes=>{
+            if(!flyers_childrenRes.ok) {
+                return flyers_childrenRes.json().then(e => Promise.reject(e));
+              }
+            return flyers_childrenRes.json()
+        })
+    },
+    getCategories(){
+        return fetch(`${config.API_ENDPOINT}/categories`, {
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            }
+        }).then(catRes=>{
+            if(!catRes.ok) {
+                return catRes.json().then(e => Promise.reject(e));
+              }
+            return catRes.json()
+        })
     },
     getFlyersChildrenByFlyerId(flyerId){
         return fetch(`${config.API_ENDPOINT}/flyers_children/flyer/${flyerId}`,{

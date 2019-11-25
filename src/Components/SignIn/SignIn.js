@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import './SignIn.css';
-import TokenService from '../services/token-service';
-import AuthApiService from '../services/auth-api-service';
+import TokenService from '../../services/token-service';
+import AuthApiService from '../../services/auth-api-service';
+import FlyersContext from '../../FlyersContext'
 
 class SignIn extends Component {
     state={
         username: '',
         password: '',
     }
+    
+    static contextType = FlyersContext;
 
     onInputChange = (event) =>{
         const value = event.target.value;
@@ -17,7 +20,10 @@ class SignIn extends Component {
             
         })
     }
-   
+
+    onLoginSuccess = ()=>{
+        this.props.history.push('/flyers')
+    } 
 
     handleSubmitJwtAuth = ev =>{
         ev.preventDefault()
@@ -33,8 +39,9 @@ class SignIn extends Component {
                 password: '',
             })
             TokenService.saveAuthToken(res.authToken)
-
+            this.onLoginSuccess()
         })
+        .catch(err => console.error(err))
     }
     
     render(){

@@ -1,9 +1,9 @@
-import config from '../config'
+import config from '../../config'
 import React, {Component} from 'react';
-import FlyersContext from '../FlyersContext'
+import FlyersContext from '../../FlyersContext'
 import {Link} from 'react-router-dom'
 import './SignUp.css';
-import FlyerApiService from '../services/flyer-api-service'
+import FlyerApiService from '../../services/flyer-api-service'
 
 
 class SignUp extends Component {
@@ -14,6 +14,7 @@ class SignUp extends Component {
         email: '',
         username: '',
         password: '',
+
 
     }
     static contextType  = FlyersContext
@@ -27,7 +28,10 @@ class SignUp extends Component {
         })
     }
 
-    
+    onSignUpSuccess = ()=>{
+        
+        this.props.history.push('/sign-in')
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -54,6 +58,8 @@ class SignUp extends Component {
             password: '',
             hideChildForm: false,
         })
+
+        this.onSignUpSuccess()
     }
 
     render(){

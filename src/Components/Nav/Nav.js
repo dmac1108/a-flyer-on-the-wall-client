@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {NavLink, Link} from 'react-router-dom'
 import './Nav.css'
-import TokenService from '../services/token-service'
+import TokenService from '../../services/token-service'
 
 class Nav extends Component{
 
@@ -39,7 +39,7 @@ class Nav extends Component{
         <nav>
             <Link to='/'><h1>A Flyer on the Wall</h1></Link>
              <ul>
-                 <li><NavLink to='/flyers'>Demo</NavLink></li>
+                 <li><NavLink to='/flyers'>Flyers</NavLink></li>
                 {TokenService.hasAuthToken() ? this.renderLogoutLink() : this.renderLoginLink()}
             </ul>
             
