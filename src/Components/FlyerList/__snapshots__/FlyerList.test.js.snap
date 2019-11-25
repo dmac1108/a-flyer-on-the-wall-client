@@ -23,11 +23,6 @@ exports[`FlyerList component renders a FlyersList by default 1`] = `
     }
   }
 >
-  <FlyerList
-    childFilterValue=""
-    filterValue=""
-    flyers={Array []}
-    sortValue=""
-  />
+  <FlyerList />
 </Router>
 `;

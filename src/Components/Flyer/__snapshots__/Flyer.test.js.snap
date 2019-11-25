@@ -33,7 +33,6 @@ exports[`renders the UI as expected 1`] = `
         2,
       ]
     }
-    eventdate="9/1/19"
     id={1}
     image="require('../src/scoutcamping.jpg')"
     title="Test"

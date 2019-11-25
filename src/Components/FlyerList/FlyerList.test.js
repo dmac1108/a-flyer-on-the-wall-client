@@ -27,7 +27,7 @@ describe('FlyerList component', ()=>{
             {
                 id: 1,
                 title: "Corn Maze",
-                image: require('.../assets/Corn-Maze-Flyer.jpg'),
+                image: require('../../assets/Corn-Maze-Flyer.jpg'),
                 eventdate: "10/15/19",
                 actiondate: "10/10/19",
                 action: "RSVP",
@@ -37,7 +37,7 @@ describe('FlyerList component', ()=>{
             {
                 id: 2,
                 title: "Field Trip",
-                image: require('.../assets/after-school-flyer.jpg'),
+                image: require('../../assets/after-school-flyer.jpg'),
                 eventdate: "11/13/19",
                 actiondate: "9/5/19",
                 action: "Send Permission Slip",
@@ -47,7 +47,7 @@ describe('FlyerList component', ()=>{
             {
                 id: 3,
                 title: "Camping",
-                image: require('.../assets/scoutcamping.jpg'),
+                image: require('../../assets/scoutcamping.jpg'),
                 eventdate: "9/3/19",
                 actiondate: "8/20/19",
                 action: "Pay",
