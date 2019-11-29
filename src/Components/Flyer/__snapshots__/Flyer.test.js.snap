@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the UI as expected 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <Flyer
+    action="Test render"
+    actiondate="8/15/19"
+    category="Scouts"
+    childid={
+      Array [
+        1,
+        2,
+      ]
+    }
+    id={1}
+    image="require('../src/scoutcamping.jpg')"
+    title="Test"
+  />
+</Router>
+`;
