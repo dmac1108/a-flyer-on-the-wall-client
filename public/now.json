@@ -1,6 +1,6 @@
 { 
     "version": 2,
-    "alias": "dmac1108-a-flyer-on-the-wall",
+    // "alias": "dmac1108-a-flyer-on-the-wall",
     "name": "a-flyer-on-the-wall",
     "routes" :[
         {
