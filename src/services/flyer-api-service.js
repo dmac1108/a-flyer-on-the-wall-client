@@ -155,7 +155,7 @@ const FlyerApiService = {
         return fetch(`${config.API_ENDPOINT}/users`,{
             method: 'POST',
             headers: {
-                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                // 'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
             },
             body: JSON.stringify(user),
