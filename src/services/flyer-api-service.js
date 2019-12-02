@@ -152,6 +152,7 @@ const FlyerApiService = {
         .catch((err)=>console.error(err))
     },
     postUser(user){
+        console.log('postUser', user)
         return fetch(`${config.API_ENDPOINT}/users`,{
             method: 'POST',
             headers: {
@@ -161,6 +162,7 @@ const FlyerApiService = {
             body: JSON.stringify(user),
         })
         .then((res)=>{
+            console.log(res)
             if(!res.ok){
                 throw new Error(res.status)
             }
