@@ -7,12 +7,6 @@ import Flyer from '../Flyer/Flyer';
 import FilterSort from '../Filter-Sort/Filter-Sort';
 
 class FlyerList extends Component{
-    // static defaultProps = {
-    //     flyers: [],
-    //     filterValue: '',
-    //     childFilterValue: '',
-    //     sortValue: ''
-    // }
 
     static contextType = FlyersContext
     
@@ -39,6 +33,8 @@ class FlyerList extends Component{
 
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;
+
+    console.log(flyers_children)
     
     // if(this.context.children.length  === 0){
     //     this.props.history.push('/add-child')

@@ -1,10 +1,7 @@
-import config from '../../config';
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import './App.css';
-import STORE from '../../STORE';
-import FlyersContext from '../../FlyersContext';
 import FlyerList from '../FlyerList/FlyerList';
 import Flyer from '../Flyer/Flyer'
 import LandingPage from '../LandingPage/LandingPage';
@@ -15,7 +12,6 @@ import EditFlyer from '../EditFlyer/EditFlyer';
 import AddChild from '../AddChild/AddChild';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
-import FlyerApiService from '../../services/flyer-api-service'
 import {withRouter} from 'react-router-dom'
 
 class App extends Component {
