@@ -34,7 +34,7 @@ class FlyerList extends Component{
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;
 
-    console.log(flyers_children)
+    console.log(this.context.flyers_children)
     
     // if(this.context.children.length  === 0){
     //     this.props.history.push('/add-child')
