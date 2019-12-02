@@ -42,7 +42,7 @@ export class FlyersProvider extends Component {
 
 
       setFlyers = (flyers) =>{
-          console.log('in context', flyers)
+          
         this.setState({
           flyers: flyers
         })
@@ -71,7 +71,7 @@ export class FlyersProvider extends Component {
     } 
   
     onAddFlyer = (flyer, flyerChild, history) => {
-      console.log('in the onAddFlyer function')
+      
       this.setState({
         flyers: [...this.state.flyers,flyer],
         flyers_children: [...this.state.flyers_children, flyerChild]

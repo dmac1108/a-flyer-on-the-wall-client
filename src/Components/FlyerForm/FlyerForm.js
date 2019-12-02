@@ -175,7 +175,7 @@ class FlyerForm extends Component {
           return res.json()
         })
         .then(flyer =>{
-            console.log(flyer)
+            
             
             let newFlyerChildren = []    
             const childrenToAdd = this.state.child
