@@ -189,8 +189,8 @@ class FlyerForm extends Component {
             }
 
             FlyerApiService.postFlyersChildren(newFlyerChildren)
-                .then(() =>{
-                    this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
+                .then((result) =>{
+                    this.context.onAddFlyer(flyer, result, this.props.history) 
                     
                 })    
             
@@ -238,10 +238,10 @@ class FlyerForm extends Component {
     componentDidMount(){
         if(this.props.submissionType === 'edit'){
             
-            FlyerApiService.getFlyersChildrenByFlyerId(this.props.flyerid)
-            .then((data)=>{
-                    console.log(data)
-                })
+            // FlyerApiService.getFlyersChildrenByFlyerId(this.props.flyerid)
+            // .then((data)=>{
+            //         console.log(data)
+            //     })
             
             const selectedFlyer = this.context.flyers.find((flyer) => flyer.id == this.props.flyerid)
             this.setState({
