@@ -206,9 +206,9 @@ const FlyerApiService = {
 
         })
     },
-    deleteFlyersChildren(flyerChildId){
-        console.log(flyerChildId)
-        return fetch(`${config.API_ENDPOINT}/flyers_children/${flyerChildId}`,{
+    deleteFlyersChildrenbyFlyerId(flyerId){
+        console.log(flyerId)
+        return fetch(`${config.API_ENDPOINT}/flyers_children/flyer/${flyerId}`,{
             method: 'DELETE',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,

@@ -175,8 +175,22 @@ class FlyerForm extends Component {
           return res.json()
         })
         .then((flyer) =>{
+
+            let FlyerForm = this
         
-                
+            // const flyersChildrenInContext = this.context.flyers_children.filter((flyerChild)=>flyerChild.flyerid === flyer.id)
+            // console.log('flyerschildren in context', flyersChildrenInContext)
+
+            async function deleteFlyers_ChildrenInContext (flyerId, callback){
+                console.log('inside delete flyers_children')
+                await FlyerApiService.deleteFlyersChildrenbyFlyerId(flyerId)
+                callback()
+            }
+
+            deleteFlyers_ChildrenInContext(flyer.id,insertNewFlyersChildren)
+
+            function insertNewFlyersChildren(){
+                console.log('inside insert new flyers_children')
             let newFlyerChildren = []    
             const childrenToAdd = FlyerForm.state.child
             if(childrenToAdd.length>0){
@@ -198,6 +212,7 @@ class FlyerForm extends Component {
             else{
                 this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
             }
+        }
         
             
         })
