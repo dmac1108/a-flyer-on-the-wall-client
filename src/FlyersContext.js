@@ -79,26 +79,12 @@ export class FlyersProvider extends Component {
       history.push('/flyers')
     }
   
-    // onAddFlyers_Children = (flyer_child) => {
-      
-    //   this.setState({
-    //     flyers_children: [...this.state.flyers_children,flyer_child]
-    //   })
-    //   this.props.history.push('/flyers')
-    // }
-  
     onAddCategory = (newCategory) => {
       
       this.setState({
         categories: [...this.state.categories,{category: newCategory}]
       })
   
-    }
-  
-    onAddUser = (newUser) =>{
-      // this.setState({
-      //   users: [...this.state.users,newUser]
-      // })
     }
   
     onAddChild = (newChild) =>{

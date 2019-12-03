@@ -5,11 +5,19 @@ import FlyersContext from '../../FlyersContext'
 import './Flyer.css';
 import AddToCalendar from 'react-add-to-calendar';
 import moment from 'moment';
+import FlyerApiService from '../../services/flyer-api-service'
 
 
  class Flyer extends Component{
 
     static contextType = FlyersContext
+
+    onDeleteFlyer = (flyerId) =>{
+        FlyerApiService.deleteFlyer(flyerId)
+        .then(()=>{
+            this.context.onDeleteFlyer(flyerId)
+        })
+    }
     
     render(){
     const {id, title, location, image, eventstartdate, eventenddate, actiondate, action, category} = this.props
@@ -39,11 +47,6 @@ import moment from 'moment';
             startTime: startTime,
             endTime: endTime,
         }
-    // console.log('id', id)
-    //     console.log(image)
-      
-   
-    //const imageBase64String = atob(image)
     
     return(
         <div className="flyer">
@@ -58,12 +61,12 @@ import moment from 'moment';
             <div className="list-group">
                 <dt>Event Start Date/Time:</dt>
                 <dd>{moment(eventstartdate).format('MMMM Do, h:mm a')}</dd>
-                {/*<dd>{new Date(eventdate).toString().substring(0,10)}</dd>*/}
+               
             </div>
             <div className="list-group">
                 <dt>Event End Date/Time:</dt>
                 <dd>{moment(eventenddate).format('MMMM Do, h:mm a')}</dd>
-                {/*<dd>{new Date(eventdate).toString().substring(0,10)}</dd>*/}
+                
             </div>
             <div className="list-group">
                 <dt>Action Date:</dt>
@@ -86,7 +89,7 @@ import moment from 'moment';
         <AddToCalendar event={event} buttonWrapperClass="add-to-calendar"/>
     
         <Link to={`/edit-flyer/${id}`}><button>Edit</button></Link>
-        <button onClick={()=>this.context.onDeleteFlyer(id)}>Delete</button>
+        <button onClick={()=>this.onDeleteFlyer(id)}>Delete</button>
      </div>
     )
     }

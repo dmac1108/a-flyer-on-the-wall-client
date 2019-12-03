@@ -186,6 +186,44 @@ const FlyerApiService = {
             res.json()
 
         })
+    },
+    deleteFlyer(flyerId){
+        console.log(flyerId)
+        return fetch(`${config.API_ENDPOINT}/flyers/${flyerId}`,{
+            method: 'DELETE',
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json',
+            },
+            
+        })
+        .then((res)=>{
+            console.log(res)
+            if(!res.ok){
+                throw new Error(res.status)
+            }
+            // res.json()
+
+        })
+    },
+    deleteFlyersChildren(flyerChildId){
+        console.log(flyerChildId)
+        return fetch(`${config.API_ENDPOINT}/flyers_children/${flyerChildId}`,{
+            method: 'DELETE',
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json',
+            },
+            
+        })
+        .then((res)=>{
+            console.log(res)
+            if(!res.ok){
+                throw new Error(res.status)
+            }
+            // res.json()
+
+        })
     }
 }
 

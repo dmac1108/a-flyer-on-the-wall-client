@@ -168,17 +168,17 @@ class FlyerForm extends Component {
             throw new Error(res.status)
           }
 
-          if(this.props.submissionType === 'edit'){
-            this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history)
+        //   if(this.props.submissionType === 'edit'){
+        //     this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history)
             
-          }
+        //   }
           return res.json()
         })
-        .then(flyer =>{
-            
-            
+        .then((flyer) =>{
+        
+                
             let newFlyerChildren = []    
-            const childrenToAdd = this.state.child
+            const childrenToAdd = FlyerForm.state.child
             if(childrenToAdd.length>0){
             for (let i=0; i<childrenToAdd.length; i++){
                 let flyerChild = {
@@ -190,7 +190,7 @@ class FlyerForm extends Component {
 
             FlyerApiService.postFlyersChildren(newFlyerChildren)
                 .then((result) =>{
-                    this.context.onAddFlyer(flyer, result, this.props.history) 
+                    FlyerForm.context.onAddFlyer(flyer, result, FlyerForm.props.history) 
                     
                 })    
             
@@ -198,12 +198,11 @@ class FlyerForm extends Component {
             else{
                 this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
             }
+        
             
         })
         .catch(error => this.setState({error}))
         
-       
-            
             
     }
 
@@ -238,11 +237,6 @@ class FlyerForm extends Component {
     componentDidMount(){
         if(this.props.submissionType === 'edit'){
             
-            // FlyerApiService.getFlyersChildrenByFlyerId(this.props.flyerid)
-            // .then((data)=>{
-            //         console.log(data)
-            //     })
-            
             const selectedFlyer = this.context.flyers.find((flyer) => flyer.id == this.props.flyerid)
             this.setState({
                 title: {value: selectedFlyer.title, touched: true},
@@ -253,11 +247,15 @@ class FlyerForm extends Component {
                 action: selectedFlyer.action,
                 actiondate: new Date(selectedFlyer.actiondate),
                 category: {value: selectedFlyer.category},
-                //child: selectedFlyer.childid
                 hideAddCategory: true,
-                //file: {},
                 imageRequired: false
 
+            })
+            
+            const selectedFlyer_Children = this.context.flyers_children.filter((flyer_child) => flyer_child.flyerid == this.props.flyerid)
+            
+            this.setState({
+                child: selectedFlyer_Children
             })
         }
     }
@@ -284,7 +282,7 @@ class FlyerForm extends Component {
     render(){
     
     const childOptions = this.context.children.map((child) => 
-    <option key={child.id} value={child.id}>{child.childname}</option>
+    <option key={child.id} value={child.id} selected={this.state.child.find(flyerchild => child.id == flyerchild.childid)}>{child.childname}</option>
 )
     const categoryOptions = this.context.categories.map((category) => <option key={category.category} value={category.category}>{category.category}</option>)    
 
@@ -341,6 +339,7 @@ class FlyerForm extends Component {
         <input type="text" id="add-category" onBlur={(e)=>this.handleNewCategory(e.target.value)}/>
         </div>
         <label htmlFor="student-select">Select One or More Students</label>
+        
         <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)} >
             <option value="select">Choose an option</option>
             {childOptions}

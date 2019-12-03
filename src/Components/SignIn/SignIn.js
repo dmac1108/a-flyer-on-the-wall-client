@@ -3,11 +3,14 @@ import './SignIn.css';
 import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
 import FlyersContext from '../../FlyersContext'
+import ValidationError from '../ValidationError/ValidationError'
 
 class SignIn extends Component {
     state={
         username: '',
         password: '',
+        error: false,
+        errormessage: '',
     }
     
     static contextType = FlyersContext;
@@ -26,6 +29,14 @@ class SignIn extends Component {
         
     } 
 
+    onLoginFailure =(error)=>{
+        console.log('in the onlogin failure function')
+        this.setState({
+            error: true,
+            errormessage: error
+        })
+    }
+
     handleSubmitJwtAuth = ev =>{
         ev.preventDefault()
         this.setState({error: null})
@@ -43,12 +54,15 @@ class SignIn extends Component {
                 resolve(TokenService.saveAuthToken(res.authToken))
             })
             tokenPromise.then(this.onLoginSuccess())
-            .catch(error => console.error(error))
+            .catch(error => this.onLoginFailure(error.error))
             
             
         })
-        .catch(err => console.error(err))
+        .catch(error => this.onLoginFailure(error.error))
+        // .catch(error=>console.log(error))
     }
+
+   
     
     render(){
     return(
@@ -57,6 +71,7 @@ class SignIn extends Component {
         <input name="username" id="usernmae" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username}/>
         <label htmlFor="password">Password</label>
         <input name="password" id="password" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.password}/>
+        {this.state.error && <ValidationError message={this.state.errormessage}/>}
         <button type="submit">Sign-In</button>
      </form>
     )
