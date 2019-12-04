@@ -1,6 +1,7 @@
 import React from 'react';
 import './LandingPage.css';
 import SignUp from '../SignUp/SignUp';
+import {Link} from 'react-router-dom'
 
 export default function(){
 
@@ -16,7 +17,7 @@ export default function(){
      </section>
      <section>
          <p>Sign Up now and start adding your flyers to the wall!</p>
-         <SignUp/>
+         <Link to='/sign-up'>Sign Me Up!</Link>
      </section>
      </div>
     )

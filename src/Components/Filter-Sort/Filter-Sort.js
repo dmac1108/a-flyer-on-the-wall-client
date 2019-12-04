@@ -6,9 +6,11 @@ class FilterSort extends Component{
     static contextType = FlyersContext;
 
     render(){
-    const childOptions = this.context.children.map((child) => 
+    let childOptions    
+    if(this.context.children){
+    childOptions = this.context.children.map((child) => 
         <option key={child.id} value={child.id}>{child.childname}</option>
-    )
+    )}
     
     const categoryOptions = this.context.categories.map((category) => <option key={category.category} value={category.category}>{category.category}</option>)
     return(

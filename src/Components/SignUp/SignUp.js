@@ -44,9 +44,7 @@ class SignUp extends Component {
         }
         
         FlyerApiService.postUser(user)
-        .then((user)=>{
-            this.context.onAddUser(user)
-        })
+        
 
         this.setState({
             first: '',
@@ -127,7 +125,7 @@ class SignUp extends Component {
                  <label htmlFor="username">Username</label>
                 <input name="username" id="usernmae" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username}/>
                 <label htmlFor="password">Password</label>
-                <input name="password" id="password" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.password}/>
+                <input name="password" id="password" type="password" required onChange={(e) => this.onInputChange(e)} value={this.state.password}/>
 
                 <ValidationError message={this.validateFirstName()}/>
                 <ValidationError message={this.validateLastName()}/>

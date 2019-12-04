@@ -168,19 +168,13 @@ class FlyerForm extends Component {
             throw new Error(res.status)
           }
 
-        //   if(this.props.submissionType === 'edit'){
-        //     this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history)
-            
-        //   }
+        
           return res.json()
         })
         .then((flyer) =>{
 
             let FlyerForm = this
-        
-            // const flyersChildrenInContext = this.context.flyers_children.filter((flyerChild)=>flyerChild.flyerid === flyer.id)
-            // console.log('flyerschildren in context', flyersChildrenInContext)
-
+           
             async function deleteFlyers_ChildrenInContext (flyerId, callback){
                 console.log('inside delete flyers_children')
                 await FlyerApiService.deleteFlyersChildrenbyFlyerId(flyerId)
@@ -210,7 +204,9 @@ class FlyerForm extends Component {
             
             }
             else{
-                this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
+                  this.props.submissionType === 'edit' ?
+                        this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history) :
+                        this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
             }
         }
         
