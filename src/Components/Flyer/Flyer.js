@@ -24,7 +24,7 @@ import FlyerApiService from '../../services/flyer-api-service'
     const {flyers_children, children} = this.context  
     
     let flyer_children
-    if(flyers_children === null){
+    if(flyers_children !== null){
         flyer_children = flyers_children.filter((flyer_child)=>
         flyer_child.flyerid === id
     )
@@ -33,7 +33,7 @@ import FlyerApiService from '../../services/flyer-api-service'
     
     let childrenList;
 
-    if(flyer_children === null){
+    if(flyer_children !== null){
         const childrenToList = flyer_children.map((flyer_child) => children.find(child => child.id === flyer_child.childid))
         
         childrenList = childrenToList.map((flyerchild)=> <dd key={flyerchild.id}>{flyerchild.childname}</dd>)
