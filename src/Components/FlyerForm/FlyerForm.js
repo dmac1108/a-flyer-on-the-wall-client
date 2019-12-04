@@ -176,7 +176,7 @@ class FlyerForm extends Component {
             let FlyerForm = this
            
             async function deleteFlyers_ChildrenInContext (flyerId, callback){
-                console.log('inside delete flyers_children')
+                
                 await FlyerApiService.deleteFlyersChildrenbyFlyerId(flyerId)
                 callback()
             }
@@ -184,7 +184,7 @@ class FlyerForm extends Component {
             deleteFlyers_ChildrenInContext(flyer.id,insertNewFlyersChildren)
 
             function insertNewFlyersChildren(){
-                console.log('inside insert new flyers_children')
+                
             let newFlyerChildren = []    
             const childrenToAdd = FlyerForm.state.child
             if(childrenToAdd.length>0){

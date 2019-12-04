@@ -188,7 +188,7 @@ const FlyerApiService = {
         })
     },
     deleteFlyer(flyerId){
-        console.log(flyerId)
+        
         return fetch(`${config.API_ENDPOINT}/flyers/${flyerId}`,{
             method: 'DELETE',
             headers: {
@@ -198,7 +198,7 @@ const FlyerApiService = {
             
         })
         .then((res)=>{
-            console.log(res)
+            
             if(!res.ok){
                 throw new Error(res.status)
             }
@@ -207,7 +207,7 @@ const FlyerApiService = {
         })
     },
     deleteFlyersChildrenbyFlyerId(flyerId){
-        console.log(flyerId)
+        
         return fetch(`${config.API_ENDPOINT}/flyers_children/flyer/${flyerId}`,{
             method: 'DELETE',
             headers: {
@@ -217,7 +217,7 @@ const FlyerApiService = {
             
         })
         .then((res)=>{
-            console.log(res)
+            
             if(!res.ok){
                 throw new Error(res.status)
             }
