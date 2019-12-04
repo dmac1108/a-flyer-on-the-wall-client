@@ -23,14 +23,17 @@ import FlyerApiService from '../../services/flyer-api-service'
     const {id, title, location, image, eventstartdate, eventenddate, actiondate, action, category} = this.props
     const {flyers_children, children} = this.context  
     
-    
-    const flyer_children = flyers_children.filter((flyer_child)=>
+    let flyer_children
+    if(flyers_children === null){
+        flyer_children = flyers_children.filter((flyer_child)=>
         flyer_child.flyerid === id
     )
+    }
+    
     
     let childrenList;
 
-    if(flyer_children){
+    if(flyer_children === null){
         const childrenToList = flyer_children.map((flyer_child) => children.find(child => child.id === flyer_child.childid))
         
         childrenList = childrenToList.map((flyerchild)=> <dd key={flyerchild.id}>{flyerchild.childname}</dd>)
