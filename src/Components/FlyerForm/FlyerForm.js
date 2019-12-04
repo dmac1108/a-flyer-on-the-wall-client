@@ -27,6 +27,7 @@ class FlyerForm extends Component {
         hideAddCategory: true,
         file: {},
         imageRequired: true,
+        flyerChildrenChanged: false,
     }
 
     static contextType = FlyersContext
@@ -120,7 +121,10 @@ class FlyerForm extends Component {
                       value.push(Number(options[i].value));
                     }
                   }
-            this.setState({child: value}); 
+            this.setState(
+                {child: value,
+                flyerChildrenChanged: true,
+                }); 
                 
     }
 
@@ -176,17 +180,23 @@ class FlyerForm extends Component {
             let FlyerForm = this
            
             async function deleteFlyers_ChildrenInContext (flyerId, callback){
-                
+                console.log('in delete')
                 await FlyerApiService.deleteFlyersChildrenbyFlyerId(flyerId)
+                .then(()=>{
+                    const flyerChildrenInContext = FlyerForm.context.flyers_children.filter((flyerchild)=> flyerchild.flyerid === flyerId)
+                    flyerChildrenInContext.map((flyerChild)=>FlyerForm.context.onDeleteFlyers_Children(flyerChild.id))
+                })
+                
                 callback()
             }
-
-            deleteFlyers_ChildrenInContext(flyer.id,insertNewFlyersChildren)
+            
+            
 
             function insertNewFlyersChildren(){
-                
+            console.log('inside insert new flyers children')
             let newFlyerChildren = []    
             const childrenToAdd = FlyerForm.state.child
+            console.log(childrenToAdd)
             if(childrenToAdd.length>0){
             for (let i=0; i<childrenToAdd.length; i++){
                 let flyerChild = {
@@ -209,7 +219,21 @@ class FlyerForm extends Component {
                         this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
             }
         }
-        
+        if(this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
+            console.log('flyersChildrenChanged = true')
+            deleteFlyers_ChildrenInContext(flyer.id,insertNewFlyersChildren)
+           
+        }
+        else if(!this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
+            console.log('flyerschildrenchanged not true')
+            this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history)
+        }
+        else 
+        {
+
+                insertNewFlyersChildren()
+                
+        }
             
         })
         .catch(error => this.setState({error}))

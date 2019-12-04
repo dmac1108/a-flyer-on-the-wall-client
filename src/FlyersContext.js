@@ -18,6 +18,7 @@ const FlyersContext = React.createContext({
     onSortChange: () => {},
     onAddFlyer: () => {},
     onAddFlyers_Children: () => {},
+    onDeleteFlyers_Children: () => {},
     onDeleteFlyer: () => {},
     onEditFlyer: () => {},
     onAddCategory: () => {},
@@ -109,6 +110,12 @@ export class FlyersProvider extends Component {
         flyers: this.state.flyers.filter((flyer) => flyer.id !== flyerid)
       })
     }
+
+    onDeleteFlyers_Children = (flyerChildId) =>{
+      this.setState({
+        flyers_children: this.state.flyers_children.filter((child) => child.id !== flyerChildId)
+      })
+    }
   
     onFilterChange = (selectedValue) =>{
       this.setState({
@@ -144,6 +151,7 @@ export class FlyersProvider extends Component {
           setCategories: this.setCategories,
           onAddFlyer: this.onAddFlyer,
           onAddFlyers_Children: this.onAddFlyers_Children,
+          onDeleteFlyers_Children: this.onDeleteFlyers_Children,
           onDeleteFlyer: this.onDeleteFlyer,
           onFilterChange: this.onFilterChange,
           onSortChange: this.onSortChange,
