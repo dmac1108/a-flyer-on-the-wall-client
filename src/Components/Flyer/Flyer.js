@@ -11,6 +11,12 @@ import piexif from 'piexifjs'
 
  class Flyer extends Component{
 
+    constructor(props){
+        super(props);
+        this.canvasRef = React.createRef();
+        this.resetImageRef = React.createRef();
+    }
+
     static contextType = FlyersContext
 
     onDeleteFlyer = (flyerId) =>{
@@ -20,47 +26,66 @@ import piexif from 'piexifjs'
         })
     }
 
+
+    resetOrientation(srcBase64, srcOrientation, canvas, context,callback) {
+        
+        var img = new Image();    
+      
+        img.onload = function() {
+          var width = img.width,
+              height = img.height,
+              
+              ctx = context;
+      
+          // set proper canvas dimensions before transform & export
+          if (4 < srcOrientation && srcOrientation < 9) {
+            canvas.width = height;
+            canvas.height = width;
+          } else {
+            canvas.width = width;
+            canvas.height = height;
+          }
+          
+          // transform context before drawing image
+          switch (srcOrientation) {
+            case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+            case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
+            case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
+            case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+            case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
+            case 7: ctx.transform(0, -1, -1, 0, height, width); break;
+            case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+            default: break;
+          }
+      
+          // draw image
+          ctx.drawImage(img, 0, 0);
+      
+          // export base64
+          callback(canvas.toDataURL());
+        };
+      
+        img.src = srcBase64;
+      };
+
+
+
+
     componentDidMount(){
-        const canvas = this.refs.canvas
-        const ctx = canvas.getContext("2d")
+        
         const image = this.props.image
         var exifObj = piexif.load(image)
+        const canvas = this.canvasRef.current
+        const context = canvas.getContext('2d')
         const srcOrientation = exifObj["0th"][piexif.ImageIFD.Orientation]
-          let newImage = new Image();
-          newImage.onload = function(){
-                const width = newImage.width
-                const height = newImage.height
-                console.log('srcOrientation', srcOrientation)
-                if (4 < srcOrientation && srcOrientation < 9) {
-                    canvas.width = height;
-                    canvas.height = width;
-                } else if(srcOrientation === 1 && width > height){
-                    canvas.width = height;
-                    canvas.height = width;
-                }
-                else{
-                    canvas.width = width;
-                    canvas.height = height;
-                }
-                console.log('canvas width', canvas.width)
-                console.log('canvas.height', canvas.height)
-                switch (srcOrientation) {
-                    case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-                    case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
-                    case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
-                    case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-                    case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
-                    case 7: ctx.transform(0, -1, -1, 0, height, width); break;
-                    case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-                    default: break;
-                  }
-
-                  console.log('ctx', ctx)
-            ctx.drawImage(newImage, 0,0);
-          }
-          newImage.src = image
         
-
+        // let resetimage = document.getElementById("image-reset")
+        let resetimage = this.resetImageRef.current
+        
+        this.resetOrientation(image,srcOrientation,canvas,context,function(resetBase64Image){
+            
+            resetimage.src = resetBase64Image
+        });
 
     }
     
@@ -101,8 +126,11 @@ import piexif from 'piexifjs'
     return(
         <div className="flyer">
         <h2>{title}</h2>
-        <canvas ref="canvas" width={425} height={640}/>
-        <img ref="image" alt="Flyer Thumbnail" src={image}/>
+        <canvas ref={this.canvasRef}/>
+        {/* <img ref="image" alt="Flyer Thumbnail" src={image}/> */}
+        <img ref={this.resetImageRef} alt="new orientation" src={this.resetimage}/>
+        
+        
         <dl>
             <div className="list-group">
                 <dt>Location:</dt>
