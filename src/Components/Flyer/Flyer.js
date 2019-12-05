@@ -26,44 +26,35 @@ import piexif from 'piexifjs'
         const image = this.props.image
         var exifObj = piexif.load(image)
         const srcOrientation = exifObj["0th"][piexif.ImageIFD.Orientation]
-        console.log('source orientation', srcOrientation)
-    //    if(srcOrientation !== undefined){
-        const width = 640
-        const height = 1080
-        console.log('image width', image.width)
-
-        if (4 < srcOrientation && srcOrientation < 9) {
-            console.log('in between 4 and 9')
-            canvas.width = height;
-
-            canvas.height = width;
-        } else {
-            console.log('otherwise')
-            canvas.width = width;
-            canvas.height = height;
-         }
-
-         switch (srcOrientation) {
-            case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-            case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
-            case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
-            case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-            case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
-            case 7: ctx.transform(0, -1, -1, 0, height, width); break;
-            case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-            default: break;
-          }
-
-          console.log('image props', image.props)
-          console.log('canvas width', canvas.width)
-          console.log('canvas height', canvas.height)
           let newImage = new Image();
           newImage.onload = function(){
-            
-            ctx.drawImage(newImage, canvas.width/2 - newImage.width/2,canvas.height/2 - newImage.height/2);
+                const width = newImage.width
+                const height = newImage.height
+                
+                if (4 < srcOrientation && srcOrientation < 9) {
+                    canvas.width = height;
+                    canvas.height = width;
+                } else {
+                    canvas.width = width;
+                    canvas.height = height;
+                }
+
+                switch (srcOrientation) {
+                    case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+                    case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
+                    case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
+                    case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+                    case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
+                    case 7: ctx.transform(0, -1, -1, 0, height, width); break;
+                    case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+                    default: break;
+                  }
+
+
+            ctx.drawImage(newImage, 0,0);
           }
           newImage.src = image
-        // }
+        
 
 
     }

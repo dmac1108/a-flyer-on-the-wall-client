@@ -8,7 +8,7 @@ import ValidationError from '../ValidationError/ValidationError'
 import { addYears } from 'date-fns'
 import config from '../../config'
 import FlyerApiService from '../../services/flyer-api-service'
-import piexif from 'piexifjs'
+
 
 
 class FlyerForm extends Component {
@@ -302,8 +302,7 @@ class FlyerForm extends Component {
             
             var promise = new Promise(this.getFileData);
             promise.then(function(data){
-                var exifObj = piexif.load(data)
-                console.log(exifObj["0th"][piexif.ImageIFD.Orientation])
+                
                 const dataToPass = data
                 currentComponent.setState({
                     image: dataToPass
