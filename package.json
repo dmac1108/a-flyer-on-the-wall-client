@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "moment": "^2.24.0",
+    "piexifjs": "^1.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-add-to-calendar": "^0.1.5",

@@ -6,6 +6,7 @@ import './Flyer.css';
 import AddToCalendar from 'react-add-to-calendar';
 import moment from 'moment';
 import FlyerApiService from '../../services/flyer-api-service'
+import piexif from 'piexifjs'
 
 
  class Flyer extends Component{
@@ -17,6 +18,50 @@ import FlyerApiService from '../../services/flyer-api-service'
         .then(()=>{
             this.context.onDeleteFlyer(flyerId)
         })
+    }
+
+    componentDidMount(){
+        const canvas = this.refs.canvas
+        const ctx = canvas.getContext("2d")
+        const image = this.props.image
+        var exifObj = piexif.load(image)
+        const srcOrientation = exifObj["0th"][piexif.ImageIFD.Orientation]
+    //    if(srcOrientation !== undefined){
+        const width = image.width
+        const height = image.height
+
+        if (4 < srcOrientation && srcOrientation < 9) {
+            console.log('in between 4 and 9')
+            canvas.width = height;
+
+            canvas.height = width;
+        } else {
+            console.log('otherwise')
+            canvas.width = width;
+            canvas.height = height;
+         }
+
+         switch (srcOrientation) {
+            case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+            case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
+            case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
+            case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+            case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
+            case 7: ctx.transform(0, -1, -1, 0, height, width); break;
+            case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+            default: break;
+          }
+
+          //console.log(image)
+        
+          let newImage = new Image();
+          newImage.onload = function(){
+            ctx.drawImage(newImage, 0,0);
+          }
+          newImage.src = image
+        // }
+
+
     }
     
     render(){
@@ -51,11 +96,13 @@ import FlyerApiService from '../../services/flyer-api-service'
             endTime: endTime,
         }
     
+     
+    
     return(
         <div className="flyer">
         <h2>{title}</h2>
-   
-        <img alt="Flyer Thumbnail" src={image}/>
+        <canvas ref="canvas" width={425} height={640}/>
+        <img ref="image" alt="Flyer Thumbnail" src={image}/>
         <dl>
             <div className="list-group">
                 <dt>Location:</dt>
