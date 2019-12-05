@@ -34,7 +34,11 @@ import piexif from 'piexifjs'
                 if (4 < srcOrientation && srcOrientation < 9) {
                     canvas.width = height;
                     canvas.height = width;
-                } else {
+                } else if(srcOrientation === 1 && width > height){
+                    canvas.width = height;
+                    canvas.height = width;
+                }
+                else{
                     canvas.width = width;
                     canvas.height = height;
                 }
