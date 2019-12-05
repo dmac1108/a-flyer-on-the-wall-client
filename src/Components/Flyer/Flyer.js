@@ -26,9 +26,11 @@ import piexif from 'piexifjs'
         const image = this.props.image
         var exifObj = piexif.load(image)
         const srcOrientation = exifObj["0th"][piexif.ImageIFD.Orientation]
+        console.log('source orientation', srcOrientation)
     //    if(srcOrientation !== undefined){
-        const width = image.width
-        const height = image.height
+        const width = 640
+        const height = 1080
+        console.log('image width', image.width)
 
         if (4 < srcOrientation && srcOrientation < 9) {
             console.log('in between 4 and 9')
@@ -52,11 +54,13 @@ import piexif from 'piexifjs'
             default: break;
           }
 
-          //console.log(image)
-        
+          console.log('image props', image.props)
+          console.log('canvas width', canvas.width)
+          console.log('canvas height', canvas.height)
           let newImage = new Image();
           newImage.onload = function(){
-            ctx.drawImage(newImage, 0,0);
+            
+            ctx.drawImage(newImage, canvas.width/2 - newImage.width/2,canvas.height/2 - newImage.height/2);
           }
           newImage.src = image
         // }
