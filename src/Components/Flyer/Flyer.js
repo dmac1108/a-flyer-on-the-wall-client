@@ -30,7 +30,7 @@ import piexif from 'piexifjs'
           newImage.onload = function(){
                 const width = newImage.width
                 const height = newImage.height
-                
+                console.log('srcOrientation', srcOrientation)
                 if (4 < srcOrientation && srcOrientation < 9) {
                     canvas.width = height;
                     canvas.height = width;
@@ -38,7 +38,8 @@ import piexif from 'piexifjs'
                     canvas.width = width;
                     canvas.height = height;
                 }
-
+                console.log('canvas width', canvas.width)
+                console.log('canvas.height', canvas.height)
                 switch (srcOrientation) {
                     case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
                     case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
@@ -50,7 +51,7 @@ import piexif from 'piexifjs'
                     default: break;
                   }
 
-
+                  console.log('ctx', ctx)
             ctx.drawImage(newImage, 0,0);
           }
           newImage.src = image
