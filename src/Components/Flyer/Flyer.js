@@ -71,10 +71,20 @@ import piexif from 'piexifjs'
     componentDidMount(){
         
         const image = this.props.image
+        const imageType = this.props.image.substring(11,14)
+        let srcOrientation
+        
+        if(imageType === 'jpe'){
         var exifObj = piexif.load(image)
+        srcOrientation = exifObj["0th"][piexif.ImageIFD.Orientation]
+        }else{
+            srcOrientation = 1
+        }
+
         const canvas = this.canvasRef.current
         const context = canvas.getContext('2d')
-        const srcOrientation = exifObj["0th"][piexif.ImageIFD.Orientation]
+       
+
         this.resetOrientation(image,srcOrientation,canvas,context);
 
     }

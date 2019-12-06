@@ -180,7 +180,7 @@ class FlyerForm extends Component {
             let FlyerForm = this
            
             async function deleteFlyers_ChildrenInContext (flyerId, callback){
-                console.log('in delete')
+                
                 await FlyerApiService.deleteFlyersChildrenbyFlyerId(flyerId)
                 .then(()=>{
                     const flyerChildrenInContext = FlyerForm.context.flyers_children.filter((flyerchild)=> flyerchild.flyerid === flyerId)
@@ -192,10 +192,10 @@ class FlyerForm extends Component {
             
 
             function insertNewFlyersChildren(){
-            console.log('inside insert new flyers children')
+            
             let newFlyerChildren = []    
             const childrenToAdd = FlyerForm.state.child
-            console.log(childrenToAdd)
+            
             if(childrenToAdd.length>0){
             for (let i=0; i<childrenToAdd.length; i++){
                 let flyerChild = {
@@ -333,7 +333,7 @@ class FlyerForm extends Component {
       <input id="location" type="text" required onChange={(e)=>this.onLocationChange(e.target.value)} value={this.state.location}/>
 
        <label htmlFor="imgfile">Flyer Image</label>
-       <input id="last" type="file" accept="image/*,.pdf" required={this.state.imageRequired} onChange={(e) =>this.onImageChange(e)} files={this.state.image}/>
+       <input id="last" type="file" accept="image/*" required={this.state.imageRequired} onChange={(e) =>this.onImageChange(e)} files={this.state.image}/>
        
        <label htmlFor="eventstartdatetime">Event Start Date/Time</label>
        <DatePicker id="eventstartdatedate" 
