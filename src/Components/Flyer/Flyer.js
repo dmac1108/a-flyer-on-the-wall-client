@@ -27,7 +27,7 @@ import piexif from 'piexifjs'
     }
 
 
-    resetOrientation(srcBase64, srcOrientation, canvas, context,callback) {
+    resetOrientation(srcBase64, srcOrientation, canvas, context) {
         
         var img = new Image();    
       
@@ -60,9 +60,6 @@ import piexif from 'piexifjs'
       
           // draw image
           ctx.drawImage(img, 0, 0);
-      
-          // export base64
-          callback(canvas.toDataURL());
         };
       
         img.src = srcBase64;
@@ -78,14 +75,7 @@ import piexif from 'piexifjs'
         const canvas = this.canvasRef.current
         const context = canvas.getContext('2d')
         const srcOrientation = exifObj["0th"][piexif.ImageIFD.Orientation]
-        
-        // let resetimage = document.getElementById("image-reset")
-        let resetimage = this.resetImageRef.current
-        
-        this.resetOrientation(image,srcOrientation,canvas,context,function(resetBase64Image){
-            
-            resetimage.src = resetBase64Image
-        });
+        this.resetOrientation(image,srcOrientation,canvas,context);
 
     }
     
@@ -127,10 +117,6 @@ import piexif from 'piexifjs'
         <div className="flyer">
         <h2>{title}</h2>
         <canvas ref={this.canvasRef}/>
-        {/* <img ref="image" alt="Flyer Thumbnail" src={image}/> */}
-        <img ref={this.resetImageRef} alt="new orientation" src={this.resetimage}/>
-        
-        
         <dl>
             <div className="list-group">
                 <dt>Location:</dt>

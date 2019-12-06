@@ -8,7 +8,7 @@ import ValidationError from '../ValidationError/ValidationError'
 import { addYears } from 'date-fns'
 import config from '../../config'
 import FlyerApiService from '../../services/flyer-api-service'
-
+import piexif from 'piexifjs'
 
 
 class FlyerForm extends Component {
@@ -68,7 +68,6 @@ class FlyerForm extends Component {
             resolve(url)
         }  
     }
-      
 
     onEventStartDateChange = (eventDate) =>{
         

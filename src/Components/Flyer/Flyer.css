@@ -8,7 +8,7 @@
 img {
     width: 25%;
     height: 25%;
-    display: none;
+    /* display: none; */
 }
 
 canvas {
