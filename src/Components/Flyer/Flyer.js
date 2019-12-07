@@ -7,7 +7,11 @@ import AddToCalendar from 'react-add-to-calendar';
 import moment from 'moment';
 import FlyerApiService from '../../services/flyer-api-service'
 import piexif from 'piexifjs'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faEdit, faTrash} from '@fortawesome/free-solid-svg-icons'
 
+library.add(faEdit,faTrash);
 
  class Flyer extends Component{
 
@@ -133,12 +137,12 @@ import piexif from 'piexifjs'
                 <dd>{location}</dd>
             </div>
             <div className="list-group">
-                <dt>Event Start Date/Time:</dt>
+                <dt>Event Start</dt>
                 <dd>{moment(eventstartdate).format('MMMM Do, h:mm a')}</dd>
                
             </div>
             <div className="list-group">
-                <dt>Event End Date/Time:</dt>
+                <dt>Event End</dt>
                 <dd>{moment(eventenddate).format('MMMM Do, h:mm a')}</dd>
                 
             </div>
@@ -153,17 +157,19 @@ import piexif from 'piexifjs'
             <div className="list-group">
                 <dt>Category:</dt>
                 <dd>{category}</dd>
-            </div>
-            
+            </div >
+            <div className="list-group">
                 <dt>Children:</dt>
                 {childrenList}
+            </div>
            
         </dl>
+        <div className="flyer-buttons">
+            <AddToCalendar event={event} buttonWrapperClass="add-to-calendar"/>
         
-        <AddToCalendar event={event} buttonWrapperClass="add-to-calendar"/>
-    
-        <Link to={`/edit-flyer/${id}`}><button>Edit</button></Link>
-        <button onClick={()=>this.onDeleteFlyer(id)}>Delete</button>
+            <Link to={`/edit-flyer/${id}`}><button><FontAwesomeIcon icon="edit"/></button></Link>
+            <button onClick={()=>this.onDeleteFlyer(id)}><FontAwesomeIcon icon="trash"/></button>
+        </div>
      </div>
     )
     }

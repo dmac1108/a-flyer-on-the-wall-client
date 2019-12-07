@@ -2,27 +2,16 @@
     position: relative;
     top: 100px;
     padding: 30px 15px;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-content: flex-start; */
   }
 
   .flyer-boxes{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* align-items: center; */
+    align-items: stretch;
     flex-wrap: wrap;
     
   }
-
-  /* .flyer-box{
-    display: inline-block;
-    /* width: 500px;
-    height: 650px; */
-    /* flex: 200px;
-  } */ 
 
   ul{
       list-style: none;
