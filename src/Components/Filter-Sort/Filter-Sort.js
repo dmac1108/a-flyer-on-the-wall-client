@@ -17,20 +17,20 @@ class FilterSort extends Component{
         <section className="filter">
             <fieldset className="filter-group">
             <legend>Filter List by</legend>
-            <div className="form-group">
+            {/* <div className="form-group"> */}
                 <label htmlFor="child-select">Select a Child</label>
                 <select id="child-select" size="2" onChange={(e)=>this.context.onChildFilterChange(e.target.value)} value={this.context.childFilterValue}>
                 <option key="all" value="all">All</option>
                     {childOptions}
                 </select>
-            </div>
-            <div className="form-group">
+            {/* </div> */}
+            {/* <div className="form-group"> */}
                 <label htmlFor="category-select">Select Catgory</label>
                 <select id="category-select" onChange={(e)=>this.context.onFilterChange(e.target.value)} value={this.context.filterValue}>
                 <option value="all">All</option>
                 {categoryOptions}
         </select>
-            </div>
+            {/* </div> */}
     
             </fieldset> 
             <fieldset className="form-group">

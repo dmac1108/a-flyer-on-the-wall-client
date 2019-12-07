@@ -1,3 +1,8 @@
+fieldset{
+   border: 0;
+   
+}
+
 .filter {
    font-size: 12px;
    position: relative;
@@ -24,8 +29,20 @@
 
 label, input, select{
    margin: 5px;
-   width: 100%;
+   /* width: 100%; */
 }
+
+@media only screen and (min-width: 500px) {
+   .filter-group{
+      
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      text-align: top;
+      background-color: #D6ECFF;
+   }
+}
+
 
 /*p {
    display: inline-block;

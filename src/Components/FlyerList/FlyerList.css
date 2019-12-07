@@ -2,16 +2,52 @@
     position: relative;
     top: 100px;
     padding: 30px 15px;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-content: flex-start;
+    align-content: flex-start; */
   }
 
+  .flyer-boxes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+    flex-wrap: wrap;
+    
+  }
+
+  /* .flyer-box{
+    display: inline-block;
+    /* width: 500px;
+    height: 650px; */
+    /* flex: 200px;
+  } */ 
+
   ul{
-      list-style: none;   
+      list-style: none;
+      margin: 0;
+      padding: 0;  
+      
   }
   
   li {
-    margin-top: 10px;
+    margin: 20px;
+    display: inline-block;
+    flex: 500px;
+
+    
+  }
+
+  @media screen and (min-width: 750px){
+    /* .flyer-boxes{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      
+    } */
+
+
   }
