@@ -9,9 +9,9 @@ import FlyerApiService from '../../services/flyer-api-service'
 import piexif from 'piexifjs'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faEdit, faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faEdit, faTrash, faCalendarPlus} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faEdit,faTrash);
+library.add(faEdit,faTrash, faCalendarPlus);
 
  class Flyer extends Component{
 
@@ -73,8 +73,9 @@ library.add(faEdit,faTrash);
 
 
     componentDidMount(){
-        
+        console.log(this.props)
         const image = this.props.image
+        console.log(image)
         const imageType = this.props.image.substring(11,14)
         let srcOrientation
         
@@ -125,10 +126,14 @@ library.add(faEdit,faTrash);
             endTime: endTime,
         }
     
-     
+    
     
     return(
         <div className="flyer">
+        <div className="flyer-buttons">
+            <button><Link to={`/edit-flyer/${id}`}><FontAwesomeIcon icon="edit"/></Link></button>
+            <button onClick={()=>this.onDeleteFlyer(id)}><FontAwesomeIcon icon="trash"/></button>
+        </div>
         <h2>{title}</h2>
         <canvas ref={this.canvasRef}/>
         <dl>
@@ -164,12 +169,12 @@ library.add(faEdit,faTrash);
             </div>
            
         </dl>
-        <div className="flyer-buttons">
-            <AddToCalendar event={event} buttonWrapperClass="add-to-calendar"/>
         
-            <Link to={`/edit-flyer/${id}`}><button><FontAwesomeIcon icon="edit"/></button></Link>
-            <button onClick={()=>this.onDeleteFlyer(id)}><FontAwesomeIcon icon="trash"/></button>
-        </div>
+            <AddToCalendar event={event} buttonClassOpen buttonLabel="Add to Calendar" buttonWrapperClass="add-to-calendar" dropdownClass="react-add-to-calendar__dropdown"
+            rootClass="react-add-to-calendar"/>
+        
+           
+        
      </div>
     )
     }

@@ -49,6 +49,16 @@ canvas:hover {
     
  } 
 
+ .react-add-to-calandar {
+    display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+ }
+
+ .react-add-to-calandar__dropdown{
+     display: inline-block;
+ }
+
  .add-to-calendar > a:hover {
         color: #2A465E;
  }
@@ -57,6 +67,17 @@ canvas:hover {
      
      display: flex;
      flex-direction: row;
-     justify-content: space-around;
-     align-items: center;
+     justify-content: space-between;
+     align-self: flex-end;
  }
+
+ .flyer-buttons > button, Link{
+     border: none;
+     background-color: white;
+     font-size: 20px;
+     
+     width: 30px;
+     
+ }
+
+

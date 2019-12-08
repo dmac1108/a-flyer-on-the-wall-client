@@ -34,7 +34,7 @@ exports[`renders the UI as expected 1`] = `
       ]
     }
     id={1}
-    image="require('../src/scoutcamping.jpg')"
+    image="require('./campingbase64.bin')"
     title="Test"
   />
 </Router>

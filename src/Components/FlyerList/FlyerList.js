@@ -12,24 +12,17 @@ class FlyerList extends Component{
     
 
     componentDidMount(){
-
-        FlyerApiService.getFlyers()
-        .then(this.context.setFlyers)
-        .catch(error => console.error(error))
-        FlyerApiService.getChildren()
-        .then(this.context.setChildren)
-        .catch(error => console.error(error))
-        FlyerApiService.getFlyersChildren()
-        .then(this.context.setFlyersChildren)
-        .catch(error => console.error(error))
-        FlyerApiService.getCategories()
-        .then(this.context.setCategories)
-        .catch(error => console.error(error))
         
+        FlyerApiService.getAllData()
+        .then(([child, flyer, flyer_children, categories])=>{
+            this.context.setChildren(child)
+            this.context.setFlyers(flyer)
+            this.context.setFlyersChildren(flyer_children)
+            this.context.setCategories(categories)
+        })
+
+
       }
-
-
-
 
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;

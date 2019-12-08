@@ -4,7 +4,7 @@ fieldset{
 }
 
 .filter {
-   font-size: 12px;
+   font-size: 14px;
    position: relative;
    top: 100px;
    left: 0px;
@@ -19,31 +19,42 @@ fieldset{
  
 }
 
+
+
 .form-group {
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    justify-content: flex-start;
    align-content: flex-start;
 }
 
+.form-group > select {
+   width: 100px;
+   display: inline-block;
+}
+
+.form-group > label, legend {
+   font-weight: bold;
+   margin-right: 10px;
+   margin-left: 10px;
+}
 
 label, input, select{
    margin: 5px;
-   /* width: 100%; */
 }
 
 @media only screen and (min-width: 500px) {
-   .filter-group{
-      
+   .filter{
+      font-size: 20px;
+   }
+
+   .form-group {
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
-      text-align: top;
-      background-color: #D6ECFF;
+      justify-content: flex-start;
+      align-content: flex-start;
    }
+   
+   
 }
 
-
-/*p {
-   display: inline-block;
-}*/
