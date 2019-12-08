@@ -12,24 +12,17 @@ class FlyerList extends Component{
     
 
     componentDidMount(){
-
-        FlyerApiService.getFlyers()
-        .then(this.context.setFlyers)
-        .catch(error => console.error(error))
-        FlyerApiService.getChildren()
-        .then(this.context.setChildren)
-        .catch(error => console.error(error))
-        FlyerApiService.getFlyersChildren()
-        .then(this.context.setFlyersChildren)
-        .catch(error => console.error(error))
-        FlyerApiService.getCategories()
-        .then(this.context.setCategories)
-        .catch(error => console.error(error))
         
+        FlyerApiService.getAllData()
+        .then(([child, flyer, flyer_children, categories])=>{
+            this.context.setChildren(child)
+            this.context.setFlyers(flyer)
+            this.context.setFlyersChildren(flyer_children)
+            this.context.setCategories(categories)
+        })
+
+
       }
-
-
-
 
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;
@@ -69,7 +62,7 @@ class FlyerList extends Component{
 
 
    
-    const list = filteredList.map((flyer) =><li key={flyer.id}><Flyer id={flyer.id} title={flyer.title} location={flyer.location} image={flyer.image} eventstartdate={flyer.eventstartdate} eventenddate={flyer.eventenddate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category}/></li>);
+    const list = filteredList.map((flyer) =><li key={flyer.id} className="flyer-box"><Flyer id={flyer.id} title={flyer.title} location={flyer.location} image={flyer.image} eventstartdate={flyer.eventstartdate} eventenddate={flyer.eventenddate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category}/></li>);
    
     
     return(
@@ -78,7 +71,7 @@ class FlyerList extends Component{
         <section className="flyer-list">
             <Link to='/add-flyer' ><button>+ New Flyer</button></Link>
             <Link to='/add-child'><button>+ New Child</button></Link>
-            <ul>
+            <ul className="flyer-boxes">
                 {list}
             </ul>
     </section>

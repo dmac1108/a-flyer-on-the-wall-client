@@ -5,21 +5,25 @@
     align-content: flex-start;
 }
 
-img {
-    width: 25%;
-    height: 25%;
-    /* display: none; */
-}
 
 canvas {
-    width: 25%;
-    height: 25%;
+    width: 50%;
+    height: 50%;
     margin-right: auto;
     margin-left: auto;
 }
 
 .flyer {
     border: solid #46535E 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+dl {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 dt{
@@ -27,13 +31,14 @@ dt{
 }
 
 canvas:hover {
-    width: 50%;
-    height: 50%;
+    width: 75%;
+    height: 75%;
   }
 
  .add-to-calendar {
-    
+        font-weight: bold;
         border-radius: 5px;
+        border: solid 2px #2A465E;
         margin-right: auto;
         margin-left: auto;
         width: 200px;
@@ -44,6 +49,35 @@ canvas:hover {
     
  } 
 
+ .react-add-to-calandar {
+    display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+ }
+
+ .react-add-to-calandar__dropdown{
+     display: inline-block;
+ }
+
  .add-to-calendar > a:hover {
         color: #2A465E;
  }
+
+ .flyer-buttons{
+     
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-self: flex-end;
+ }
+
+ .flyer-buttons > button, Link{
+     border: none;
+     background-color: white;
+     font-size: 20px;
+     
+     width: 30px;
+     
+ }
+
+

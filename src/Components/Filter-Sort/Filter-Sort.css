@@ -1,5 +1,10 @@
+fieldset{
+   border: 0;
+   
+}
+
 .filter {
-   font-size: 12px;
+   font-size: 14px;
    position: relative;
    top: 100px;
    left: 0px;
@@ -14,19 +19,42 @@
  
 }
 
+
+
 .form-group {
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    justify-content: flex-start;
    align-content: flex-start;
 }
 
+.form-group > select {
+   width: 100px;
+   display: inline-block;
+}
+
+.form-group > label, legend {
+   font-weight: bold;
+   margin-right: 10px;
+   margin-left: 10px;
+}
 
 label, input, select{
    margin: 5px;
-   width: 100%;
 }
 
-/*p {
-   display: inline-block;
-}*/
+@media only screen and (min-width: 500px) {
+   .filter{
+      font-size: 20px;
+   }
+
+   .form-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-content: flex-start;
+   }
+   
+   
+}
+
