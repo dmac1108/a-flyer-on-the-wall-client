@@ -30,7 +30,7 @@ class SignIn extends Component {
     } 
 
     onLoginFailure =(error)=>{
-        console.log('in the onlogin failure function')
+        
         this.setState({
             error: true,
             errormessage: error

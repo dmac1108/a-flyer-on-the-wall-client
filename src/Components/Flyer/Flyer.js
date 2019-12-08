@@ -73,9 +73,9 @@ library.add(faEdit,faTrash, faCalendarPlus);
 
 
     componentDidMount(){
-        console.log(this.props)
+        
         const image = this.props.image
-        console.log(image)
+        
         const imageType = this.props.image.substring(11,14)
         let srcOrientation
         
