@@ -219,12 +219,12 @@ class FlyerForm extends Component {
             }
         }
         if(this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
-            console.log('flyersChildrenChanged = true')
+
             deleteFlyers_ChildrenInContext(flyer.id,insertNewFlyersChildren)
            
         }
         else if(!this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
-            console.log('flyerschildrenchanged not true')
+            
             this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history)
         }
         else 

@@ -46,5 +46,6 @@
     "enzyme-to-json": "^3.4.3",
     "jest-canvas-mock": "^2.2.0",
     "react-test-renderer": "^16.11.0"
-  }
+    
+}
 }
