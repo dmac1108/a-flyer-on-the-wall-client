@@ -4,22 +4,19 @@ fieldset{
 }
 
 .filter {
-   font-size: 14px;
+   font-size: 12px;
    position: relative;
    top: 100px;
    left: 0px;
    right: 0px;
    display: flex;
    flex-direction: row;
-   justify-content: space-around;
-   /*height: 100px;*/
-   text-align: top;
-   background-color: #D6ECFF;
+   justify-content: space-evenly;
+   align-items: center;
    
- 
+   background-color: #D6ECFF;
+
 }
-
-
 
 .form-group {
    display: flex;
@@ -41,6 +38,20 @@ fieldset{
 
 label, input, select{
    margin: 5px;
+}
+.radio-button > input {
+   display: none;
+}
+
+.radio-button > label{
+   display: block;
+   border-radius: 5px;
+   padding: 10px 10px;
+   border: 2px solid #2A465E;
+   cursor: pointer;
+   background-color: #E2A66F;
+   font-weight: bold;
+   
 }
 
 @media only screen and (min-width: 550px) {

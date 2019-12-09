@@ -142,12 +142,12 @@ library.add(faEdit,faTrash, faCalendarPlus);
                 <dd>{location}</dd>
             </div>
             <div className="list-group">
-                <dt>Event Start</dt>
+                <dt>Start</dt>
                 <dd>{moment(eventstartdate).format('MMMM Do, h:mm a')}</dd>
                
             </div>
             <div className="list-group">
-                <dt>Event End</dt>
+                <dt>End</dt>
                 <dd>{moment(eventenddate).format('MMMM Do, h:mm a')}</dd>
                 
             </div>
