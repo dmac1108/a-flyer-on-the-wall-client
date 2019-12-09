@@ -29,6 +29,7 @@ class FlyerForm extends Component {
         file: {},
         imageRequired: true,
         flyerChildrenChanged: false,
+        showLoader: true,
     }
 
     static contextType = FlyersContext
@@ -141,6 +142,9 @@ class FlyerForm extends Component {
 
     handleSubmit = (e) =>{
         e.preventDefault();
+        this.setState({
+            showLoader: true
+        })
 
         const flyer = 
             {
@@ -164,7 +168,7 @@ class FlyerForm extends Component {
             url = `${config.API_ENDPOINT}/flyers/${this.props.flyerid}`;
             fetchMethod = 'PATCH'
         }    
-
+        
         FlyerApiService.postOrPatchFlyer(url, fetchMethod, flyer)
         .then(res => {
             
@@ -207,18 +211,27 @@ class FlyerForm extends Component {
 
             FlyerApiService.postFlyersChildren(newFlyerChildren)
                 .then((result) =>{
+                    FlyerForm.setState({
+                        showLoader: false
+                    })
                     FlyerForm.context.onAddFlyer(flyer, result, FlyerForm.props.history) 
                     
                 })    
             
             }
             else{
+                this.setState({
+                    showLoader: true
+                })
                   this.props.submissionType === 'edit' ?
                         this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history) :
                         this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
             }
         }
         if(this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
+            this.setState({
+                showLoader: true
+            })
 
             deleteFlyers_ChildrenInContext(flyer.id,insertNewFlyersChildren)
            
@@ -383,7 +396,10 @@ class FlyerForm extends Component {
         {this.state.title.touched && (<ValidationError message={this.validateTitle()}/>)}
         <ValidationError message={this.validateCategory()}/>
         <ValidationError message={this.validateEventEndDate()}/>
+       
+       <div id="loader" className="loader" hidden={this.state.showLoader}></div>
        <button type="submit" disabled={this.validateTitle() || this.validateCategory() || this.validateEventEndDate()}>Submit</button>
+       
        <button type="reset" onClick={() => this.props.history.push('/flyers')}>Cancel</button>
     </form>
 
