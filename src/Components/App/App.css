@@ -3,7 +3,8 @@
   }
 
   body {
-    font-family: 'Architects Daughter', cursive;
+    /* font-family: 'Architects Daughter', cursive; */
+    font-family: 'Gloria Hallelujah', cursive;
     font-size: 24px;
     color: #5D7991;
     text-align: center;
@@ -28,3 +29,18 @@
       color: #2A465E;
       background-color: #E2A66F ;
   }
+
+  .loader {
+    border: 16px solid #E2A66F; /* yello */
+    border-top: 16px solid #2A465E; /* dark red */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  
+ 

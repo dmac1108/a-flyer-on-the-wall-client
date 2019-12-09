@@ -8,6 +8,10 @@ import FilterSort from '../Filter-Sort/Filter-Sort';
 
 class FlyerList extends Component{
 
+    state={
+        hideLoader: false
+    }
+
     static contextType = FlyersContext
     
 
@@ -19,6 +23,10 @@ class FlyerList extends Component{
             this.context.setFlyers(flyer)
             this.context.setFlyersChildren(flyer_children)
             this.context.setCategories(categories)
+
+            this.setState({
+                hideLoader: true
+            })
         })
 
 
@@ -71,6 +79,7 @@ class FlyerList extends Component{
         <section className="flyer-list">
             <Link to='/add-flyer' ><button>+ New Flyer</button></Link>
             <Link to='/add-child'><button>+ New Child</button></Link>
+            <div id="loader" className="loader" hidden={this.state.hideLoader}></div>
             <ul className="flyer-boxes">
                 {list}
             </ul>
