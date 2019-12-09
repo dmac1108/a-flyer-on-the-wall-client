@@ -76,7 +76,6 @@ canvas:hover {
      border: none;
      background-color: white;
      font-size: 20px;
-     
      width: 30px;
      
  }
@@ -88,8 +87,8 @@ canvas:hover {
         
     } 
  
-    html{
+    /* html{
         background-color: red;
-    }
+    } */
     
    }
