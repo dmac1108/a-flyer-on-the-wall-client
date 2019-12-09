@@ -29,7 +29,7 @@ class FlyerForm extends Component {
         file: {},
         imageRequired: true,
         flyerChildrenChanged: false,
-        showLoader: true,
+        hideLoader: true,
     }
 
     static contextType = FlyersContext
@@ -143,9 +143,9 @@ class FlyerForm extends Component {
     handleSubmit = (e) =>{
         e.preventDefault();
         this.setState({
-            showLoader: true
+            hideLoader: false
         })
-
+        
         const flyer = 
             {
                 title: this.state.title.value,
@@ -212,7 +212,7 @@ class FlyerForm extends Component {
             FlyerApiService.postFlyersChildren(newFlyerChildren)
                 .then((result) =>{
                     FlyerForm.setState({
-                        showLoader: false
+                        hideLoader: true
                     })
                     FlyerForm.context.onAddFlyer(flyer, result, FlyerForm.props.history) 
                     
@@ -221,7 +221,7 @@ class FlyerForm extends Component {
             }
             else{
                 this.setState({
-                    showLoader: true
+                    hideLoader: true
                 })
                   this.props.submissionType === 'edit' ?
                         this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history) :
@@ -230,7 +230,7 @@ class FlyerForm extends Component {
         }
         if(this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
             this.setState({
-                showLoader: true
+                hideLoader: true
             })
 
             deleteFlyers_ChildrenInContext(flyer.id,insertNewFlyersChildren)
@@ -397,7 +397,7 @@ class FlyerForm extends Component {
         <ValidationError message={this.validateCategory()}/>
         <ValidationError message={this.validateEventEndDate()}/>
        
-       <div id="loader" className="loader" hidden={this.state.showLoader}></div>
+       <div id="loader" className="loader" hidden={this.state.hideLoader}></div>
        <button type="submit" disabled={this.validateTitle() || this.validateCategory() || this.validateEventEndDate()}>Submit</button>
        
        <button type="reset" onClick={() => this.props.history.push('/flyers')}>Cancel</button>
