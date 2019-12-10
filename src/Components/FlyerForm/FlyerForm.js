@@ -8,7 +8,11 @@ import ValidationError from '../ValidationError/ValidationError'
 import { addYears } from 'date-fns'
 import config from '../../config'
 import FlyerApiService from '../../services/flyer-api-service'
-import piexif from 'piexifjs'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faChevronCircleLeft, faPaperPlane} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faChevronCircleLeft,faPaperPlane);
 
 
 class FlyerForm extends Component {
@@ -350,7 +354,18 @@ class FlyerForm extends Component {
        
        <label htmlFor="eventstartdatetime">Event Start Date/Time</label>
        <DatePicker id="eventstartdatedate" 
-        inline
+        popperPlacement='bottom'
+        popperModifiers={{
+            flip: {
+                behavior: ['bottom']
+            },
+            preventOverflow:{
+                enabled: false
+            },
+            hide:{
+                enabled: false
+            }
+        }}
         minDate={!this.state.eventstartdatetime? new Date() : this.state.eventstartdatetime}
         maxDate={addYears(new Date(),1)}
         showTimeSelect
@@ -361,17 +376,43 @@ class FlyerForm extends Component {
 
         <label htmlFor="eventenddatetime">Event End Date/Time</label>
        <DatePicker id="eventenddatetime" 
-        inline
+        popperPlacement='bottom'
+        popperModifiers={{
+            flip: {
+                behavior: ['bottom']
+            },
+            preventOverflow:{
+                enabled: false
+            },
+            hide:{
+                enabled: false
+            }
+        }}
         minDate={this.state.eventstartdatetime}
         maxDate={addYears(new Date(),1)}
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
         timeCaption="time"
-        dateFormat="MMMM d, yyyy h:mm aa" selected={new Date(this.state.eventenddatetime)} onChange={date =>{this.onEventEndDateChange(date)}}/>
+        dateFormat="MMMM d, yyyy h:mm aa" 
+        selected={new Date(this.state.eventenddatetime)} 
+        onChange={date =>{this.onEventEndDateChange(date)}}/>
        
        <label htmlFor="actiondate">Action Date</label>
-       <DatePicker id="actiondate" inline selected={new Date(this.state.actiondate)} onChange={date =>{this.onActionDateChange(date)}}/>
+       <DatePicker id="actiondate" 
+       popperPlacement='bottom'
+       popperModifiers={{
+           flip: {
+               behavior: ['bottom']
+           },
+           preventOverflow:{
+               enabled: false
+           },
+           hide:{
+               enabled: false
+           }
+       }}
+       selected={new Date(this.state.actiondate)} onChange={date =>{this.onActionDateChange(date)}}/>
 
        <label htmlFor="actiontype">Action</label>
        <input id="actiontype" type="text" onChange={(e)=>this.onActionChange(e.target.value)} value={this.state.action}/>
@@ -398,9 +439,9 @@ class FlyerForm extends Component {
         <ValidationError message={this.validateEventEndDate()}/>
        
        <div id="loader" className="loader" hidden={this.state.hideLoader}></div>
-       <button type="submit" disabled={this.validateTitle() || this.validateCategory() || this.validateEventEndDate()}>Submit</button>
+       <button title="Submit" type="submit" className="flyer-form-buttons" disabled={this.validateTitle() || this.validateCategory() || this.validateEventEndDate()}><FontAwesomeIcon icon="paper-plane"/></button>
        
-       <button type="reset" onClick={() => this.props.history.push('/flyers')}>Cancel</button>
+       <button title="Cancel" type="reset" className="flyer-form-buttons" onClick={() => this.props.history.push('/flyers')}><FontAwesomeIcon icon="chevron-circle-left"/></button>
     </form>
 
     )
