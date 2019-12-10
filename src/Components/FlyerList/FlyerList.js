@@ -5,6 +5,12 @@ import FlyersContext from '../../FlyersContext';
 import FlyerApiService from '../../services/flyer-api-service'
 import Flyer from '../Flyer/Flyer';
 import FilterSort from '../Filter-Sort/Filter-Sort';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faUserPlus, faChild, faFile} from '@fortawesome/free-solid-svg-icons'
+
+
+library.add(faUserPlus, faChild, faFile);
 
 class FlyerList extends Component{
 
@@ -77,12 +83,14 @@ class FlyerList extends Component{
         <div> 
         <FilterSort/>
         <section className="flyer-list">
-            <Link to='/add-flyer' ><button>+ New Flyer</button></Link>
-            <Link to='/add-child'><button>+ New Child</button></Link>
+            <Link to='/add-flyer' ><button title="Add Flyer" className="list-buttons">+<FontAwesomeIcon icon="file"/></button></Link>
+            <Link to='/add-child'><button title="Add Child" className="list-buttons">+<FontAwesomeIcon icon="child"/></button></Link>
             <div id="loader" className="loader" hidden={this.state.hideLoader}></div>
             <ul className="flyer-boxes">
                 {list}
             </ul>
+            <Link to='/add-flyer' ><button title="Add Flyer" className="list-buttons">+<FontAwesomeIcon icon="file"/></button></Link>
+            <Link to='/add-child'><button title="Add Child" className="list-buttons">+<FontAwesomeIcon icon="child"/></button></Link>
     </section>
         </div>
     )

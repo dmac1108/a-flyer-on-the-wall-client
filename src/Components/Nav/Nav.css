@@ -29,13 +29,17 @@ nav> ul {
   font-size: 10px;
 }
 
+a {
+  text-decoration: none;
+}
+
 @media only screen and (min-width: 550px){
  h1 {
    font-size: 24px;
  }
 
  nav > ul{
-   font-size: 14px;
+   font-size: 20px;
  }
 
 }
