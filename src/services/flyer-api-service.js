@@ -60,7 +60,8 @@ const FlyerApiService = {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
-        }).then(childrenRes=>{
+        })
+        .then(childrenRes=>{
             if(!childrenRes.ok) {
                 return childrenRes.json().then(e => Promise.reject(e));
               }
@@ -72,7 +73,8 @@ const FlyerApiService = {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
-        }).then(flyers_childrenRes=>{
+        })
+        .then(flyers_childrenRes=>{
             if(!flyers_childrenRes.ok) {
                 return flyers_childrenRes.json().then(e => Promise.reject(e));
               }
@@ -84,7 +86,8 @@ const FlyerApiService = {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
-        }).then(catRes=>{
+        })
+        .then(catRes=>{
             if(!catRes.ok) {
                 return catRes.json().then(e => Promise.reject(e));
               }

@@ -23,16 +23,30 @@ class FlyerList extends Component{
 
     componentDidMount(){
         
-        FlyerApiService.getAllData()
-        .then(([child, flyer, flyer_children, categories])=>{
-            this.context.setChildren(child)
-            this.context.setFlyers(flyer)
-            this.context.setFlyersChildren(flyer_children)
-            this.context.setCategories(categories)
-
-            this.setState({
-                hideLoader: true
+        FlyerApiService.getChildren()
+        .then((children) =>{
+            this.context.setChildren(children)
+        })
+        .then(()=>{
+            FlyerApiService.getCategories()
+            .then((categories)=>{
+                this.context.setCategories(categories)
             })
+            .then(()=>{
+            FlyerApiService.getFlyers()
+            .then((flyers)=>{
+                this.context.setFlyers(flyers)
+            })
+            .then(()=>{
+                FlyerApiService.getFlyersChildren()
+                .then((flyer_children)=>{
+                    this.context.setFlyersChildren(flyer_children)
+                    this.setState({
+                        hideLoader: true
+                    })
+                })
+            })
+        })
         })
 
 
