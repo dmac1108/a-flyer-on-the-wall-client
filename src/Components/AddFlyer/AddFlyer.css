@@ -1,8 +1,0 @@
-.addflyer {
-    position: relative;
-    top: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-content: center;
-}

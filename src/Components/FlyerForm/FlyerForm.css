@@ -1,32 +1,62 @@
-.addflyer{
+.addflyer {
+  position: relative;
+  top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  /* align-content: center; */
   font-size: 14px;
 }
-
-.addflyer > input, select, img {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    width: 50%;
+.button-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
- .addflyer > label {
+
+.form-label-group > input, select, img {
+    width: 75%;
+    
+}
+ .form-label-group > label {
     display: inline-block;
-    margin: 10px 10px 20px;
-    margin-left: 0;
+    /* color: #E2A66F; */
+    font-weight: bolder;
+    /* margin: 10px 10px 20px; */
+    /* margin-left: 0; */
   } 
 
+  .form-label-group{
+    /* margin-left: 25px; */
+  }
+
+  .form-datepicker{
+    width: 90%;
+  }
+
   .flyer-form-buttons {
-    width: 150px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100px;
+    /* margin-left: auto;
+    margin-right: auto; */
     border: none;
     background-color: white;
   }
 
+  .form-validation{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   @media only screen and (min-width: 550px){
     .addflyer{
-      font-size: 24px;
+      font-size: 20px;
     }
 
+    .form-datepicker{
+      width: 100px
+    }
 
 
   }
