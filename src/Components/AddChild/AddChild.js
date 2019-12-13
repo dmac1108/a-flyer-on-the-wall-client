@@ -22,25 +22,27 @@ class AddChild extends Component {
 
     handleAddChild = (e) =>{
         e.preventDefault()
-        this.context.onAddChild(this.state.name)
+        
         const newChild = {childname: this.state.name}
         
 
         FlyerApiService.postChild(newChild)
-        .then(()=>{
-        this.setState({
-            childrenAdded: [...this.state.childrenAdded, this.state.name]
+        .then((child)=>{
+            
+            this.context.onAddChild(child)
+            this.setState({
+                name: '',
+                childrenAdded: [...this.state.childrenAdded, child.childname]
         })
-        this.setState({
-            name: '',
-           
-        })
+        
+        
     })
         
         
     }
     
     validateChild(){
+        
         const matchingChildren = this.context.children.filter((child) => child.childname === this.state.name)
         
         if(matchingChildren.length>0){

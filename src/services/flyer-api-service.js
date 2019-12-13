@@ -182,13 +182,15 @@ const FlyerApiService = {
             },
             body: JSON.stringify(child),
         })
-        .then((res)=>{
-            if(!res.ok){
-                throw new Error(res.status)
+        .then(res => {
+            if(!res.ok) {
+              throw new Error(res.status)
             }
-            res.json()
-
-        })
+  
+            return res.json()
+          })
+          .catch((err)=>console.error(err))
+        
     },
     deleteFlyer(flyerId){
         

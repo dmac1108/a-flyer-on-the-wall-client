@@ -89,11 +89,10 @@ export class FlyersProvider extends Component {
     }
   
     onAddChild = (newChild) =>{
-      const child = {
-        name: newChild,
-      }
+      
+      
       this.setState({
-        children: [...this.state.children,child]
+        children: [...this.state.children,newChild]
       })
     }
   
