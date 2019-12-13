@@ -450,7 +450,7 @@ class FlyerForm extends Component {
                 {childOptions}
             </select>
         </div>
-        <div id="loader" className="loader" hidden={this.state.hideLoader}></div>
+        <div id="loader" className="loader" hidden={this.state.hideLoader}>Your flyer is being posted to the wall!</div>
         <div className="form-validation">
             {this.state.title.touched && (<ValidationError message={this.validateTitle()}/>)}
             <ValidationError message={this.validateCategory()}/>

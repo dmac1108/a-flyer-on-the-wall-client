@@ -42,14 +42,14 @@
   }
 
   .loader {
-    border: 16px solid #E2A66F; /* yello */
-    border-top: 16px solid #2A465E; /* dark red */
-    border-radius: 50%;
+    /* border: 16px solid #E2A66F; /* yello */
+    /* border-top: 16px solid #2A465E; dark red */
+    /* border-radius: 50%;
     width: 60px;
     height: 60px;
-    animation: spin 1s linear infinite;
+    animation: 3s spin 2s linear infinite; 
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
   }
 
 

@@ -40,6 +40,8 @@
     margin-right: auto; */
     border: none;
     background-color: white;
+    height: 50px;
+    font-size: 20px;
   }
 
   .form-validation{
@@ -56,6 +58,10 @@
 
     .form-datepicker{
       width: 100px
+    }
+
+    .flyer-form-buttons{
+      font-size: 24px;
     }
 
 

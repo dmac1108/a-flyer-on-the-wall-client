@@ -3,7 +3,11 @@ import FlyersContext from '../../FlyersContext'
 import './SignUp.css';
 import FlyerApiService from '../../services/flyer-api-service'
 import   ValidationError  from '../ValidationError/ValidationError'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 
+library.add(faPaperPlane);
 
 class SignUp extends Component {
 
@@ -112,30 +116,40 @@ class SignUp extends Component {
     
     return(
         <section className="signup">
-        <div >
+        
         <form id="signup" onSubmit={(e) => this.handleSubmit(e)}>
             <fieldset className="signupform">
-            <legend>Sign-Up</legend>
-                <label htmlFor="first">Parent First Name</label> 
-                <input name="first" id="first" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.first}/>
-                <label htmlFor="last">Parent Last Name</label>
-                <input name="last" id="last" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.last}/>
-                <label htmlFor="email">Email Address</label>
-                 <input name="email" id="email" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.email}/>
-                 <label htmlFor="username">Username</label>
-                <input name="username" id="usernmae" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username}/>
-                <label htmlFor="password">Password</label>
-                <input name="password" id="password" type="password" required onChange={(e) => this.onInputChange(e)} value={this.state.password}/>
-
+            <legend>Sign-Up!</legend>
+                <div className="signup-label-group">
+                    <label htmlFor="first">Parent First Name</label> 
+                    <input name="first" id="first" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.first}/>
+                </div>
+                <div className="signup-label-group">
+                    <label htmlFor="last">Parent Last Name</label>
+                    <input name="last" id="last" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.last}/>
+                </div>
+                <div className="signup-label-group">
+                    <label htmlFor="email">Email Address</label>
+                    <input name="email" id="email" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.email}/>
+                 
+                 </div>
+                 <div className="signup-label-group">
+                    <label htmlFor="username">Username</label>
+                    <input name="username" id="usernmae" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username}/>
+                </div>
+                <div className="signup-label-group">
+                    <label htmlFor="password">Password</label>
+                    <input name="password" id="password" type="password" required onChange={(e) => this.onInputChange(e)} value={this.state.password}/>
+                </div>
                 <ValidationError message={this.validateFirstName()}/>
                 <ValidationError message={this.validateLastName()}/>
                 <ValidationError message={this.validateEmail()}/>
                 <ValidationError message={this.validateUsername()}/>
                 <ValidationError message={this.validatePassword()}/>
-                <button type="submit">Submit</button>
+                <button className="signup-button" type="submit"><FontAwesomeIcon icon="paper-plane"/></button>
             </fieldset>
         </form>
-     </div>
+     
      
      </section>
     );

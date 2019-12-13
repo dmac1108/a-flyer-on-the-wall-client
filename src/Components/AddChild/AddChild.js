@@ -1,8 +1,8 @@
-import config from '../../config'
 import React, {Component} from 'react'
 import FlyersContext from '../../FlyersContext'
 import './AddChild.css'
 import FlyerApiService from '../../services/flyer-api-service'
+import ValidationError from '../ValidationError/ValidationError'
 
 class AddChild extends Component {
     state = {
@@ -24,6 +24,8 @@ class AddChild extends Component {
         e.preventDefault()
         this.context.onAddChild(this.state.name)
         const newChild = {childname: this.state.name}
+        
+
         FlyerApiService.postChild(newChild)
         .then(()=>{
         this.setState({
@@ -38,6 +40,17 @@ class AddChild extends Component {
         
     }
     
+    validateChild(){
+        const matchingChildren = this.context.children.filter((child) => child.childname === this.state.name)
+        console.log(matchingChildren)
+        if(matchingChildren.length>0){
+             return 'Child alredy exists. Please enter a different name'
+        }
+        return 
+    }
+
+
+
     render(){
         const childList = this.state.childrenAdded.map((child)=><li key={child}>{child}</li>)
         return(
@@ -46,8 +59,9 @@ class AddChild extends Component {
             <form  className="addChild" onSubmit={(e)=>this.handleAddChild(e)}>
                 <legend>Add Child</legend>
                 <label htmlFor="add-child">Name</label>
-                <input name="name" type="text" id="add-child" onChange={(e)=>this.onInputChange(e)} value={this.state.childName}/>
-                <button type="submit">Add Child</button>
+                <input name="name" type="text" id="add-child" onChange={(e)=>this.onInputChange(e)} value={this.state.name}/>
+                <ValidationError message={this.validateChild()}/>
+                <button type="submit" disabled={this.validateChild()}>Add Child</button>
                 <button type="reset" onClick={()=>this.props.history.push('/flyers')}>Done</button>
             </form>
             </div>
