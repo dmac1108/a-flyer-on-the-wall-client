@@ -42,11 +42,19 @@ class AddChild extends Component {
     
     validateChild(){
         const matchingChildren = this.context.children.filter((child) => child.childname === this.state.name)
-        console.log(matchingChildren)
+        
         if(matchingChildren.length>0){
              return 'Child alredy exists. Please enter a different name'
         }
         return 
+    }
+
+    validateChildName(){
+        const name = this.state.name
+        if(name.length === 0){
+            return 'Child name must be at least 1 character'
+        }
+        return
     }
 
 
@@ -61,7 +69,8 @@ class AddChild extends Component {
                 <label htmlFor="add-child">Name</label>
                 <input name="name" type="text" id="add-child" onChange={(e)=>this.onInputChange(e)} value={this.state.name}/>
                 <ValidationError message={this.validateChild()}/>
-                <button type="submit" disabled={this.validateChild()}>Add Child</button>
+                <ValidationError message={this.validateChildName()}/>
+                <button type="submit" disabled={this.validateChild() || this.validateChildName()}>Add Child</button>
                 <button type="reset" onClick={()=>this.props.history.push('/flyers')}>Done</button>
             </form>
             </div>
