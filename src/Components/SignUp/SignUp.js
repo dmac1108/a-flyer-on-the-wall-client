@@ -65,21 +65,21 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // if(this.validateEmail().length > 0){
-        //     this.setState({
-        //         error: true,
-        //         errorMessage: this.validateEmail() 
-        //     })
-        //     return
-        // }
+        if(this.validateEmail()){
+            this.setState({
+                error: true,
+                errorMessage: this.validateEmail() 
+            })
+            return
+        }
 
-        // if(this.validatePassword().length > 0){
-        //     this.setState({
-        //         error: true,
-        //         errorMessage: this.validatePassword()
-        //     })
-        //     return
-        // }
+        if(this.validatePassword()){
+            this.setState({
+                error: true,
+                errorMessage: this.validatePassword()
+            })
+            return
+        }
         const user = {
             firstname: this.state.first.value,
             lastname: this.state.last.value,
@@ -129,11 +129,11 @@ class SignUp extends Component {
     }
     validateEmail(){
     
-        const email = this.state.email;
-        const emailRegEx = new RegExp('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/')
-        const newEmailRegex = new RegExp('/^[^\s@]+@[^\s@]+\.[^\s@]+$/')
+        const email = this.state.email.vallue;
+        const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        const newEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-        if(!emailRegEx.test(email)){
+        if(!newEmailRegex.test(email)){
             return 'A valid email address is required.'
         }
         return
@@ -149,9 +149,9 @@ class SignUp extends Component {
     }
     validatePassword(){
     
-        const password = this.state.password;
-        const REGEX_UPPER_LOWER_NUMBER_SPECIAL = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/)
-        console.log(REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password))
+        const password = this.state.password.value;
+        const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
+        
         if(!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password) || password.length < 8){
             return 'The password must contain at least one uppercase, one lowercase, one special character and one number and must be at least eight characters long.'
         }
