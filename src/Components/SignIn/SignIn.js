@@ -4,6 +4,12 @@ import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
 import FlyersContext from '../../FlyersContext'
 import ValidationError from '../ValidationError/ValidationError'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faPaperPlane);
+
 
 class SignIn extends Component {
     state={
@@ -59,7 +65,7 @@ class SignIn extends Component {
             
         })
         .catch(error => this.onLoginFailure(error.error))
-        // .catch(error=>console.log(error))
+        
     }
 
    
@@ -68,11 +74,11 @@ class SignIn extends Component {
     return(
         <form  className="signin" id="signin" onSubmit={this.handleSubmitJwtAuth}>
         <label htmlFor="username">Username</label>
-        <input name="username" id="usernmae" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username}/>
+        <input name="username" id="username" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username}/>
         <label htmlFor="password">Password</label>
         <input name="password" id="password" type="password" required onChange={(e) => this.onInputChange(e)} value={this.state.password}/>
         {this.state.error && <ValidationError message={this.state.errormessage}/>}
-        <button type="submit">Sign-In</button>
+        <button type="submit" title="Sign-In"><FontAwesomeIcon icon="paper-plane"/></button>
      </form>
     )
     }

@@ -1,23 +1,28 @@
-.signup, .signupform {
-    font-size: 18px;
+.signupform{
     position: relative;
-    top: 75px;
+    top: 120px;
+    width: 100%;
+}
+ .signupform-fieldset {
+    font-size: 18px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
+    align-items: flex-start
+    
 }
 
-.signupform>legend {
+.signupform-fieldset>legend {
     display: none;
 }
 
-.signupform >label {
-    display: inline-block;
+.signupform-fieldset > input {
+    width: 100%;
+    margin-bottom: 10px;
 }
 
+
 .signup-button{
-    font-size: 18px;
+    font-size: 24px;
     border: none;
     background-color: white;
     margin-left: auto;
@@ -25,16 +30,17 @@
 }
 
 
-.signupform > .signup-label-group > input {
-    /* width: 50%; */
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 @media only screen and (min-width: 550px){
 .signup{
     font-size: 24px;
+}
+
+.signupform{
+    
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      
 }
 }
 

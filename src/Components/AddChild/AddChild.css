@@ -1,24 +1,48 @@
-.addChild {
+.addChild > legend {
+    text-align: center;
+}
+.addchildsection{
     position: relative;
     top: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+.addChild {
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    width: 65%;
+}
+.addChild > button {
+    width: 50%;
 }
 
-.addchildsection{
+.addchildlist{
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 25%;
 }
 
-.addchildlist{
-    position: relative;
-    top: 120px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+.addchildlist > ul >li {
+    display: block;
+    font-size: 14px;
+    margin: 0px;
+}
+
+.addchildlist > h2 {
+    font-size: 16px;
+    text-align: center;
+}
+
+@media only screen and (min-width: 550px){
+    .addChild{
+        width: 40%;
+    }
 }

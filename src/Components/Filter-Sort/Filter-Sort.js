@@ -31,14 +31,16 @@ class FilterSort extends Component{
             </div>
     
             </fieldset> 
-            <fieldset className="form-group">
+            <fieldset className="filter-group">
             <legend>Sort by</legend>
             <div className="form-group">
                 <div className="radio-button">
+                   
                     <input id="eventdatesort" type="radio" name="sort" value="eventdate" onChange={(e)=>this.context.onSortChange(e.target.value)} checked={this.context.sortValue === 'eventdate'}/>
                     <label htmlFor="eventdatesort">Event Date</label>
                 </div>
                 <div className="radio-button">
+                    
                     <input id="actiondatesort" type="radio" name="sort" value="actiondate" onChange={(e)=>this.context.onSortChange(e.target.value)} checked={this.context.sortValue === 'actiondate'}/>
                     <label htmlFor="actiondatesort">Action Date</label>
                 </div>

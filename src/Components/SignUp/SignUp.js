@@ -12,12 +12,29 @@ library.add(faPaperPlane);
 class SignUp extends Component {
 
     state ={
-        first: '',
-        last: '',
-        email: '',
-        username: '',
-        password: '',
-
+        first: {
+            value: '',
+            touched: false,
+        },
+        last: {
+            value: '',
+            touched: false,
+        },
+        email: {
+            value: '',
+            touched: false,
+        },
+        username: {
+            value: '',
+            touched: false,
+        },
+        password: {
+            value: '',
+            touched: false,
+        },
+        error: false,
+        errorMessage: '',
+        
 
     }
     static contextType  = FlyersContext
@@ -26,7 +43,9 @@ class SignUp extends Component {
         const value = event.target.value;
         this.setState({
             ...this.state,
-            [event.target.name]: value
+            [event.target.name]: {
+                value:value,
+                touched: true}
             
         })
     }
@@ -36,30 +55,57 @@ class SignUp extends Component {
         this.props.history.push('/sign-in')
     }
 
+    onSignUpFailure = (error)=>{
+        console.log(error)
+        this.setState({
+            error: true,
+            
+        })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
+        // if(this.validateEmail().length > 0){
+        //     this.setState({
+        //         error: true,
+        //         errorMessage: this.validateEmail() 
+        //     })
+        //     return
+        // }
 
+        // if(this.validatePassword().length > 0){
+        //     this.setState({
+        //         error: true,
+        //         errorMessage: this.validatePassword()
+        //     })
+        //     return
+        // }
         const user = {
-            firstname: this.state.first,
-            lastname: this.state.last,
-            email: this.state.email,
-            username: this.state.username,
-            user_password: this.state.password
+            firstname: this.state.first.value,
+            lastname: this.state.last.value,
+            email: this.state.email.value,
+            username: this.state.username.value,
+            user_password: this.state.password.value
         }
         
         FlyerApiService.postUser(user)
+        .then(() =>{
+            
+            this.setState({
+                first: {value: '', touched: false},
+                last: {value: '', touched: false},
+                email: {value: '', touched: false},
+                username: {value: '', touched: false},
+                password: {value: '', touched: false},
+                
+            })
+    
+            this.onSignUpSuccess()
+        })
+        //  .catch(error => this.onSignUpFailure(error.error))
+         .catch(error => console.log(error))
         
 
-        this.setState({
-            first: '',
-            last: '',
-            email: '',
-            username: '',
-            password: '',
-            hideChildForm: false,
-        })
-
-        this.onSignUpSuccess()
     }
 
     validateFirstName(){
@@ -67,6 +113,7 @@ class SignUp extends Component {
         const firstname = this.state.first;
         
         if(firstname === '' ){
+            
             return 'A valid first name is required.'
         }
         return
@@ -83,10 +130,10 @@ class SignUp extends Component {
     validateEmail(){
     
         const email = this.state.email;
-        const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-        const newEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        const emailRegEx = new RegExp('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/')
+        const newEmailRegex = new RegExp('/^[^\s@]+@[^\s@]+\.[^\s@]+$/')
 
-        if(!newEmailRegex.test(email)){
+        if(!emailRegEx.test(email)){
             return 'A valid email address is required.'
         }
         return
@@ -103,8 +150,8 @@ class SignUp extends Component {
     validatePassword(){
     
         const password = this.state.password;
-        const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
-
+        const REGEX_UPPER_LOWER_NUMBER_SPECIAL = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/)
+        console.log(REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password))
         if(!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password) || password.length < 8){
             return 'The password must contain at least one uppercase, one lowercase, one special character and one number and must be at least eight characters long.'
         }
@@ -117,36 +164,36 @@ class SignUp extends Component {
     return(
         <section className="signup">
         
-        <form id="signup" onSubmit={(e) => this.handleSubmit(e)}>
-            <fieldset className="signupform">
+        <form id="signup" className="signupform" onSubmit={(e) => this.handleSubmit(e)}>
+            <fieldset className="signupform-fieldset">
             <legend>Sign-Up!</legend>
-                <div className="signup-label-group">
+                
                     <label htmlFor="first">Parent First Name</label> 
-                    <input name="first" id="first" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.first}/>
-                </div>
-                <div className="signup-label-group">
+                    <input name="first" id="first" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.first.value}/>
+                
+                
                     <label htmlFor="last">Parent Last Name</label>
-                    <input name="last" id="last" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.last}/>
-                </div>
-                <div className="signup-label-group">
+                    <input name="last" id="last" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.last.value}/>
+                
+                
                     <label htmlFor="email">Email Address</label>
-                    <input name="email" id="email" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.email}/>
+                    <input name="email" id="email" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.email.value}/>
                  
-                 </div>
-                 <div className="signup-label-group">
+                 
+                 
                     <label htmlFor="username">Username</label>
-                    <input name="username" id="usernmae" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username}/>
-                </div>
-                <div className="signup-label-group">
+                    <input name="username" id="usernmae" type="text" required onChange={(e) => this.onInputChange(e)} value={this.state.username.value}/>
+                
+                
                     <label htmlFor="password">Password</label>
-                    <input name="password" id="password" type="password" required onChange={(e) => this.onInputChange(e)} value={this.state.password}/>
-                </div>
-                <ValidationError message={this.validateFirstName()}/>
-                <ValidationError message={this.validateLastName()}/>
-                <ValidationError message={this.validateEmail()}/>
-                <ValidationError message={this.validateUsername()}/>
-                <ValidationError message={this.validatePassword()}/>
-                <button className="signup-button" type="submit"><FontAwesomeIcon icon="paper-plane"/></button>
+                    <input name="password" id="password" type="password" required onChange={(e) => this.onInputChange(e)} value={this.state.password.value}/>
+                
+                {this.state.first.touched && <ValidationError message={this.validateFirstName()}/>}
+                {this.state.last.touched && <ValidationError message={this.validateLastName()}/>}
+                {this.state.username.touched && <ValidationError message={this.validateUsername()}/>}
+                {this.state.error && <ValidationError message={this.state.errorMessage}/>}
+                
+                <button className="signup-button" type="submit" title="Submit" disabled={this.validateFirstName() || this.validateLastName() ||  this.validateUsername()}><FontAwesomeIcon icon="paper-plane"/></button>
             </fieldset>
         </form>
      

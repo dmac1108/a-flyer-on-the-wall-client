@@ -10,9 +10,13 @@
     justify-content: space-between;
     align-items: stretch;
     flex-wrap: wrap;
-    flex-grow: 1 1;
+    flex-grow: 1 1 0;
     
   }
+
+  /* .flyer-box{
+    height: 650px;
+  } */
 
   ul{
       list-style: none;
@@ -30,6 +34,12 @@
     
   }
 
+  .flyer-list-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   .list-buttons{
     border: none;
     background-color: white;
@@ -40,9 +50,12 @@
     
   }
 
-  .loader > p {
+  .loader > p, .flyer-list > p {
     font-size: 18px;
     width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
   }
 
   @media screen and (min-width: 750px){
@@ -50,6 +63,9 @@
   .loader > p {
     font-size: 20px;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
 
 

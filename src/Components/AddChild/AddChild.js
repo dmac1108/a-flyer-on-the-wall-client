@@ -65,17 +65,19 @@ class AddChild extends Component {
         const childList = this.state.childrenAdded.map((child)=><li key={child}>{child}</li>)
         return(
             <section className="addchildsection">
-                <div>
+             
             <form  className="addChild" onSubmit={(e)=>this.handleAddChild(e)}>
                 <legend>Add Child</legend>
                 <label htmlFor="add-child">Name</label>
                 <input name="name" type="text" id="add-child" onChange={(e)=>this.onInputChange(e)} value={this.state.name}/>
                 <ValidationError message={this.validateChild()}/>
                 <ValidationError message={this.validateChildName()}/>
-                <button type="submit" disabled={this.validateChild() || this.validateChildName()}>Add Child</button>
-                <button type="reset" onClick={()=>this.props.history.push('/flyers')}>Done</button>
+                <div>
+                    <button type="submit" disabled={this.validateChild() || this.validateChildName()}>Add Child</button>
+                    <button type="reset" onClick={()=>this.props.history.push('/flyers')}>Done</button>
+                </div>
             </form>
-            </div>
+       
             <div className="addchildlist">
                 <h2>Children Added</h2>
             <ul>

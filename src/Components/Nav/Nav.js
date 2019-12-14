@@ -12,6 +12,7 @@ class Nav extends Component{
     renderLogoutLink(){
         return (
             <div className='Nav__logged-in'>
+                {/* <li><NavLink to='/flyers'>Flyers</NavLink></li> */}
                 <li><Link onClick={this.handleLogoutClick}
                 to='/'>
                     Logout
@@ -37,9 +38,9 @@ class Nav extends Component{
     render(){
     return(
         <nav>
-            <Link to='/'><h1>A Flyer on the Wall</h1></Link>
+            <NavLink to='/'><h1>A Flyer on the Wall</h1></NavLink>
              <ul>
-                 <li><NavLink to='/flyers'>Flyers</NavLink></li>
+                 
                 {TokenService.hasAuthToken() ? this.renderLogoutLink() : this.renderLoginLink()}
             </ul>
             

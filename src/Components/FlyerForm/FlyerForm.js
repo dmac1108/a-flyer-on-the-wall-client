@@ -340,26 +340,24 @@ class FlyerForm extends Component {
 
 
     return(
-    <form className="addflyer" id="newflyer" onSubmit={(e) => this.handleSubmit(e)}>
-       <div className="form-label-group">
+    <form className="addflyer" id="newflyer" onSubmit={(e) => this.handleSubmit(e)}> 
+       
             <label htmlFor="title">Title</label> 
             
             <input id="title" type="text" required onChange={(e)=>this.onTitleChange(e.target.value)} value={this.state.title.value}/>
-       </div>
-       <div className="form-label-group">
+      
             <label htmlFor="location">Location</label> 
             
             <input id="location" type="text" required onChange={(e)=>this.onLocationChange(e.target.value)} value={this.state.location}/>
-        </div>
-        <div className="form-label-group">
+        
             <label htmlFor="imgfile">Flyer Image</label>
             <input id="last" type="file" accept="image/*" required={this.state.imageRequired} onChange={(e) =>this.onImageChange(e)} files={this.state.image}/>
-        </div>
-        <div className="form-label-group">
+        
             <label htmlFor="eventstartdatetime">Event Start Date/Time</label>
             <DatePicker id="eventstartdatedate" 
                 className="form-datepicker"
-                popperPlacement='bottom'
+                disableAutoFocus="true"
+                popperPlacement='auto'
                 popperModifiers={{
                     flip: {
                         behavior: ['bottom']
@@ -378,12 +376,13 @@ class FlyerForm extends Component {
                 timeIntervals={15}
                 timeCaption="time"
                 dateFormat="MMM d, yyyy h:mm aa" selected={new Date(this.state.eventstartdatetime)} onChange={date =>{this.onEventStartDateChange(date)}}/>
-        </div>
-        <div className="form-label-group">
+        
+       
                 <label htmlFor="eventenddatetime">Event End Date/Time</label>
                 <DatePicker id="eventenddatetime" 
                 className="form-datepicker"
-                popperPlacement='bottom'
+                disableAutoFocus="true"
+                popperPlacement='auto'
                 popperModifiers={{
                     flip: {
                         behavior: ['bottom']
@@ -404,12 +403,12 @@ class FlyerForm extends Component {
                 dateFormat="MMM d, yyyy h:mm aa" 
                 selected={new Date(this.state.eventenddatetime)} 
                 onChange={date =>{this.onEventEndDateChange(date)}}/>
-       </div>
-       <div className="form-label-group">
+       
             <label htmlFor="actiondate">Action Date</label>
             <DatePicker id="actiondate" 
             className="form-datepicker"
-            popperPlacement='bottom'
+            disableAutoFocus="true"
+            popperPlacement='auto'
             popperModifiers={{
                 flip: {
                     behavior: ['bottom']
@@ -424,12 +423,10 @@ class FlyerForm extends Component {
             dateFormat="MMM d, yyyy" 
             selected={new Date(this.state.actiondate)} 
             onChange={date =>{this.onActionDateChange(date)}}/>
-        </div>
-        <div className="form-label-group">
+        
             <label htmlFor="actiontype">Action</label>
             <input id="actiontype" type="text" onChange={(e)=>this.onActionChange(e.target.value)} value={this.state.action}/>
-        </div>
-        <div className="form-label-group">
+        
             <label htmlFor="category-select" hidden={!this.state.hideAddCategory}>Select Catgory</label>
             
             <select id="category-select" onChange={(e)=>this.onCategoryChange(e.target.value)} hidden={!this.state.hideAddCategory} value={this.state.category.value.toLowerCase()}>
@@ -437,19 +434,19 @@ class FlyerForm extends Component {
                 {categoryOptions}
             <option value="add-category">Add Category</option>
         </select>
-        </div>
+        
         <div className="form-label-group" hidden={this.state.hideAddCategory}>
             <label htmlFor="add-category" >Add Category</label>
             <input type="text" id="add-category" onBlur={(e)=>this.handleNewCategory(e.target.value)}/>
         </div>
-        <div className="form-label-group">
+        
             <label htmlFor="student-select">Select One or More Students</label>
             
             <select id="student-select" multiple size="1" onChange={(e)=>this.onChildChange(e.target.options)} >
                 <option value="select">Choose an option</option>
                 {childOptions}
             </select>
-        </div>
+        
         <div id="loader" className="loader" hidden={this.state.hideLoader}>Your flyer is being posted to the wall!</div>
         <div className="form-validation">
             {this.state.title.touched && (<ValidationError message={this.validateTitle()}/>)}

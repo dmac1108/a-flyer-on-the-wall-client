@@ -23,10 +23,14 @@ nav> ul {
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-start;
+   justify-content: flex-end; 
+  align-items: flex-end;
   list-style: none;
   font-size: 10px;
+}
+
+nav > ul > li{
+  flex: 1 1 auto;
 }
 
 a {

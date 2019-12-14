@@ -105,9 +105,10 @@ class FlyerList extends Component{
         <FilterSort/>
         
         <section className="flyer-list">
-             
-            <Link to='/add-flyer' ><button title="Add Flyer" className="list-buttons" hidden={!this.state.hideLoader}>+<FontAwesomeIcon icon="file"/></button></Link>
-            <Link to='/add-child'><button title="Add Child" className="list-buttons" hidden={!this.state.hideLoader}>+<FontAwesomeIcon icon="child"/></button></Link>
+            <div className="flyer-list-buttons">  
+                <Link to='/add-flyer' ><button title="Add Flyer" className="list-buttons" hidden={!this.state.hideLoader}>+<FontAwesomeIcon icon="file"/></button></Link>
+                <Link to='/add-child'><button title="Add Child" className="list-buttons" hidden={!this.state.hideLoader}>+<FontAwesomeIcon icon="child"/></button></Link>
+            </div>
             <div id="loader" className="loader" hidden={this.state.hideLoader}>
                 <p>Your flyers are being posted to the wall!</p>
             </div>
@@ -115,8 +116,10 @@ class FlyerList extends Component{
             <ul className="flyer-boxes">
                 {list}
             </ul>
-            <Link to='/add-flyer' ><button title="Add Flyer" className="list-buttons" hidden={!this.state.hideLoader}>+<FontAwesomeIcon icon="file"/></button></Link>
-            <Link to='/add-child'><button title="Add Child" className="list-buttons" hidden={!this.state.hideLoader}>+<FontAwesomeIcon icon="child"/></button></Link>
+            <div className="flyer-list-buttons">
+                <Link to='/add-flyer' ><button title="Add Flyer" className="list-buttons" hidden={!this.state.hideLoader || list.length === 0}>+<FontAwesomeIcon icon="file"/></button></Link>
+                <Link to='/add-child'><button title="Add Child" className="list-buttons" hidden={!this.state.hideLoader || list.length === 0}>+<FontAwesomeIcon icon="child"/></button></Link>
+            </div>
     </section>
         </div>
     )

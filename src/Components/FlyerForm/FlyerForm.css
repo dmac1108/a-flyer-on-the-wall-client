@@ -3,41 +3,46 @@
   top: 150px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  /* align-content: center; */
+  align-items: flex-start;
   font-size: 14px;
 }
 .button-section {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-self: center;
 }
 
-.form-label-group > input, select, img {
-    width: 75%;
-    
+.react-datepicker-wrapper, .react-datepicker__input-container{
+    display: block !important;
+    width: 100%;
+
 }
- .form-label-group > label {
-    display: inline-block;
-    /* color: #E2A66F; */
-    font-weight: bolder;
-    /* margin: 10px 10px 20px; */
-    /* margin-left: 0; */
+
+.react-datepicker__input-container{
+  width: 100%;
+}
+
+
+.react-datepicker__input-container input, .form-datepicker{
+  display: block;
+  width: 100%;
+}
+
+.addflyer > input, select, img {
+    width: 100%;  
+}
+
+.addflyer > label {
+    margin-top: 10px;
   } 
 
-  .form-label-group{
-    /* margin-left: 25px; */
-  }
-
   .form-datepicker{
-    width: 90%;
+    width: 100%;
   }
 
   .flyer-form-buttons {
     width: 100px;
-    /* margin-left: auto;
-    margin-right: auto; */
     border: none;
     background-color: white;
     height: 50px;
@@ -49,18 +54,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-self: center;
   }
 
   @media only screen and (min-width: 550px){
     .addflyer{
-      font-size: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
     }
 
-    .form-datepicker{
+  .form-label-group > input, select, img {
+      width: 100%;
+  }
+
+  .form-datepicker{
       width: 100px
     }
 
-    .flyer-form-buttons{
+  .flyer-form-buttons{
       font-size: 24px;
     }
 

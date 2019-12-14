@@ -18,11 +18,17 @@ fieldset{
 
 }
 
+.filter-group {
+   width: 40%;
+}
+
 .form-group {
    display: flex;
    flex-direction: column;
    justify-content: flex-start;
    align-content: flex-start;
+   width: 100%;
+  
 }
 
 .form-group > select {
@@ -31,32 +37,64 @@ fieldset{
 }
 
 .form-group > label, legend {
-   font-weight: bold;
+   /* font-weight: bold; */
    margin-right: 10px;
    margin-left: 10px;
 }
 
-label, input, select{
+/* .form-group >label, input, select{
    margin: 5px;
-}
-.radio-button > input {
-   display: none;
+} */
+
+.radio-button {
+  
+   appearance: none;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   align-items: flex-start;
+   
+
 }
 
-.radio-button > label{
-   display: block;
+
+
+
+ .radio-button > label{
+   /* display: block;
    border-radius: 5px;
    padding: 10px 10px;
    border: 2px solid #2A465E;
    cursor: pointer;
    background-color: #E2A66F;
-   font-weight: bold;
+   font-weight: bold; */
+
+   /* font: 15px/1.7 'Open Sans', sans-serif;
+     color: #333; */
+     
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     display: inline-block;
+     cursor: pointer;
+     margin-right: 10px;
+     
+     
    
+} 
+
+.radio-button > input {
+   /* -webkit-appearance: none;
+   -moz-appearance: none; */
+   /* border: 0; */
+   border-radius: 3px;
+   cursor: pointer;
+   margin-right: 7px;
+   /* outline: none; */
 }
 
 @media only screen and (min-width: 550px) {
    .filter{
-      font-size: 20px;
+      font-size: 14px;
    }
 
    .form-group {
