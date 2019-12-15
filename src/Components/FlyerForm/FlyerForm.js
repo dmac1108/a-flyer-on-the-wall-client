@@ -442,7 +442,7 @@ class FlyerForm extends Component {
         
             <label htmlFor="student-select">Select One or More Students</label>
             
-            <select id="student-select" multiple size="1" onChange={(e)=>this.onChildChange(e.target.options)} >
+            <select id="student-select" multiple size="4" onChange={(e)=>this.onChildChange(e.target.options)} >
                 <option value="select">Choose an option</option>
                 {childOptions}
             </select>
