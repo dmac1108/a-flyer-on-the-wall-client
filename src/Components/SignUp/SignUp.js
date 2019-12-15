@@ -56,10 +56,10 @@ class SignUp extends Component {
     }
 
     onSignUpFailure = (error)=>{
-        console.log(error)
+        
         this.setState({
             error: true,
-            
+            errorMessage: error,
         })
     }
 
@@ -89,21 +89,33 @@ class SignUp extends Component {
         }
         
         FlyerApiService.postUser(user)
-        .then(() =>{
+        .then((res)=>{
             
-            this.setState({
-                first: {value: '', touched: false},
-                last: {value: '', touched: false},
-                email: {value: '', touched: false},
-                username: {value: '', touched: false},
-                password: {value: '', touched: false},
-                
-            })
-    
-            this.onSignUpSuccess()
+            if(!res.ok)
+            {
+                res.json()
+                .then(e=>Promise.reject(e))
+                .catch(error => this.onSignUpFailure(error.error))
+            }
+            else{
+                res.json()
+                this.setState({
+                    first: {value: '', touched: false},
+                    last: {value: '', touched: false},
+                    email: {value: '', touched: false},
+                    username: {value: '', touched: false},
+                    password: {value: '', touched: false},
+                    
+                })
+        
+                this.onSignUpSuccess()
+
+            }
+
+           
         })
-        //  .catch(error => this.onSignUpFailure(error.error))
-         .catch(error => console.log(error))
+         .catch(error => this.onSignUpFailure(error.error))
+        
         
 
     }
@@ -129,10 +141,10 @@ class SignUp extends Component {
     }
     validateEmail(){
     
-        const email = this.state.email.vallue;
+        const email = this.state.email.value;
         const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         const newEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
+        
         if(!newEmailRegex.test(email)){
             return 'A valid email address is required.'
         }

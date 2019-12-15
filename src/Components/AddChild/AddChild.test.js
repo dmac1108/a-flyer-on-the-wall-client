@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 
 
 
-describe('AddChild Component', ()=>{
+describe.only('AddChild Component', ()=>{
     it('renders the AddChild Component without crashing', ()=>{
         const div = document.createElement('div');
         ReactDOM.render(<BrowserRouter><AddChild/></BrowserRouter>, div)
@@ -16,7 +16,23 @@ describe('AddChild Component', ()=>{
     })
 
     it('renders the AddChild component', ()=>{
-        const wrapper = shallow(<AddChild/>)
+        const context = {
+            "children" : [
+                {
+                    id: 1,
+                    name: "Dick",
+                },
+                {
+                    id: 2,
+                    name: "Sally",
+                },
+                {
+                    id: 3,
+                    name: "Jane",
+                },
+            ],
+        categories: ['scouts', 'school', 'gymnastics'],};
+        const wrapper = shallow(<BrowserRouter><AddChild/></BrowserRouter>, context)
         expect(toJson(wrapper)).toMatchSnapshot()
     })
 })

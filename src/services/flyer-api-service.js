@@ -164,14 +164,13 @@ const FlyerApiService = {
             },
             body: JSON.stringify(user),
         })
-        .then((res)=>{
+        // .then((res)=>{
             
-            if(!res.ok){
-                throw new Error(res.status)
-            }
-            res.json()
+        //     (!res.ok)
+        //     ? res.json().then(e=> Promise.reject(e))
+        //     :res.json()
 
-        })
+        // })
     },
     postChild(child){
         return fetch(`${config.API_ENDPOINT}/children`,{
