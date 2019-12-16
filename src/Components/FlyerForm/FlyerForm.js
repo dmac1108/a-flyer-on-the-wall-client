@@ -456,7 +456,7 @@ class FlyerForm extends Component {
         <div className="button-section">
             <button title="Cancel" type="reset" className="flyer-form-buttons" onClick={() => this.props.history.push('/flyers')}><FontAwesomeIcon icon="chevron-circle-left"/></button>
             
-            <button title="Submit" type="submit" className="flyer-form-buttons" disabled={this.validateTitle() || this.validateCategory() || this.validateEventEndDate()}><FontAwesomeIcon icon="paper-plane"/></button>
+            <button id="submit" title="Submit" type="submit" className="flyer-form-buttons" disabled={this.validateTitle() || this.validateCategory() || this.validateEventEndDate() || !this.state.hideLoader}><FontAwesomeIcon icon="paper-plane"/></button>
             
             
        </div>

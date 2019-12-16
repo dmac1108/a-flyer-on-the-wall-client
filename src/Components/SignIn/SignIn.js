@@ -17,6 +17,7 @@ class SignIn extends Component {
         password: '',
         error: false,
         errormessage: '',
+        hideLoader: true,
     }
     
     static contextType = FlyersContext;
@@ -39,13 +40,16 @@ class SignIn extends Component {
         
         this.setState({
             error: true,
-            errormessage: error
+            errormessage: error,
+            hideLoader: true
         })
     }
 
     handleSubmitJwtAuth = ev =>{
         ev.preventDefault()
-        this.setState({error: null})
+        this.setState({
+            hideLoader: false,
+            error: null})
 
         AuthApiService.postLogin({
             username: this.state.username,
@@ -78,7 +82,9 @@ class SignIn extends Component {
         <label htmlFor="password">Password</label>
         <input name="password" id="password" type="password" required onChange={(e) => this.onInputChange(e)} value={this.state.password}/>
         {this.state.error && <ValidationError message={this.state.errormessage}/>}
-        <button type="submit" title="Sign-In"><FontAwesomeIcon icon="paper-plane"/></button>
+        
+        <div id="loader" className="loader" hidden={this.state.hideLoader}>You are being redirected to the wall!</div>
+        <button id="submit" type="submit" title="Sign-In" disabled={!this.state.hideLoader}><FontAwesomeIcon icon="paper-plane"/></button>
      </form>
     )
     }

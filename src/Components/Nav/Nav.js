@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {NavLink, Link} from 'react-router-dom'
 import './Nav.css'
 import TokenService from '../../services/token-service'
+import Logo from '../../assets/android-chrome-512x512.png'
 
 class Nav extends Component{
 
@@ -13,7 +14,7 @@ class Nav extends Component{
         return (
             <div className='Nav__logged-in'>
                 {/* <li><NavLink to='/flyers'>Flyers</NavLink></li> */}
-                <li><Link onClick={this.handleLogoutClick}
+                <li><Link className="flyer-link" onClick={this.handleLogoutClick}
                 to='/'>
                     Logout
                 </Link></li>
@@ -24,11 +25,11 @@ class Nav extends Component{
     renderLoginLink(){
         return (
             <div className='Nav__not-logged-in'>
-                <li><Link 
+                <li><Link className="flyer-link"
                 to='/sign-in'>
                     Sign-In
                 </Link></li>
-                <li><Link 
+                <li><Link className="flyer-link"
                 to='/sign-up'>
                     Sign-Up
                 </Link></li>
@@ -38,7 +39,8 @@ class Nav extends Component{
     render(){
     return(
         <nav>
-            <NavLink to='/'><h1>A Flyer on the Wall</h1></NavLink>
+            <NavLink to='/'><img className="nav-logo" src={Logo}/><h1>A Flyer on the Wall</h1></NavLink>
+            
              <ul>
                  
                 {TokenService.hasAuthToken() ? this.renderLogoutLink() : this.renderLoginLink()}

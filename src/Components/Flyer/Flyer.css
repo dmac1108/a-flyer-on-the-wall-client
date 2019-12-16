@@ -87,6 +87,12 @@ canvas:hover {
      
  }
 
+ .flyer-buttons > button:hover{
+    background-color: #D6ECFF;
+    border: darkgrey;
+    border-radius: 100px;
+  }
+
  
  @media only screen and (min-width: 550px){
     .flyer{

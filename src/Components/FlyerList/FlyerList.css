@@ -5,18 +5,9 @@
   }
 
   .flyer-boxes{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    flex-wrap: wrap;
-    flex-grow: 1 1 0;
-    
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(500px, 1fr));
   }
-
-  /* .flyer-box{
-    height: 650px;
-  } */
 
   ul{
       list-style: none;

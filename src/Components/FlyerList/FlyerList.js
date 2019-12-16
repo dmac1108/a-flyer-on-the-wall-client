@@ -112,7 +112,7 @@ class FlyerList extends Component{
             <div id="loader" className="loader" hidden={this.state.hideLoader}>
                 <p>Your flyers are being posted to the wall!</p>
             </div>
-            {list.length === 0 && <p>There are no matching flyers.</p>}
+            {list.length === 0 && this.state.hideLoader && <p>There are no matching flyers.</p>}
             <ul className="flyer-boxes">
                 {list}
             </ul>

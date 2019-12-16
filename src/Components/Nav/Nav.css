@@ -12,10 +12,18 @@ nav {
     height: 100px;
 }
 
-h1 {
+.nav-logo {
   position: absolute;
   top: 0px;
   left: 20px;
+  width: 35px;
+  
+}
+
+h1 {
+  position: absolute;
+  top: 5px;
+  left: 50px;
   font-size: 20px;
 }
 
@@ -39,7 +47,7 @@ a {
 
 @media only screen and (min-width: 550px){
  h1 {
-   font-size: 24px;
+   font-size: 30px;
  }
 
  nav > ul{

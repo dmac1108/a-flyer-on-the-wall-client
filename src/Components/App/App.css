@@ -3,7 +3,6 @@
   }
 
   body {
-    /* font-family: 'Architects Daughter', cursive; */
     font-family: 'Alfa Slab One', cursive;
     font-size: 24px;
     color: #5D7991;
@@ -20,36 +19,51 @@
     color: #2A465E;
   }
 
+  .flyer-link:hover {
+    color: #E2A66F;
+  }  
+
   button {
       border: solid 2px #2A465E;
       font-weight: bold;
       border-radius: 5px;
-      /* margin-right: 10 px; */
-      /* font-size: 20px; */
       color: #2A465E;
       background-color: #E2A66F ;
   }
 
-  button, input, select {
-    /* font-family: inherit; */
-    /* font-size: 100%; */
-  }
-
   input:focus {
-    background: rgba(0,0,0,.1);
+    background: #D6ECFF;
     border-radius: 5px;
     outline: none;
   }
 
   .loader {
-    /* border: 16px solid #E2A66F; /* yello */
-    /* border-top: 16px solid #2A465E; dark red */
-    /* border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: 3s spin 2s linear infinite; 
-    margin-left: auto;
-    margin-right: auto; */
+    background-color: #2A465E;
+    background-image: linear-gradient(to right,
+      rgba(0, 0, 0, .9) 25%,
+      rgba(0, 0, 0, .1) 50%,
+      rgba(0, 0, 0, .9) 75%);
+    color: #E2A66F;
+    height: 75%;
+    width: 75%;
+
+    -webkit-animation: 30s linear 0s infinite alternate move_loader;
+          animation: 30s linear 0s infinite alternate move_loader;
+  }
+
+  @-webkit-keyframes move_loader { from { margin-left: -5%; } to { margin-left: 100%; }  }
+        @keyframes move_loader { from { margin-left: -5%; } to { margin-left: 100%; }  } 
+
+
+  button:disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  button:hover{
+    background-color: #D6ECFF;
+    border: darkgrey;
+    border-radius: 100px;
   }
 
 

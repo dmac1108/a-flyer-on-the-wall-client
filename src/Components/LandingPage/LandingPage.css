@@ -1,4 +1,20 @@
-.landing {
+.landing, .landing-section {
     position: relative;
-    top: 200px;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing-image {
+    width: 75%;
+    border: solid #46535E 2px;
+}
+
+.landing-image:hover{
+    width: 100%;
+}
+
+.landing-section > p{
+    text-align: center;
 }

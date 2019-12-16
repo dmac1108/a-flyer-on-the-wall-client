@@ -75,7 +75,11 @@
   .flyer-form-buttons{
       font-size: 24px;
     }
-
+  
+    #flyer-form-submit.disabled{
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
 
   }
 

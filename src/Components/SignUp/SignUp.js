@@ -205,7 +205,7 @@ class SignUp extends Component {
                 {this.state.username.touched && <ValidationError message={this.validateUsername()}/>}
                 {this.state.error && <ValidationError message={this.state.errorMessage}/>}
                 
-                <button className="signup-button" type="submit" title="Submit" disabled={this.validateFirstName() || this.validateLastName() ||  this.validateUsername()}><FontAwesomeIcon icon="paper-plane"/></button>
+                <button id="submit" className="signup-button" type="submit" title="Submit" disabled={this.validateFirstName() || this.validateLastName() ||  this.validateUsername()}><FontAwesomeIcon icon="paper-plane"/></button>
             </fieldset>
         </form>
      
