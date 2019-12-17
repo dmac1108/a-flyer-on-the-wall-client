@@ -38,12 +38,12 @@
   }
 
   .loader {
-    background-color: #2A465E;
+    /* background-color: #2A465E;
     background-image: linear-gradient(to right,
       rgba(0, 0, 0, .9) 25%,
       rgba(0, 0, 0, .1) 50%,
       rgba(0, 0, 0, .9) 75%);
-    color: #E2A66F;
+    color: #E2A66F; */
     height: 75%;
     width: 75%;
 
