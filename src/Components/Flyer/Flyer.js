@@ -7,6 +7,7 @@ import AddToCalendar from 'react-add-to-calendar';
 import moment from 'moment';
 import FlyerApiService from '../../services/flyer-api-service'
 import piexif from 'piexifjs'
+import Popup from '../Popup/popup';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {faEdit, faTrash, faCalendarPlus} from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +15,10 @@ import {faEdit, faTrash, faCalendarPlus} from '@fortawesome/free-solid-svg-icons
 library.add(faEdit,faTrash, faCalendarPlus);
 
  class Flyer extends Component{
+
+    state={
+        showPopup: false,
+    }
 
     constructor(props){
         super(props);
@@ -24,10 +29,13 @@ library.add(faEdit,faTrash, faCalendarPlus);
     static contextType = FlyersContext
 
     onDeleteFlyer = (flyerId) =>{
-        FlyerApiService.deleteFlyer(flyerId)
-        .then(()=>{
-            this.context.onDeleteFlyer(flyerId)
+        this.setState({
+            showPopup: true,
         })
+        // FlyerApiService.deleteFlyer(flyerId)
+        // .then(()=>{
+        //     this.context.onDeleteFlyer(flyerId)
+        // })
     }
 
 
@@ -133,8 +141,10 @@ library.add(faEdit,faTrash, faCalendarPlus);
         <div className="flyer-buttons">
             <button><Link to={`/edit-flyer/${id}`}><FontAwesomeIcon icon="edit"/></Link></button>
             <button onClick={()=>this.onDeleteFlyer(id)}><FontAwesomeIcon icon="trash"/></button>
+            
         </div>
         <h2>{title}</h2>
+        {this.state.showPopup && <Popup/>}
         <canvas ref={this.canvasRef}/>
         <dl>
             <div className="list-group">
