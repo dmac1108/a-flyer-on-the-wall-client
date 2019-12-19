@@ -38,6 +38,20 @@ library.add(faEdit,faTrash, faCalendarPlus);
         // })
     }
 
+    onClickYes = (flyerId) =>{
+        
+        FlyerApiService.deleteFlyer(flyerId)
+        .then(()=>{
+            this.context.onDeleteFlyer(flyerId)
+        })  
+    }
+
+    onClickNo = () =>{
+        this.setState({
+            showPopup: false
+        })
+    }
+
 
     resetOrientation(srcBase64, srcOrientation, canvas, context) {
         
@@ -138,13 +152,14 @@ library.add(faEdit,faTrash, faCalendarPlus);
     
     return(
         <div className="flyer">
+            {this.state.showPopup && <Popup onClose={this.onClickNo} onClickYes={this.onClickYes} showPop={this.state.showPopup} flyer={id} />}
         <div className="flyer-buttons">
             <button><Link to={`/edit-flyer/${id}`}><FontAwesomeIcon icon="edit"/></Link></button>
             <button onClick={()=>this.onDeleteFlyer(id)}><FontAwesomeIcon icon="trash"/></button>
             
         </div>
         <h2>{title}</h2>
-        {this.state.showPopup && <Popup/>}
+        
         <canvas ref={this.canvasRef}/>
         <dl>
             <div className="list-group">

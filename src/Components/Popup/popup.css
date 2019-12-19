@@ -1,20 +1,31 @@
 .popup {  
     position: fixed;  
-    width: 75%;  
-    height: 25%;  
-    top: 80; 
-    text-align: center;  
-    margin-right: auto;
-    margin-left: auto;
-    background-color: rgba(0,0,0, 0.5);  
+    width: 350px;  
+    height: 100px; 
+    top: 120px; 
+    background-color: #E2A66F; 
+    
   }  
-  .popup-inner {  
-    position: absolute;  
-    left: 25%;  
-    right: 25%;  
-    top: 25%;  
-    bottom: 25%;  
+  /* .popup-inner {  
+    position: relative;  
+    left: 5%;  
+    right: 5%;  
+    top: 5%;  
+    bottom: 5%;  
     margin: auto;  
     border-radius: 20px;  
-    background: white;  
+    background: white; 
+   
+  } */
+
+  .popup-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  @media only screen and (min-width: 550px){
+     .popup-inner{
+       font-size: 16px;
+     }
   }
