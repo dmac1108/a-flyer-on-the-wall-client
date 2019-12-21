@@ -20,7 +20,7 @@ class Popup extends Component{
 
         return (
             <div className='popup'>
-                <div className='popup-inner'>
+               
                 <h1>Are you sure?</h1>
                     <div className="popup-buttons">
                         <button type="submit" onClick={this.onClickYes}>Yes</button>
@@ -28,7 +28,7 @@ class Popup extends Component{
 
                     </div>
                     
-                </div>
+               
              </div>
         )
     }

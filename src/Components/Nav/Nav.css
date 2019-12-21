@@ -18,13 +18,18 @@ nav {
   left: 20px;
   width: 35px;
   
+  
 }
 
-h1 {
+
+
+
+nav > a > h1 {
   position: absolute;
   top: 5px;
   left: 50px;
   font-size: 16px;
+  color: #6B3D3B;
 }
 
 nav> ul {
@@ -37,8 +42,13 @@ nav> ul {
   font-size: 10px;
 }
 
+.Nav__logged-in > li > a, .Nav__not-logged-in > li > a{
+  color: #6B3D3B;
+}
+
 nav > ul > li{
   flex: 1 1 auto;
+  
 }
 
 a {
@@ -47,7 +57,7 @@ a {
 
 
 @media only screen and (min-width: 550px){
- h1 {
+  nav > a > h1 {
    font-size: 30px;
  }
 

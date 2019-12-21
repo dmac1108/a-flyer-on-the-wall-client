@@ -5,22 +5,23 @@
   body {
     font-family: 'Alfa Slab One', cursive;
     font-size: 24px;
-    color: #5D7991;
+    /* color: #5D7991; */
+    color: #2A465E;
     
   }
   
   a:hover {
-    color: #E2A66F;
+    color: #1F3345;
   }  
   a:link {
-    color: #2A465E;
+    color: #6B3D3B;
   }
   a:visited {
-    color: #2A465E;
+    color: #5D7991;
   }
 
   .flyer-link:hover {
-    color: #E2A66F;
+    color: #1F3345;
   }  
 
   button {
