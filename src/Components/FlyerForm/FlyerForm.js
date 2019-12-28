@@ -225,9 +225,9 @@ class FlyerForm extends Component {
             }
             else{
                 
-                // this.setState({
-                //     hideLoader: true
-                // })
+                FlyerForm.setState({
+                    hideLoader: true
+                })
                 
                   FlyerForm.props.submissionType === 'edit' ?
                         FlyerForm.context.onEditFlyer(FlyerForm.props.flyerid, flyer, FlyerForm.props.history) :

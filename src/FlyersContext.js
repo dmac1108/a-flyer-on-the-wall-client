@@ -105,6 +105,7 @@ export class FlyersProvider extends Component {
     }
   
     onDeleteFlyer = (flyerid) =>{
+      
       this.setState({
         flyers: this.state.flyers.filter((flyer) => flyer.id !== flyerid)
       })
