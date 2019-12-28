@@ -224,14 +224,17 @@ class FlyerForm extends Component {
             
             }
             else{
-                this.setState({
-                    hideLoader: true
-                })
-                  this.props.submissionType === 'edit' ?
-                        this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history) :
-                        this.context.onAddFlyer(flyer, newFlyerChildren, this.props.history) 
+                
+                // this.setState({
+                //     hideLoader: true
+                // })
+                
+                  FlyerForm.props.submissionType === 'edit' ?
+                        FlyerForm.context.onEditFlyer(FlyerForm.props.flyerid, flyer, FlyerForm.props.history) :
+                        FlyerForm.context.onAddFlyer(flyer, newFlyerChildren, FlyerForm.props.history) 
             }
         }
+
         if(this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
             this.setState({
                 hideLoader: true

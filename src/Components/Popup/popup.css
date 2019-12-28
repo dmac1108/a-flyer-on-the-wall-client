@@ -17,19 +17,6 @@
     font-size: 16px;
   }
 
-
-  .popup-inner {  
-    position: relative;  
-    left: 5%;  
-    right: 5%;  
-    top: 5%;  
-    bottom: 5%;  
-    margin: auto;  
-    border-radius: 20px;  
-    background: white; 
-   
-  }
-
   .popup-buttons {
     display: flex;
     flex-direction: row;

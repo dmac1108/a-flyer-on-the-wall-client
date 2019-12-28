@@ -72,7 +72,7 @@ export class FlyersProvider extends Component {
     } 
   
     onAddFlyer = (flyer, flyerChild, history) => {
-      
+    
       this.setState({
         flyers: [...this.state.flyers,flyer],
         flyers_children: [...this.state.flyers_children, flyerChild]
