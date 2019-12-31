@@ -118,7 +118,7 @@ library.add(faEdit,faTrash, faCalendarPlus);
     
     render(){
     const {id, title, location, image, eventstartdate, eventenddate, actiondate, action, category} = this.props
-    const {flyers_children, children} = this.context  
+    const {flyers_children, children, categories} = this.context  
     
     let flyer_children
     if(flyers_children !== null){
@@ -148,7 +148,7 @@ library.add(faEdit,faTrash, faCalendarPlus);
             endTime: endTime,
         }
     
-    
+    const flyerCategory = categories.find(cat => cat.id == category)
     
     return(
         <div className="flyer">
@@ -186,7 +186,7 @@ library.add(faEdit,faTrash, faCalendarPlus);
             </div>
             <div className="list-group">
                 <dt>Category:</dt>
-                <dd>{category}</dd>
+                <dd>{flyerCategory.category}</dd>
             </div >
             <div className="list-group">
                 <dt>Children:</dt>

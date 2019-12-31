@@ -82,7 +82,7 @@ const FlyerApiService = {
         })
     },
     getCategories(){
-        return fetch(`${config.API_ENDPOINT}/categories`, {
+        return fetch(`${config.API_ENDPOINT}/flyers_categories`, {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
@@ -110,7 +110,7 @@ const FlyerApiService = {
             })
     },
     postCategory(category){
-        return fetch(`${config.API_ENDPOINT}/categories`,{
+        return fetch(`${config.API_ENDPOINT}/flyers_categories`,{
             method: 'POST',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,

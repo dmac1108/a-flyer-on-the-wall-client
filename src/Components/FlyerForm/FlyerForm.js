@@ -134,12 +134,18 @@ class FlyerForm extends Component {
     }
 
     handleNewCategory = (newCategory) =>{
-        this.setState({
-            category:{ value: newCategory}
-        })
-        this.context.onAddCategory(newCategory)
-        const category = {value: newCategory}
+
+        const category = {category: newCategory}
         FlyerApiService.postCategory(category)
+        .then((cat)=>{
+            
+            this.context.onAddCategory(cat)
+            this.setState({
+                category:{ value: cat.id}
+            })
+            
+        })
+        
     }
 
     
@@ -159,7 +165,7 @@ class FlyerForm extends Component {
                 eventenddate: this.state.eventenddatetime,
                 flyeraction: this.state.action,
                 actiondate: this.state.actiondate,
-                flyercategory: this.state.category.value,
+                categoryid: this.state.category.value,
                 
             }
         
@@ -339,7 +345,7 @@ class FlyerForm extends Component {
     const childOptions = this.context.children.map((child) => 
     <option key={child.id} value={child.id} selected={this.state.child.find(flyerchild => child.id == flyerchild.childid)}>{child.childname}</option>
 )
-    const categoryOptions = this.context.categories.map((category) => <option key={category.category} value={category.category}>{category.category}</option>)    
+    const categoryOptions = this.context.categories.map((category) => <option key={category.id} value={category.id}>{category.category}</option>)    
 
 
     return(
@@ -432,7 +438,7 @@ class FlyerForm extends Component {
         
             <label htmlFor="category-select" hidden={!this.state.hideAddCategory}>Select Catgory</label>
             
-            <select id="category-select" onChange={(e)=>this.onCategoryChange(e.target.value)} hidden={!this.state.hideAddCategory} value={this.state.category.value.toLowerCase()}>
+            <select id="category-select" onChange={(e)=>this.onCategoryChange(e.target.value)} hidden={!this.state.hideAddCategory} value={this.state.category.value}>
             <option value="select">Choose an option</option>
                 {categoryOptions}
             <option value="add-category">Add Category</option>

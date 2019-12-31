@@ -83,7 +83,7 @@ export class FlyersProvider extends Component {
     onAddCategory = (newCategory) => {
       
       this.setState({
-        categories: [...this.state.categories,{category: newCategory}]
+        categories: [...this.state.categories,newCategory]
       })
   
     }

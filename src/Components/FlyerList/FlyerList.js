@@ -7,7 +7,7 @@ import Flyer from '../Flyer/Flyer';
 import FilterSort from '../Filter-Sort/Filter-Sort';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faUserPlus, faChild, faFile, faAmericanSignLanguageInterpreting} from '@fortawesome/free-solid-svg-icons'
+import {faUserPlus, faChild, faFile} from '@fortawesome/free-solid-svg-icons'
 
 
 library.add(faUserPlus, faChild, faFile);
@@ -56,7 +56,7 @@ class FlyerList extends Component{
 
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;
-
+    console.log(this.context.flyers)
     let sortedList = flyers;
     
     if(sortValue !== null){
@@ -97,7 +97,6 @@ class FlyerList extends Component{
 
    
     const list = filteredList.map((flyer) =><li key={flyer.id} className="flyer-box"><Flyer id={flyer.id} title={flyer.title} location={flyer.location} image={flyer.image} eventstartdate={flyer.eventstartdate} eventenddate={flyer.eventenddate} actiondate={flyer.actiondate} action={flyer.action} category={flyer.category}/></li>);
-    
     
     
     return(
