@@ -35,7 +35,7 @@ class FlyerForm extends Component {
         flyerChildrenChanged: false,
         hideLoader: true,
     }
-
+    
     static contextType = FlyersContext
 
     onTitleChange = (title) =>{
@@ -192,13 +192,28 @@ class FlyerForm extends Component {
         .then((flyer) =>{
 
             let FlyerForm = this
+
+            //find the flyers_children in context not in state
+            const flyerChildrenInContext = FlyerForm.context.flyers_children.filter((flyerchild)=> flyerchild.flyerid === flyer.id)
+            let flyerChildrenToDelete = []
+
+            for(let i=0; i<flyerChildrenInContext.length; i++){
+                const childInStateAndContext = FlyerForm.state.child.find(child => child == flyerChildrenInContext[i].childid)
+                console.log('child in state and context', childInStateAndContext)
+                if(!childInStateAndContext){
+                    flyerChildrenToDelete.push(flyerChildrenInContext[i])
+                }
+                console.log('child', flyerChildrenInContext[i])
+                console.log(flyerChildrenToDelete)
+            }
+            console.log(flyerChildrenToDelete)
            
             async function deleteFlyers_ChildrenInContext (flyerId, callback){
                 
                 await FlyerApiService.deleteFlyersChildrenbyFlyerId(flyerId)
                 .then(()=>{
-                    const flyerChildrenInContext = FlyerForm.context.flyers_children.filter((flyerchild)=> flyerchild.flyerid === flyerId)
-                    flyerChildrenInContext.map((flyerChild)=>FlyerForm.context.onDeleteFlyers_Children(flyerChild.id))
+                    // const flyerChildrenInContext = FlyerForm.context.flyers_children.filter((flyerchild)=> flyerchild.flyerid === flyerId)
+                    // flyerChildrenInContext.map((flyerChild)=>FlyerForm.context.onDeleteFlyers_Children(flyerChild.id))
                 })
                 
                 callback()
@@ -224,7 +239,15 @@ class FlyerForm extends Component {
                     FlyerForm.setState({
                         hideLoader: true
                     })
-                    FlyerForm.context.onAddFlyer(flyer, result, FlyerForm.props.history) 
+                    console.log(result)
+                    FlyerForm.props.submissionType === 'edit' ?
+                        FlyerForm.context.onEditFlyer(FlyerForm.props.flyerid, flyer, result, FlyerForm.props.history) :
+                        FlyerForm.context.onAddFlyer(flyer, result, FlyerForm.props.history) 
+                    
+                    
+                    
+                    
+                    // FlyerForm.context.onAddFlyer(flyer, result, FlyerForm.props.history) 
                     
                 })    
             
@@ -295,6 +318,8 @@ class FlyerForm extends Component {
     }
 
     componentDidMount(){
+
+        
         if(this.props.submissionType === 'edit'){
             
             const selectedFlyer = this.context.flyers.find((flyer) => flyer.id == this.props.flyerid)

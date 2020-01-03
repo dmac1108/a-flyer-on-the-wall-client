@@ -56,7 +56,7 @@ class FlyerList extends Component{
 
     render(){
     const {flyers, flyers_children, filterValue, childFilterValue, sortValue} = this.context;
-    console.log(this.context.flyers)
+    
     let sortedList = flyers;
     
     if(sortValue !== null){
@@ -83,14 +83,15 @@ class FlyerList extends Component{
     }
     else if(filterValue !== 'all' && childFilterValue === 'all'){
         
-        filteredList = sortedList.filter((flyer) => flyer.category.toLowerCase() === filterValue.toLowerCase()) 
+        filteredList = sortedList.filter((flyer) => flyer.category == filterValue )
         
     }
     else if(filterValue !== 'all' && childFilterValue !== 'all'){
       
+        
         const filteredFlyers_Children = flyers_children.filter((flyer_child)=>flyer_child.childid == childFilterValue) 
         
-        filteredList = sortedList.filter((flyer) => filteredFlyers_Children.find((flyer_child)=> flyer_child.flyerid === flyer.id) && flyer.category.toLowerCase() === filterValue.toLowerCase())
+        filteredList = sortedList.filter((flyer) => filteredFlyers_Children.find((flyer_child)=> flyer_child.flyerid === flyer.id) && flyer.category == filterValue)
         
     }
 

@@ -96,10 +96,12 @@ export class FlyersProvider extends Component {
       })
     }
   
-    onEditFlyer = (id,flyer, history) =>{
+    onEditFlyer = (id,flyer, flyerChild, history) =>{
+      console.log('in onEditFlyer')
       flyer.id = id
       this.setState({
-        flyers: [...this.state.flyers.filter((flyer)=>flyer.id !== id),flyer]
+        flyers: [...this.state.flyers.filter((flyer)=>flyer.id !== id),flyer],
+        flyers_children: [...this.state.flyers_children, flyerChild]
       })
       history.push('/flyers')
     }

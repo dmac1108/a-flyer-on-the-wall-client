@@ -228,6 +228,25 @@ const FlyerApiService = {
             // res.json()
 
         })
+    },
+    deleteFlyersChildrenbyChildId(childId){
+        
+        return fetch(`${config.API_ENDPOINT}/flyers_children/child/${childId}`,{
+            method: 'DELETE',
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json',
+            },
+            
+        })
+        .then((res)=>{
+            
+            if(!res.ok){
+                throw new Error(res.status)
+            }
+            // res.json()
+
+        })
     }
 }
 
