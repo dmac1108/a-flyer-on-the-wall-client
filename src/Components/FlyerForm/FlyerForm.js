@@ -193,29 +193,18 @@ class FlyerForm extends Component {
 
             let FlyerForm = this
 
-            //find the flyers_children in context not in state
-            const flyerChildrenInContext = FlyerForm.context.flyers_children.filter((flyerchild)=> flyerchild.flyerid === flyer.id)
-            let flyerChildrenToDelete = []
-
-            for(let i=0; i<flyerChildrenInContext.length; i++){
-                const childInStateAndContext = FlyerForm.state.child.find(child => child == flyerChildrenInContext[i].childid)
-                console.log('child in state and context', childInStateAndContext)
-                if(!childInStateAndContext){
-                    flyerChildrenToDelete.push(flyerChildrenInContext[i])
-                }
-                console.log('child', flyerChildrenInContext[i])
-                console.log(flyerChildrenToDelete)
-            }
-            console.log(flyerChildrenToDelete)
+            
            
-            async function deleteFlyers_ChildrenInContext (flyerId, callback){
+            async function deleteFlyers_ChildrenInContext (flyerChildrenToDelete, callback){
                 
-                await FlyerApiService.deleteFlyersChildrenbyFlyerId(flyerId)
+                await 
+                flyerChildrenToDelete.map(flyerChild => FlyerApiService.deleteFlyersChildrenbyId(flyerChild.id)
                 .then(()=>{
-                    // const flyerChildrenInContext = FlyerForm.context.flyers_children.filter((flyerchild)=> flyerchild.flyerid === flyerId)
-                    // flyerChildrenInContext.map((flyerChild)=>FlyerForm.context.onDeleteFlyers_Children(flyerChild.id))
+                    FlyerForm.context.onDeleteFlyers_Children(flyerChild.id)
                 })
                 
+                )
+
                 callback()
             }
             
@@ -269,7 +258,21 @@ class FlyerForm extends Component {
                 hideLoader: true
             })
 
-            deleteFlyers_ChildrenInContext(flyer.id,insertNewFlyersChildren)
+            //find the flyers_children in context not in state
+            const flyerChildrenInContext = FlyerForm.context.flyers_children.filter((flyerchild)=> flyerchild.flyerid === flyer.id)
+            let flyerChildrenToDelete = []
+
+            for(let i=0; i<flyerChildrenInContext.length; i++){
+                const childInStateAndContext = FlyerForm.state.child.find(child => child == flyerChildrenInContext[i].childid)
+                
+                if(!childInStateAndContext){
+                    flyerChildrenToDelete.push(flyerChildrenInContext[i])
+                }
+               
+            }
+            
+
+            deleteFlyers_ChildrenInContext(flyerChildrenToDelete,insertNewFlyersChildren)
            
         }
         else if(!this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
