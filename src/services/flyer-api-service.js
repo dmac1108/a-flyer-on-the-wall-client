@@ -216,7 +216,7 @@ const FlyerApiService = {
             method: 'DELETE',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
-                'content-type': 'application/json',
+                'Content-Type': 'application/json;charset=utf-8',
             },
             
         })
@@ -235,7 +235,7 @@ const FlyerApiService = {
             method: 'DELETE',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
-                'content-type': 'application/json',
+                'Content-Type': 'application/json',
             },
             
         })

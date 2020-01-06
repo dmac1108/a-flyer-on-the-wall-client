@@ -96,14 +96,21 @@ export class FlyersProvider extends Component {
       })
     }
   
-    onEditFlyer = (id,flyer, flyerChild, history) =>{
-      console.log('in onEditFlyer')
-      flyer.id = id
-      this.setState({
-        flyers: [...this.state.flyers.filter((flyer)=>flyer.id !== id),flyer],
-        flyers_children: [...this.state.flyers_children, flyerChild]
+    onEditFlyer = (id,flyer, flyerChildrenToDelete, flyerChild, history) =>{
+      
+      const contextDeletions = flyerChildrenToDelete.map((flyerChild)=>
+        this.onDeleteFlyers_Children(flyerChild.id)
+      )
+      Promise.all(contextDeletions)
+      .then(()=>{
+       
+        flyer.id = id
+        this.setState({
+          flyers: [...this.state.flyers.filter((flyer)=>flyer.id != id),flyer],
+          flyers_children: [...this.state.flyers_children, flyerChild]
+        })
+        history.push('/flyers')
       })
-      history.push('/flyers')
     }
   
     onDeleteFlyer = (flyerid) =>{
@@ -114,9 +121,17 @@ export class FlyersProvider extends Component {
     }
 
     onDeleteFlyers_Children = (flyerChildId) =>{
-      this.setState({
+      
+      return new Promise((resolve, reject) =>{
+        resolve(this.setState({
+          
         flyers_children: this.state.flyers_children.filter((child) => child.id !== flyerChildId)
+      
+        }))
+        
       })
+      
+   
     }
   
     onFilterChange = (selectedValue) =>{

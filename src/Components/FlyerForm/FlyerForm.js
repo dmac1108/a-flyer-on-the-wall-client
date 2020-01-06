@@ -195,21 +195,24 @@ class FlyerForm extends Component {
 
             
            
-            async function deleteFlyers_ChildrenInContext (flyerChildrenToDelete, callback){
+            function deleteFlyers_ChildrenInContext (flyerChildrenToDelete, callback){
                 
-                await 
-                flyerChildrenToDelete.map(flyerChild => FlyerApiService.deleteFlyersChildrenbyId(flyerChild.id)
-                .then(()=>{
-                    FlyerForm.context.onDeleteFlyers_Children(flyerChild.id)
+                
+                const deletions = flyerChildrenToDelete.map(flyerChild => FlyerApiService.deleteFlyersChildrenbyId(flyerChild.id))
+                
+                Promise.all(deletions).then(()=>{
+                    //FlyerForm.context.onDeleteFlyers_Children(flyerChild.id)
+                    
+                    callback(flyerChildrenToDelete)
                 })
                 
-                )
+                
 
-                callback()
+                
             }
             
 
-            function insertNewFlyersChildren(){
+            function insertNewFlyersChildren(flyerChildrenToDelete){
             
             let newFlyerChildren = []    
             const childrenToAdd = FlyerForm.state.child
@@ -230,7 +233,7 @@ class FlyerForm extends Component {
                     })
                     console.log(result)
                     FlyerForm.props.submissionType === 'edit' ?
-                        FlyerForm.context.onEditFlyer(FlyerForm.props.flyerid, flyer, result, FlyerForm.props.history) :
+                        FlyerForm.context.onEditFlyer(FlyerForm.props.flyerid, flyer,flyerChildrenToDelete ,result, FlyerForm.props.history) :
                         FlyerForm.context.onAddFlyer(flyer, result, FlyerForm.props.history) 
                     
                     
@@ -248,7 +251,7 @@ class FlyerForm extends Component {
                 })
                 
                   FlyerForm.props.submissionType === 'edit' ?
-                        FlyerForm.context.onEditFlyer(FlyerForm.props.flyerid, flyer, FlyerForm.props.history) :
+                        FlyerForm.context.onEditFlyer(FlyerForm.props.flyerid, flyer, flyerChildrenToDelete, newFlyerChildren,FlyerForm.props.history) :
                         FlyerForm.context.onAddFlyer(flyer, newFlyerChildren, FlyerForm.props.history) 
             }
         }

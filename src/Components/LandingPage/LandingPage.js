@@ -21,10 +21,10 @@ export default function(){
 
      
      <section className="landing-section">
-         <p>Try the demo application! <Link className="flyer-link" to='/sign-in'>Sign-In</Link> and use the following user to access the demo:
+         <p>Try the demo application! <Link className="flyer-link" to='/sign-in'>Sign-In</Link> and use the following user to access the demo:</p>
             <p>username: jsmith</p> 
             <p>password: apassword</p> 
-         </p>
+         
          
      </section>
      <section className="landing-section">
