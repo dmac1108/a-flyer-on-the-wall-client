@@ -23,6 +23,16 @@ describe('FlyerList component', ()=>{
                 name: "Jane",
             },
         ],
+        "flyer_categories": [{
+            id: 1,
+            category: "testing",
+            
+        },
+        {
+            id: 2,
+            category: "work",
+            
+        }] ,
         "flyers": [
             {
                 id: 1,
@@ -32,7 +42,9 @@ describe('FlyerList component', ()=>{
                 actiondate: "10/10/19",
                 action: "RSVP",
                 category: "School",
-                childid: [2]
+                childid: [2],
+                category: 1
+                
             },
             {
                 id: 2,
@@ -42,7 +54,8 @@ describe('FlyerList component', ()=>{
                 actiondate: "9/5/19",
                 action: "Send Permission Slip",
                 category: "School",
-                childid: [1,2]
+                childid: [1,2],
+                category: 2,
             },
             {
                 id: 3,
@@ -52,10 +65,10 @@ describe('FlyerList component', ()=>{
                 actiondate: "8/20/19",
                 action: "Pay",
                 category: "Scouts",
-                childid: [3]
+                childid: [3],
+                category: 2
             },
         ],
-        categories: ['scouts', 'school', 'gymnastics'],
     }
 
 it('renders a FlyersList by default', () =>{

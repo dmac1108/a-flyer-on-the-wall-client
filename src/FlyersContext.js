@@ -97,7 +97,8 @@ export class FlyersProvider extends Component {
     }
   
     onEditFlyer = (id,flyer, flyerChildrenToDelete, flyerChild, history) =>{
-      
+      console.log('in oneditflyer', history)
+      if(flyerChildrenToDelete){
       const contextDeletions = flyerChildrenToDelete.map((flyerChild)=>
         this.onDeleteFlyers_Children(flyerChild.id)
       )
@@ -111,6 +112,14 @@ export class FlyersProvider extends Component {
         })
         history.push('/flyers')
       })
+    } else {
+      flyer.id = id
+        this.setState({
+          flyers: [...this.state.flyers.filter((flyer)=>flyer.id != id),flyer],
+          flyers_children: [...this.state.flyers_children, flyerChild]
+        })
+        history.push('/flyers')
+    }
     }
   
     onDeleteFlyer = (flyerid) =>{

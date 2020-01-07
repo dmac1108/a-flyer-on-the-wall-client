@@ -15,18 +15,20 @@ const testFlyer = {
     eventenddate: "9/4/19 10:30",
     actiondate:'8/15/19',
     action: 'Test render', 
-    category: 'Scouts', 
-    childid: [1,2]
+    flyercategory: 'Scouts', 
+    childid: [1,2],
+    category: 1
 }
 
-it.only('renders without crashing', () => {
+it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<BrowserRouter><Flyer id={testFlyer.id} title={testFlyer.title} image={testFlyer.image} eventdate={testFlyer.eventdate} actiondate={testFlyer.actiondate} action={testFlyer.action} category={testFlyer.category} childid={testFlyer.childid} /></BrowserRouter>, div)
     ReactDOM.unmountComponentAtNode(div)
 }); 
 
 
-it.only('renders the UI as expected', () =>{
+it('renders the UI as expected', () =>{
     const wrapper = shallow(<BrowserRouter><Flyer id={testFlyer.id} title={testFlyer.title} image={testFlyer.image} eventdate={testFlyer.eventdate} actiondate={testFlyer.actiondate} action={testFlyer.action} category={testFlyer.category} childid={testFlyer.childid}/></BrowserRouter>)
     expect(toJson(wrapper)).toMatchSnapshot()
 })
+

@@ -120,8 +120,9 @@ class FlyerForm extends Component {
     onChildChange = (child) =>{
 
         var options = child
+        //start at index 1 so that 'select a child' is not updated in state
           var value = [];
-                  for (var i = 0, l = options.length; i < l; i++) {
+                  for (var i = 1, l = options.length; i < l; i++) {
                     if (options[i].selected) {
                       value.push(Number(options[i].value));
                     }
@@ -193,8 +194,6 @@ class FlyerForm extends Component {
 
             let FlyerForm = this
 
-            
-           
             function deleteFlyers_ChildrenInContext (flyerChildrenToDelete, callback){
                 
                 
@@ -231,7 +230,7 @@ class FlyerForm extends Component {
                     FlyerForm.setState({
                         hideLoader: true
                     })
-                    console.log(result)
+                    
                     FlyerForm.props.submissionType === 'edit' ?
                         FlyerForm.context.onEditFlyer(FlyerForm.props.flyerid, flyer,flyerChildrenToDelete ,result, FlyerForm.props.history) :
                         FlyerForm.context.onAddFlyer(flyer, result, FlyerForm.props.history) 
@@ -274,13 +273,15 @@ class FlyerForm extends Component {
                
             }
             
-
+            
             deleteFlyers_ChildrenInContext(flyerChildrenToDelete,insertNewFlyersChildren)
            
         }
         else if(!this.state.flyerChildrenChanged && this.props.submissionType === 'edit'){
             
-            this.context.onEditFlyer(this.props.flyerid, flyer, this.props.history)
+            this.context.onEditFlyer(this.props.flyerid, flyer, [], [],this.props.history)
+            
+
         }
         else 
         {
